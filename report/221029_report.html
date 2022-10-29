@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 실습 2</title>
+    <style>
+        div {
+            padding-top: 150px;
+            padding-left: 200px;
+            padding-bottom: 150px;
+            background-color: grey;
+        }
+        img {
+            width: 400px;
+            height: 300px;
+            position: relative;
+        }
+        #img1 {
+            z-index: 5;
+            transform: skewY(30deg);
+        }
+        #img2 {
+            z-index: 3;
+            transform: skewY(30deg);
+            left: -100px;
+        }
+        #img3 {
+            z-index: 1;
+            transform: skewY(30deg);
+            left: -200px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <img src="../res/etc/naver.png" id="img1">
+        <img src="../res/etc/daum.png" id="img2">
+        <img src="../res/etc/tistory.png" id="img3">
+    </div>
+</body>
+</html>

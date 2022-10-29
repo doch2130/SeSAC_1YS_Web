@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 선택자</title>
+    <style>
+        .deco {
+            text-decoration: underline;
+        }
+        .red {
+            color: red;
+        }
+        #hrid {
+            border: 1px solid black;
+            background-color: red;
+        }
+
+        #div2 .apple {
+            color: green;
+            background-color: grey;
+        }
+        #div2 > .apple {
+            color: red;
+            background-color: skyblue;
+        }
+        .apple + p {
+            background-color: pink;
+        }
+        .b + span {
+            color: red;
+        }
+        .c ~ span {
+            background-color: blue;
+        }
+    </style>
+
+</head>
+<body>
+    <h1 class="deco">h1</h1>
+    <h2 class="red deco">h2</h2>
+    <h3 class="red">h3</h3>
+    <hr>
+    <p id="hrid">p1</p>
+    <p>p2</p>
+    <hr>
+    <br>
+
+    <div>
+        <div id="div2">
+            <p class="apple">1</p>
+            <p>2</p>
+            <div>
+                <p class="apple">3</p>
+            </div>
+            <p class="apple">4</p>
+        </div>
+        <p class="apple">5</p>
+        <p>6</p>
+    </div>
+
+    <div>
+        <span class="a">1</span>
+        <span class="b">2</span>
+        <span class="a">3</span>
+        <span class="c">4</span>
+        <span class="a">5</span>
+        <span class="b">6</span>
+        <span class="a">7</span>
+        <strong>
+            <span>test</span>
+        </strong>
+</body>
+</html>
