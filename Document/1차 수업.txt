@@ -1,0 +1,50 @@
+2022-10-27 목요일
+
+1. 환경세팅
+- VS CODE 설치
+- 확장 프로그램 설치 (3개)
+- git 로컬 설치
+- wakatime 동기화 설정
+- git 첫 테스트
+
+VS 확장 프로그램
+Auto Commit Message
+GitLens — Git supercharged
+WakaTime
+Live Server / 로컬 서버
+
+
+2. git 세팅 및 테스트
+cd desktop
+mkdir github
+cd github
+git init
+git init으로 생성된 git 숨긴 폴더 삭제 (bash에서 master 없어짐)
+
+git config --global init.defaultBranch main
+ git config --global core.autocrlf true / 개행 문자 관련 처리 - 윈도우
+ git config --global core.autocrlf input / 개행 문자 관련 처리 - 맥
+git config --global user.name "HyoHyun"
+git config --global user.email "doch2130@gmail.com"
+git config --global --list
+
+git clone url
+
+code . / vscode 실행 (폴더 bash 폴더 설정) (. 은 현재 폴더 전부 해당)
+
+git add . (현재 폴더 전체 파일을 add) / 스테이징에 올림 ( 로컬 및 remote 아님, 대기 상태)
+git commit -m "메시지" (로컬 등록)
+git push (remote 등록)
+
+
+3. git issue 및 pull request 사용
+git bash에서 git branch 각자 설정
+git 홈페이지에서 issue 등록 (개인)
+request에 필요인원 등록(최소 3명)
+approve 등록 후 merge 확인
+
+
+4. html 기본 배우기
+html 기본 구조 및 태그
+inline, block 요소
+속성 - id, class, style 등
