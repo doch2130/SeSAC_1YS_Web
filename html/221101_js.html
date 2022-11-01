@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript</title>
+    <script>
+        // alert('Hi');
+        console.log('Hello');
+        var a;
+        console.log(a);
+        var a = 1;
+        console.log(a);
+        a = 'GG';
+        console.log(a);
+        console.log(typeof('문자'));
+        console.log(typeof(245));
+        console.log(typeof(function() { }));
+        console.log(typeof(true));
+        console.log(typeof({}));
+        console.log(typeof([]));
+        console.log(typeof(NaN));
+        console.log(typeof(null));
+
+        var a = 1;
+        var b = 2;
+        console.log( a + b);
+        a = "1";
+        console.log( a + b);
+        console.log(parseInt(a) + b);
+        console.log(Number(a) + b);
+        console.log(a + b.toString());
+        
+        function sesac() {
+            console.log("sesac hi!");
+        }
+        sesac();
+
+        function sesac2(abc) {
+            alert(abc + " hello");
+        }
+        sesac2('용산');
+        sesac2('홍길동');
+
+        function sesac3(abc, test, a) {
+            console.log(abc + " gg " + test + " hh  " + a);
+        }
+        sesac3(a);
+        sesac3(a, 'power', 999);
+
+        function sesac2() {
+            console.log('error3');
+        }
+        sesac2();
+
+        function init() {
+            console.log('init');
+        }
+        function parameter1(a) {
+            console.log(a);
+        }
+        function parameter2(a, b) {
+            console.log (a + " " + b);
+        }
+        function parameter3(a, b, c) {
+            console.log("----parameter3----");
+            console.log("a : " + a);
+            console.log("b : " + b);
+            console.log("C : " + c);
+        }
+        init();
+        parameter1();
+        parameter1(10);
+        parameter2(5, 3);
+        parameter3(1, 2, 3);
+        var variable = "hi";
+        parameter3(variable, variable, variable);
+        parameter3(variable, variable);
+        parameter3(variable);
+
+
+        
+        </script>
+</head>
+<body>
+    
+</body>
+</html>

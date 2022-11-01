@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript 실습</title>
+    <script>
+        let no_1 = 1;
+        let no_2 = 2;
+        let no_3 = 3;
+
+        function add(a, b , c) {
+            console.log("합계: " + (a+b+c));
+        }
+        add(no_1, no_2, no_3);
+
+        function sub(a, b) {
+            console.log("차이: " + (b-a));
+        }
+        sub(no_1, no_2);
+
+        function divide(a, b) {
+            console.log('나누기: ' + (a/b));
+        }
+        divide(no_1, no_2);
+
+        function mul(a, b) {
+            console.log('곱하기: ' + (a*b));
+        }
+        mul(no_1, no_2);
+
+        var a = prompt("숫자를 입력하세요.");
+        if ( a > 10) {
+            console.log( "a > 10");
+        } else if ( a > 5) {
+            console.log( "a > 5");
+            if (a > 8) {
+                console.log ( "a > 8");
+            } else {
+                console.log ( " 5 < a <= 8");
+            }
+        } else if ( a > 0) {
+            console.log( "a > 0");
+        } else {
+            console.log( " a <= 0");
+        }
+
+        switch(a) {
+            case '8':
+                console.log("a = 8");
+                break;
+            default:
+            console.log("a != 8");
+                break;
+        }
+
+        for ( var i = 0; i < 10; i++) {
+            console.log("i : " + i);
+        }
+
+        var j = 0;
+        while( j < 10) {
+            console.log("j : " + j);
+            j++;
+        }
+    </script>
+
+</head>
+<body>
+    
+</body>
+</html>
