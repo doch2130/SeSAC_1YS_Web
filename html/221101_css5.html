@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Animation 실습3</title>
+    <link rel="stylesheet" href="./../css/style.css">
+    <style>
+        .sun {
+            animation-name: sun_move;
+            animation-duration: 20s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes sun_move {
+            0% {
+                transform: rotate(-90deg);
+                opacity: 0;
+            }
+            25% {
+                transform: rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: rotate(90deg);
+                opacity: 0;
+            }
+            75% {
+                transform: rotate(180deg);
+                opacity: 0;
+            }
+            100% {
+                transform: rotate(360deg);
+                opacity: 0;
+            }
+        }
+        .moon {
+            animation-name: moon_move;
+            animation-duration: 20s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes moon_move {
+            0% {
+                transform: rotate(-90deg);
+                opacity: 0;
+            }
+            25% {
+                transform: rotate(-180deg);
+                opacity: 0;
+            }
+            50% {
+                transform: rotate(-270deg);
+                opacity: 0;
+            }
+            75% {
+                transform: rotate(-360deg);
+                opacity: 1;
+            }
+            100% {
+                transform: rotate(-450deg);
+                opacity: 0;
+            }
+        }
+        .cloud_1 {
+            animation-name: cloud_1_move;
+            animation-duration: 20s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes cloud_1_move {
+            0% {
+                left: 0%;
+                opacity: 0;
+            }
+            25% {
+                left: 50%;
+                opacity: 1;
+            }
+            50% {
+                left: 100%;
+                opacity: 0;
+            }
+            75% {
+                left: 50%;
+                opacity: 1;
+            }
+            100% {
+                left: 0%;
+                opacity: 0;
+            }
+        }
+        .cloud_2 {
+            animation-name: cloud_2_move;
+            animation-duration: 18s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes cloud_2_move {
+            0% {
+                left: 0%;
+                opacity: 0;
+            }
+            25% {
+                left: 50%;
+                opacity: 1;
+            }
+            50% {
+                left: 100%;
+                opacity: 0;
+                animation-delay: 1s;
+            }
+            75% {
+                left: 50%;
+                opacity: 1;
+            }
+            100% {
+                left: 0%;
+                opacity: 0;
+            }
+        }
+        body {
+            animation-name: body_color;
+            animation-duration: 20s;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+        }
+        @keyframes body_color {
+            0% {
+                background-color: #b1e1e2;
+            }
+            50% {
+                background-color: #e2c0b1;
+            }
+            75% {
+                background-color: #b1bce2
+            }
+            100% {
+                background-color: #7a799e
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <section>
+        <article class="sky">
+            <img src="./../res/img/sun.png" alt="태양" class="sun">
+            <img src="./../res/img/moon.png" alt="달" class="moon">
+            <img src="./../res/img/cloud.png" alt="큰 구름" class="cloud_1">
+            <img src="./../res/img/cloud.png" alt="작은 구름" class="cloud_2">
+        </article>
+
+        <article class="city">
+            <img src="./../res/img/city.png" alt="" class="city_img">
+        </article>
+    </section>
+</body>
+
+</html>

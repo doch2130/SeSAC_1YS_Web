@@ -1,0 +1,52 @@
+2022-11-01 화요일
+
+1. display 속성
+
+inline
+- span과 같이 내용에 따라서 크기가 결정, 크기 조절 불가
+
+block
+- div 같이 한 줄을 차지하는 속성, 크기 조절 가능
+
+inline-block
+- inline과 block 기능이 일부 합쳐진 상태로 크기 조절 가능하며 width 크기에 따라서 inline 처럼 한 줄을 차지 안하는 경우도 있음
+
+flex
+- 바로 아래 자식들이 크기를 조절할 수 있는 inline-block 속성을 가지게 된다
+- 자식들의 크기 조절도 가능하다
+- flex의 justify-content 속성으로 위치 조정이 가능
+
+none
+- 코드는 그대로 남아있지만 화면에서 크기를 차지하지 않고 표시가 되지 않는 상태
+
+
+2. Animation 속성
+animation-name: anim;
+/ 애니메이션 이름
+animation-duration: 2s;
+/ 애니메이션 지속 시간
+animation-iteration-count: 30;
+/ 애니메이션 반복 횟수
+animation-delay: 1s;
+/ 애니메이션 시작 전 대기 시간
+animation-timing-function: ease;
+/ 애니메이션 실행 속도 방식, ease 외 종류 더 있음
+
+@keyframes 이름 { }
+from {} to {}
+0% {}, 50%{}, 100%{}
+등으로 위치 설정 가능
+EX)
+position: relative 설정인 경우에 아래와 같이 left 위치 설정 가능
+0% { left: 0px; }
+50% { left: 300px; }
+100% { left: 150px; }
+
+
+3. Animation 속성 - 02
+transform-origin: center 600px;
+/ 해당 개체의 기준점을 변경함
+transform: rotate(-90deg);
+- 기준점을 기준으로 개체를 돌림 (각도기 느낌)
+
+
