@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS 객체</title>
+    <script>
+        var cat = {
+            name: '나비',
+            age: 1,
+            mew: function() {
+                return "야옹";
+            }
+        }
+        function hello() {
+            return "안녕";
+        }
+        function hi() {
+            console.log('hi');
+            return '하이';
+            // return이 없으면 외부에서 함수 호출해도 데이터 값을 전달해주지는 않기 때문에
+            // hi는 함수 실행시 같이 실행되어 출력되지만 함수 종료 후 결과 값으로 undefined가 한 번 더 출력된다.
+        }
+        console.log(hi());
+        console.log(hello());
+        console.log('-----------------------------');
+        console.log(cat);
+        console.log(cat.name);
+        console.log(cat.age);
+        console.log(cat.mew());
+        console.log('-----------------------------');
+
+        var arr1 = [1,2,3,'a','b','c'];
+        var arr2 = new Array(1, 2, 3, 'a', 'b', 'c');
+        console.log(arr1);
+        console.log(arr1[0]);
+        console.log(arr1.indexOf('a'));
+        console.log('lenth: ' + arr1.length);
+        console.log('-----------------------------');
+        console.log(arr1.pop());
+        console.log(arr1);
+        console.log(arr1.push('c'));
+        console.log(arr1);
+        console.log('-----------------------------');
+        console.log(arr1.unshift('test'));
+        console.log(arr1);
+        console.log(arr1.shift());
+        console.log(arr1);
+        console.log('-----------------------------');
+
+        var me = {
+            name: 'hyohyun',
+            birth: '1004'
+        };
+        me['gender'] = 'M';
+        console.log(me);
+        console.log(me.name);
+        console.log(me['name']);
+        console.log('-----------------------------');
+
+        var date = new Date();
+        console.log(date);
+        console.log(date.getYear());
+        // 현재 getYear() 함수는 웹 표준에서 제거(Deprecated)됬다.
+        console.log(date.getFullYear());
+        console.log(date.getMonth());
+        console.log(date.getDate());
+        console.log(date.getDay());
+        console.log(date.getTime());
+        console.log(date.getHours());
+        console.log(date.getMinutes());
+        console.log(date.getSeconds());
+        console.log('-----------------------------');
+
+        console.log(Math.min());
+        console.log(Math.min(1, 9, 2, 8, 5, 3, 0));
+        console.log(Math.min(0, 'a', 9));
+        
+        console.log(Math.max());
+        console.log(Math.max(1, 9, 2, 8, 5, 3, 0));
+        console.log(Math.max(0, 'a', 9));
+
+        console.log(Math.random());
+        var min = 1;
+        var max = 10;
+        console.log(Math.random() * (max-min) + min);
+        // 최대값과 최소값 사이의 랜덤 값 구하는 방법
+        
+        console.log(Math.round(9.5));
+        console.log(Math.round(9.4));
+        console.log(Math.ceil(4.4));
+        console.log(Math.floor(8.4));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
