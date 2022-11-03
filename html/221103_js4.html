@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Document 실습</title>
+    <script>
+        
+        function calculate() {
+            var input1 = document.getElementById('input1');
+            var input2 = document.getElementById('input2');
+            var input3 = document.getElementById('input3');
+            var input4 = document.getElementById('input4');
+            var result = 0;
+
+            if (input3.value == "+") {
+                result = Number(input1.value) + Number(input2.value);
+            } else if (input3.value == '-') {
+                result = Number(input1.value) - Number(input2.value);
+            } else if (input3.value == '*') {
+                result = Number(input1.value) * Number(input2.value);
+            } else if (input3.value == '/') {
+                result = Number(input1.value) / Number(input2.value);
+            } else {
+                alert('연산자 값을 다시 입력해주세요.')
+            }
+            input4.value = result;
+        }
+
+        function init() {
+            var input1 = document.getElementById('input1');
+            var input2 = document.getElementById('input2');
+            var input3 = document.getElementById('input3');
+            var input4 = document.getElementById('input4');
+            input1.value = '';
+            input2.value = '';
+            input3.value = '';
+            input4.value = '';
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <span>값1: </span>
+        <input type="text" id="input1">
+    </div>
+    <div>
+        <span>값2: </span>
+        <input type="text" id="input2">
+    </div>
+    <div>
+        <span>연산자: </span>
+        <input type="text" id="input3">
+    </div>
+    <div>
+        <span>결과 </span>
+        <input type="text" id="input4">
+    </div>
+    <div>
+        <button type="button" onclick="calculate();">계산하기</button>
+        <button type="button" onclick="init();">초기화</button>
+    </div>
+</body>
+</html>

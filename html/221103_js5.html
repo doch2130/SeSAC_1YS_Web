@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Document 실습2</title>
+    <script>
+
+        // var number3 = 1;
+        function upload() {
+            var name = document.getElementById('name');
+            var content = document.getElementById('content');
+            var tr = document.createElement("tr");
+            var tdNumber = document.createElement("td");
+            var tdName = document.createElement("td");
+            var tdContent = document.createElement("td");
+            var tdDate = document.createElement("td");
+            var tbody = document.querySelector('tbody');
+            var date = new Date();
+
+            // 테이블안의 마지막 tr 태그 검사 후 number td 값 검사를 위한 변수 3개
+            var testBody = document.querySelector('tbody');
+            var lastTr = testBody.lastChild;
+            var firstTd = lastTr.firstChild;
+
+            // tr의 개수를 구해서 하는 방법도 있음
+            // var tdNumber2 = document.getElementsByTagName('tr');
+
+            // 전역변수를 1개 만들어서 number 값으로만 사용하는 방법
+            // 함수 밖에다가 number3 = 1 선언 후
+            // tdNumber.innerText = number3; 값을 대입 후 사용
+            // 함수 종료 시 마다 number3 += 1; 실행하여 값 맞춰주면 됨
+
+
+            tdName.innerText = name.value;
+            tdContent.innerText = content.value;
+            tdDate.innerText = date.getFullYear() + '-' + (date.getMonth()+1) + '-' + date.getDate() + ' ' + 
+            date.getHours() + ':' + date.getMinutes().toString().padStart(2, "0");
+
+            tbody.append(tr);
+
+            if(document.getElementsByTagName('td')[0] == undefined) {
+                tdNumber.innerText = '1';
+            } else {
+                tdNumber.innerText = Number(firstTd.textContent) + 1;
+            }
+
+            tr.append(tdNumber, tdName, tdContent, tdDate);
+            // tdNumber2.innerText = tdNumber2;
+            // tr.append(tdNumber2, tdName, tdContent, tdDate);
+
+        }
+
+    </script>
+</head>
+<body>
+    <div style="margin-bottom: 20px;">
+        방명록입니다.
+    </div>
+    <div>
+        <div style="display: inline-block; width: 50px;"><strong>작성자</strong></div>
+        <input tpye="text" id="name">
+    </div>
+    <div style="margin-bottom: 20px;">
+        <div style="display: inline-block; width: 50px;"><strong>내용</strong></div>
+        <input type="text" id="content">
+    </div>
+    <div style="margin-bottom: 20px;">
+        <button onclick="upload()">작성</button>
+    </div>
+    <table border="3" cellpadding=20 style="text-align: center;">
+        <tr>
+            <th style="width: 40px;">번호</th>
+            <th style="width: 100px;">작성자</th>
+            <th style="width: 200px;">내용</th>
+            <th style="width: 150px;">작성일</th>
+        </tr>
+    </table>
+
+</body>
+</html>

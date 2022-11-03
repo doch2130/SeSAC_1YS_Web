@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Document 실습3</title>
+    <style>
+        fieldset {
+            width: 500px;
+            margin-bottom: 20px;
+        }
+    </style>
+    <script>
+        var result = 24000;
+        function addMenu() {
+            var total = document.getElementById('total');
+
+            if(event.target.checked) {
+                result = result + Number(event.target.value);
+            } else {
+                result = result - Number(event.target.value);
+            }
+
+            total.innerHTML = result + "원";
+        }
+
+        
+    </script>
+</head>
+<body>
+    <h1>피자 주문</h1>
+    <fieldset>
+        <legend>사이즈</legend>
+        <label for=''>Large - 24000 원</label>
+    </fieldset>
+    <fieldset>
+        <legend>추가 주문</legend>
+        <input type="checkbox" id="picle" value="800" onclick="addMenu();"><label for='picle'>피클(800원)</label>
+        <input type="checkbox" id="chili" value="300" onclick="addMenu();"><label for='chili'>칠리 소스(300원)</label>
+        <input type="checkbox" id="diping" value="200" onclick="addMenu();"><label for='diping'>디핑 소스(200원)</label>
+        <br>
+        <input type="checkbox" id="cheeze" value="4800" onclick="addMenu();"><label for='cheeze'>치즈스틱(4개, 4800원)</label>
+        <input type="checkbox" id="con" value="2400" onclick="addMenu();"><label for='con'>콘 샐러드(2400원)</label>
+    </fieldset>
+    <fieldset>
+        <legend>합계</legend>
+        <strong id="total">0원</strong>
+    </fieldset>
+</body>
+</html>

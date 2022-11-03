@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS document 연습</title>
+    <script>
+        function imgChange() {
+            var tag = document.querySelector('img');
+            console.log(tag);
+            console.log(tag.src);
+            console.log(tag.width);
+
+            tag.src='../res/coffee_img/coffee_01.png';
+        }
+
+        function add() {
+            var li = document.createElement("li");
+            li.innerText = '새로운 li';
+            console.log(li);
+            var ul = document.querySelector('ul');
+            ul.append(li, "123");
+            // ul.appendChild(li);
+        }
+        function remove() {
+            var li = document.querySelector('li');
+            li.remove();
+            // var ul = document.querySelector('ul');
+            // ul.removeChild(li);
+            // li.parentElement.removeChild(li); 부모를 모르는 경우 이 방식으로도 삭제 가능
+        }
+    </script>
+
+
+</head>
+<body>
+    <img src="../res/img01.png" width="100" height="100">
+    <br>
+    <button type="button" onclick="imgChange();">이미지</button>
+
+    <ul>
+        <li>이름</li>
+    </ul>
+    <button type="button" onclick="add();">추가</button>
+    <button type="button" onclick="remove();">삭제</button>
+</body>
+</html>
