@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="../res/jquery-ui-1.13.2/jquery-ui.js"></script>
+    <link href="../res/jquery-ui-1.13.2/jquery-ui.css">
+    <title>JQuery 실습</title>
+    <style>
+        img {
+            width: 250px;
+            height: 250px;
+        }
+        #div01 {
+            width: 250px;
+            height: 250px;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 50px;
+        }
+    </style>
+    <script>
+        function apple() {
+            $('#div01').after('<img id="img01" src="">');
+            $('#div01').remove();
+            $('#img01').attr('src', "../res/img/apple.png");
+        }
+        function grape() {
+            $('#div01').after('<img id="img01" src="">');
+            $('#div01').remove();
+            $('#img01').attr('src', "../res/img/grape.png");
+        }
+        function banana() {
+            $('#div01').after('<img id="img01" src="">');
+            $('#div01').remove();
+            $('#img01').attr('src', "../res/img/banana.png");
+        }
+        function peach() {
+            $('#div01').after('<img id="img01" src="">');
+            $('#div01').remove();
+            $('#img01').attr('src', "../res/img/peach.png");
+        }
+    </script>
+</head>
+<body>
+    <div>
+        <div id="div01">과일을 골라볼게요</div>
+    </div>
+    <div>
+        <button type="button" onclick="apple()">사과</button>
+        <button type="button" onclick="grape()">포도</button>
+        <button type="button" onclick="banana()">바나나</button>
+        <button type="button" onclick="peach()">복숭아</button>
+    </div>
+</body>
+</html>

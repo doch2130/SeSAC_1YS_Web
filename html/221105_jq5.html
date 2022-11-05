@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="../res/jquery-ui-1.13.2/jquery-ui.js"></script>
+    <link href="../res/jquery-ui-1.13.2/jquery-ui.css">
+    <title>JQuery 실습2</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+        }
+        div:hover{
+          cursor: pointer;
+        }
+        .red {
+          background-color: red;
+        }
+        .orange {
+          background-color: orange;
+        }
+        .yellow {
+          background-color: yellow;
+        }
+        .green {
+          background-color: green;
+        }
+        .blue {
+          background-color: blue;
+        }
+        .purple {
+          background-color: purple;
+        }
+      </style>
+      <script>
+        function changeColor(){
+            if($('#div1').hasClass('red')) {
+                $('#div1').switchClass('red', 'orange', 500);
+            } else if($('#div1').hasClass('orange')) {
+                $('#div1').switchClass('orange', 'yellow', 500);
+            } else if($('#div1').hasClass('yellow')) {
+                $('#div1').switchClass('yellow', 'green', 500);
+            } else if($('#div1').hasClass('green')) {
+                $('#div1').switchClass('green', 'blue', 500);
+            } else if($('#div1').hasClass('blue')) {
+                $('#div1').switchClass('blue', 'purple', 500);
+            } else if($('#div1').hasClass('purple')) {
+                $('#div1').switchClass('purple', 'red', 500);
+            }
+        }
+      </script>
+</head>
+<body>
+    <div id="div1" class="red" onclick="changeColor();"></div>
+</body>
+</html>

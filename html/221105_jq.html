@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <title>JQuery</title>
+    <script>
+        function getData() {
+            var value1 = document.getElementById('input1').value;
+            console.log(value1);
+
+            var value2 = $("#input1").val();
+            console.log(value2);
+        }
+        // $('#input1').on('click', function(e) {
+        //     if(e.key == 'enter') {
+        //        console.log(getData());
+        //     }
+        //     if(e.code == 'enter') {
+        //         console.log(getData());
+        //     }
+        // });
+        // $('#input1').click(function(e) {
+        //     if(e.key == 'enter') {
+        //         console.log(getData());
+        //     }
+        //     if(e.code == 'enter') {
+        //         console.log(getData());
+        //     }
+        // });
+        // $('#input1').on("keyup", function(e) {
+        //     if(e.key == 'enter') {
+        //         console.log(getData());
+        //     }
+        //     if(e.code == 'enter') {
+        //         console.log(getData());
+        //     }
+        // });
+        $(document).ready(function() {
+        $("#input1").keydown(function (key) {
+            // if (key.key == "Enter") {
+            if (key.keyCode == "13") {
+                alert("엔터키 누름");
+            }
+        });
+    });
+        function setData() {
+            // document.getElementById('input1').value = 'hi';
+            $('#input1').val('hi');
+        }
+        function setStyle1() {
+            var p1 = document.querySelector('#p1');
+            p1.style = "background-color: yellow; color: blue;"
+        }
+        function setStyle2() {
+            $('#p1').css("background-color", "red");
+        }
+        function setStyle3() {
+            $('#p1').attr('style', 'background-color: blue; color: white;');
+        }
+        function changeText() {
+            console.log($('#p1').text());
+            $('#p1').text('text 글자 변경');
+        }
+        function changeHTML() {
+            $('#p1').html('<strong>html 글자 변경</strong>');
+        }
+        function append1() {
+            document.querySelector('#p1').append("<h2>h2</h2>");
+            $('#p1').append('<h3>h3태그입니다.</h3>');
+        }
+        function append() {
+            $('#ul').append("<li class='append'>append</li>");
+        }
+        function prepend() {
+            $('#ul').prepend("<li>prepend</li>");
+        }
+        function before() {
+            $('#li1').before("<li>before</li>");
+        }
+        function after() {
+            $('#li1').after("<li>after</li>");
+        }
+        function remove() {
+            // $("#li1").remove();
+            $(".append").remove();
+        }
+        function empty() {
+            $("#ul").remove();
+        }
+        function parent() {
+            console.log($('#li1').parent());
+            console.log($('#li1').parent().parent());
+            console.log($('#li1').parent().next());
+            console.log($('#li1').parent().prev());
+            $('#li1').parent().append("<li>parentAppend</li>");
+        }
+    </script>
+</head>
+<body>
+    <ul id="ul">
+        <li id="li1">기준 li</li>
+    </ul>
+    <button type="button" onclick="append();">append</button>
+    <button type="button" onclick="prepend();">prepend</button>
+    <button type="button" onclick="before();">beofre</button>
+    <button type="button" onclick="after();">after</button>
+    <button type="button" onclick="remove();">remove</button>
+    <button type="button" onclick="empty();">empty</button>
+    <button type="button" onclick="parent();">parent</button>
+    <hr>
+    <input type="text" id="input1">
+    <button type="button" onclick="getData();">값 가져오기</button>
+    <button type="button" onclick="setData();">값 불러오기</button>
+    <hr>
+    <p id="p1">p태그입니다.</p>
+    <button type="button" onclick="append1();">jquery 요소 추가</button>
+    <hr>
+    <button type="button" onclick="setStyle1();">javascript 변경</button>
+    <button type="button" onclick="setStyle2();">jquery 변경</button>
+    <button type="button" onclick="setStyle3();">jquery 여러 개 변경</button>
+    <hr>
+    <button type="button" onclick="changeText();">jquery Text</button>
+    <button type="button" onclick="changeHTML();">jquery HTML</button>
+</body>
+</html>

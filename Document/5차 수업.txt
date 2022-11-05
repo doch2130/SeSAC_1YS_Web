@@ -3,3 +3,14 @@
 1. Bootstrap
 - 프레임워크
 
+2. JQuery
+- 자바스크립트 라이브러리
+
+3. JQuery UI
+- cdn이 따로 없음
+
+- switchClass 함수
+$('div').switchClass('first', 'second', 2000);
+- div의 first 클래스를 second로 변경, 2초 동안 진행[애니메이션]
+- 만약 first가 없는 경우 second가 새롭게 추가 됨
+*has 클래스를 이용하면 if 조건문도 가능*

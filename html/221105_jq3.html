@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <script src="../res/jquery-ui-1.13.2/jquery-ui.js"></script>
+    <link href="../res/jquery-ui-1.13.2/jquery-ui.css">
+    <title>JQuery UI</title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+        }
+        .first {
+            background-color: red;
+        }
+        .second {
+            background-color: yellow;
+        }
+        .third {
+            background-color: green;
+        }
+        .sizeup {
+            font-size: 30px;
+        }
+    </style>
+    <script>
+        function second() {
+            $('div').switchClass('first', 'second', 2000);
+            // if($('div').hasClass('first')) {
+            //     $('div').switchClass('first', 'second', 2000);
+            // } else {
+            //     alert('ㅎㅎ');
+            // }
+        }
+        function sizeup() {
+            $('div').switchClass("second", "sizeup", 1000);
+        }
+        function third() {
+            $('div').switchClass("sizeup", "third", 3000);
+        }
+        function first() {
+            $('div').switchClass("third", "first", 3000);
+        }
+    </script>
+</head>
+<body>
+    <!-- <div class="first">div</div><br> -->
+    <div class="">div</div><br>
+    <button type="button" onclick="second();">first => second</button>
+    <button type="button" onclick="sizeup();">second => sizeup</button>
+    <button type="button" onclick="third();">sizeup => third</button>
+    <button type="button" onclick="first();">third => first</button>
+</body>
+</html>
