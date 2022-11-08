@@ -1,0 +1,38 @@
+2022-11-08 화요일
+
+1. 이벤트 리스너
+
+- 로딩 이벤트
+$(document).ready(function() { )};
+-> 1.8 버전에서는 deprecated 및 3.0 버전에서 미지원
+=> $(function() { });
+=> 해당 코드로 변경해서 사용
+
+
+
+$('#div1').click(function(e) {
+        console.log('div click');
+        console.log( 'e: ', e);
+    });
+e => 함수 실행시 event 객체를 던져주는 parameter 값이라고 보면 됨
+e 말고 다른거 입력해도 사용 가능 / 필요없으면 지워도 됨
+
+mouseover, hover 차이
+mouseover는 올렸을 때만 반응을 한다면 hover는 올렸을 때와 땠을 때까지 총 2번 반응을 한다.
+
+$('#div1').hover(function() {
+	console.log('div hover');
+}, function() {
+	console.log('div hover2');
+});
+=> hover 함수의 경우 function을 1개만 쓰면 올렸다 땟을 때 1번함수만 실행이 되지만,
+function을 2개를 사용하면 올렸을 때는 1번, 내렸을 때는 2번 함수가 실행된다. / 2번은 생략 가능
+
+
+keydown
+- 키보드를 눌렀지만 페이지에 반영되기 전 상태
+keypress
+- 키보드를 눌렀고 페이지에 반영된 상태 / 이 이벤트는 사용을 권장하지 않습니다.
+참고 : https://hianna.tistory.com/496
+keyup
+- 키보드에서 손을 땐 상태
