@@ -43,9 +43,14 @@
                 top: 0px !important;
             }
         }
-        @media (min-width: 992px) {
+        @media (min-width: 1320px) {
 	        .carousel-item > img {
-		        height: 350px;
+		        height: 500px;
+    	    }
+        }
+        @media (min-width: 992px) and (max-width: 1320px) {
+	        .carousel-item > img {
+		        height: 400px;
     	    }
         }
         @media (min-width: 768px) and (max-width: 992px) {
@@ -85,6 +90,7 @@
     <div class="row" id="join-row" style="margin-top: 1rem;">
         <div class="col-sm-12" style="text-align: right;">
             <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><span>로그인</span></a>
+            <button class="btn btn-primary">로그인</button>
             <a href="#" target_="_self"><span>회원가입</span></a>
         </div>
     </div>
@@ -98,13 +104,14 @@
                 </button>
                 <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">새싹 카페</h5>
+                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">카페</h5>
                         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                     </div>
                     <div class="offcanvas-header">
                         <!-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">사이트 이2름</h5> -->
                         <!-- <img src="../res/etc/test.png"> -->
                         <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><span>로그인</span></a>
+                        <button class="btn btn-primary">로그인</button>
                         <a href="#" target_="_self"><span>회원가입</span></a>
                     </div>
                     <div class="offcanvas-body">
@@ -113,7 +120,7 @@
                                 <a class="nav-link active" aria-current="page" href="#">Home</a>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Menu
                                 </a>
                                 <ul class="dropdown-menu">
@@ -125,7 +132,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Store
                                 </a>
                                 <ul class="dropdown-menu">
@@ -133,7 +140,7 @@
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 News
                                 </a>
                                 <ul class="dropdown-menu">
@@ -190,7 +197,7 @@
                 <img src="../res/mainpage/bestmenu-04.png" class="imgw-22">
             </div>
         </div>
-        <div class="col-11 col-md-3">
+        <div class="col-12 col-md-3">
             <p style="font-size: 1.5rem;"><strong>오시는 길</strong></p>
             <img src="../res/mainpage/roadmap-01.png" class="w-100" style="opacity: 0.8;">
         </div>
@@ -204,8 +211,6 @@
                 <span>개인정보처리방침</span>
                 <span>|</span>
                 <span>서비스이용약관</span>
-                <span>|</span>
-                <span>멤버십이용약관</span>
                 <span>|</span>
                 <span>고객문의</span>
                 <span>|</span>
