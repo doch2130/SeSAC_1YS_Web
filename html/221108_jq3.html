@@ -117,6 +117,40 @@
             color: white;
         }
 
+        .accordion-body {
+            height: 500px;
+        }
+        #accordion-ul > li {
+            float: left;
+            position: absolute;
+            width: 70% !important;
+            height: 520px;
+            /* opacity: 0.6; */
+            transform-origin: center;
+        }
+        #accordion-ul > li > img {
+            height: 100%;
+            width: 100%;
+        }
+        .accordion-img-left {
+            /* transform: translate(-97%, 0%); */
+            margin-left: -67%;
+            opacity: 0.5;
+            z-index: 10;
+        }
+        .accordion-img-center {
+            /* transform: translate(5%, 0%); */
+            margin-left: 7%;
+            opacity: 1;
+            z-index: 10;
+        }
+        .accordion-img-right {
+            /* transform: translate(107%, 0%); */
+            margin-left: 81%;
+            opacity: 0.5;
+            z-index: 7;
+        }
+
     </style>
     <script>
         $(function() {
@@ -136,6 +170,84 @@
             $(".nav-item").click(function() {
                 $(".nav-subnav").slideToggle();
             });
+
+            // accordion 이미지 슬라이드 애니메이션
+            function use_animated() { 
+                $("#accordion-img1").animate({ 
+                    marginLeft: '7%',
+                    opacity: '1',
+                    zIndex: '10'
+                }, 2001)
+                .delay(1000)
+                .animate({ 
+                    marginLeft: '81%',
+                    opacity: '0.5',
+                    zIndex: '7'
+                }, 2001)
+                .delay(1000)
+                .animate({
+                    marginLeft: '-67%',
+                    opacity: '0.5',
+                    zIndex: '7'
+                }, 2001)
+                .delay(1000);
+
+                $("#accordion-img2").animate({
+                    marginLeft: '81%',
+                    opacity: '0.5',
+                    zIndex: '7'
+                }, 2001)
+                .delay(1000)
+                .animate({ 
+                    marginLeft: '-67%',
+                    opacity: '0.5',
+                    zIndex: '7'
+                }, 2001)
+                .delay(1000)
+                .animate({
+                    marginLeft: '7%',
+                    opacity: '1',
+                    zIndex: '10'
+                }, 2001)
+                .delay(1000);
+
+                $("#accordion-img3").animate({
+                    marginLeft: '-67%',
+                    opacity: '0.5',
+                    zIndex: '7'
+                }, 2001)
+                .delay(1000)
+                .animate({ 
+                    marginLeft: '7%',
+                    opacity: '1',
+                    zIndex: '10'
+                }, 2001)
+                .delay(1000)
+                .animate({
+                    marginLeft: '81%',
+                    opacity: '0.5',
+                    zIndex: '7'
+                }, 2001)
+                .delay(1000);
+            }
+
+            let accordionImgCount = 0;
+            setInterval(function(){
+                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+                    $.when($('#accordion-img1'), $('#accordion-img2'), $('#accordion-img3')).then(function() {
+                        use_animated();
+                    });
+                    accordionImgCount++;
+                } else {
+                    if(accordionImgCount > 0) {
+                        $('#accordion-ul > li').stop(true, true);
+                        // $("요소 선택").stop(clearQueue, finish);
+                        clearInterval();
+                        accordionImgCount = 0;
+                    }
+                }
+            }, 5000);
+
         });
     </script>
 </head>
@@ -266,14 +378,25 @@
             <div class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button style="background-color: #F6F5EF; color: black;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        <button style="background-color: #F6F5EF; color: black;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
                         프로모션
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
                         <div class="accordion-body">
                             <!-- 아코디언 이미지 슬라이드 시작 -->
-                            일단 냅두자...
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <ul type="none" id="accordion-ul">
+                                        <!-- <li><img src="../res/mainpage/accordionBanner-02.jpg" class="w-10"></li> -->
+                                        <li id="accordion-img1" class="accordion-img-left"><img src="../res/mainpage/accordionBanner-03.jpg" class="w-100"></li>
+                                        <li id="accordion-img2" class="accordion-img-center"><img src="../res/mainpage/accordionBanner-01.jpg" class="w-100"></li>
+                                        <li id="accordion-img3" class="accordion-img-right"><img src="../res/mainpage/accordionBanner-02.jpg" class="w-100"></li>
+                                        <!-- <li id="accordion-img4" class="accordion-img-back"><img src="../res/mainpage/accordionBanner-03.jpg" class="w-100"></li> -->
+                                        <!-- <li><img src="../res/mainpage/accordionBanner-01.jpg" class="w-10"></li> -->
+                                    </ul>
+                                </div>
+                            </div>
                             <!-- 아코디언 이미지 슬라이드 끝 -->
                         </div>
                     </div>
@@ -281,57 +404,6 @@
             </div>
         </div>
     </div>
-
-    <!-- 이미지 테스트 용 div -->
-    <div class="row">
-        <div class="col-sm-12" style="height: 550px;">
-            <ul type="none" id="test">
-                <!-- <li><img src="../res/mainpage/accordionBanner-02.jpg" class="w-10"></li> -->
-                <li><img src="../res/mainpage/accordionBanner-03.jpg" class="w-100"></li>
-                <li><img src="../res/mainpage/accordionBanner-01.jpg" class="w-100"></li>
-                <li><img src="../res/mainpage/accordionBanner-02.jpg" class="w-100"></li>
-                <!-- <li><img src="../res/mainpage/accordionBanner-03.jpg" class="w-10"></li> -->
-                <!-- <li><img src="../res/mainpage/accordionBanner-01.jpg" class="w-10"></li> -->
-            </ul>
-        </div>
-    </div>
-    <script>
-        
-    </script>
-    <style>
-        #test > li {
-            float: left;
-            width: 80% !important;
-            position: relative;
-            opacity: 0.6;
-            height: 550px;
-            transform-origin: center;
-        }
-        #test > li:nth-child(1) {
-            /* display: none; */
-        }
-        #test > li:nth-child(3) {
-            /* position: relative !important; */
-            /* transform: translate(10%, 0%); */
-            /* transform: rotate3d(0,0,90deg); */
-            /* animation-name: test2; */
-            animation-duration: 10s;
-            animation-delay: 0s;
-            animation-iteration-count: 1;
-            animation-timing-function: linear;
-        }
-        #test > li:nth-child(4) {
-            /* transform: translate(111%, -100%); */
-        }
-        #test > li:nth-child(2) {
-            /* transform: translate(-91%, -200%); */
-        }
-        @keyframes test2 {
-            0% { transform: translate(10%, 0%); }
-            50% { transform: translate(111%, 0%); }
-            100% { transform: translate(-91%, 0%); }
-        }
-    </style>
 
     <!-- bestmenu & 오시는길 -->
     <div class="row" style="margin-bottom: 1rem;">
