@@ -15,7 +15,11 @@
     
     <!-- sweetAlert -->
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" integrity="sha384-RIQuldGV8mnjGdob13cay/K1AJa+LR7VKHqSXrrB5DPGryn4pMUXRLh92Ev8KlGF" crossorigin="anonymous"></script>
-    <title>JQuery 페이지 만들기</title>
+
+    <!-- bxSlider -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script> -->
+    <title>개인 프로젝트 - 페이지 만들기(front)</title>
     <style>
         .row {
             margin: 0px;
@@ -26,14 +30,17 @@
         .fixed-top {
             top: 36px;
         }
-        a:link {
-            color: black;
+        #loginBtn:link, #loginBtn:visited, #registerBtn:link, #registerBtn:visited {
+            color: black;   
         }
-        a:visited {
+        .nav-item > a {
             color: black;
         }
         a {
             text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
         }
         @media (max-width: 992px) {
             #join-row {
@@ -84,78 +91,145 @@
             color: #de898e;
             margin-bottom: 0px;
         }
+
+        .nav-item:hover {
+            background-color: #2C2A29;
+        }
+        .nav-item:hover > a {
+            color: white;
+        }
+        .nav-subnav {
+            background-color: #2C2A29;
+            height: 330px;
+        }
+        .nav-subnav > ul {
+            color: #999;
+            padding-top: 1rem;
+        }
+        .nav-subnav > ul > li {
+            margin-bottom: 0.1rem;
+        }
+        .nav-subnav > ul > li > a {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        .nav-subnav > ul > li > strong > a {
+            color: white;
+        }
+
     </style>
+    <script>
+        $(function() {
+            // nav 마우스 이벤트로 메뉴 호출 및 삭제
+            $('.nav-item').mouseover(function () {
+                // $('.nav-subnav').css('display', 'block');
+                $(".nav-subnav").slideDown();
+            });
+            $('.nav-subnav').mouseover(function () {
+                $('.nav-subnav').css('display', 'block');
+            });
+            $('.nav-subnav').parent().parent().mouseleave(function () {
+                $(".nav-subnav").slideUp();
+                // $('.nav-subnav').css('display', 'none');
+            });
+            // 필요없을거 같으면 삭제
+            $(".nav-item").click(function() {
+                $(".nav-subnav").slideToggle();
+            });
+        });
+    </script>
 </head>
 <body>
     <div class="row" id="join-row" style="margin-top: 1rem;">
         <div class="col-sm-12" style="text-align: right;">
-            <a href="#" href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><span>로그인</span></a>
-            <button class="btn btn-primary">로그인</button>
-            <a href="#" target_="_self"><span>회원가입</span></a>
+            <a href="#" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal"><span>로그인</span></a>
+            <!-- <button class="btn btn-primary">로그인</button> -->
+            <a href="#" id="registerBtn" target_="_self"><span>회원가입</span></a>
         </div>
     </div>
 
     <div class="row">
-        <nav class="navbar navbar-expand-lg fixed-top">
+        <nav class="navbar navbar-expand-lg" style="padding-bottom: 0px;">
             <div class="container-fluid">
-                <!-- <a class="navbar-brand" href="#">Offcanvas navbar</a> -->
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">카페</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-header">
-                        <!-- <h5 class="offcanvas-title" id="offcanvasNavbarLabel">사이트 이2름</h5> -->
-                        <!-- <img src="../res/etc/test.png"> -->
-                        <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal"><span>로그인</span></a>
-                        <button class="btn btn-primary">로그인</button>
-                        <a href="#" target_="_self"><span>회원가입</span></a>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Menu
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Coffee</a></li>
-                                    <li><a class="dropdown-item" href="#">Non Coffee</a></li>
-                                    <li><a class="dropdown-item" href="#">Dessert</a></li>
-                                    <li><a class="dropdown-item" href="#">Etc</a></li>
-                                    <!-- <li><hr class="dropdown-divider"></li> -->
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Store
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">매장검색</a></li>
-                                </ul>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                News
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">Notice</a></li>
-                                    <li><a class="dropdown-item" href="#">Event</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+              <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav" style="margin: auto;">
+                  <li class="nav-item">
+                    <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+                    <a class="nav-link" href="#">COFFEE</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">MENU</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">STORE</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">WHAT'S NEW</a>
+                  </li>
+                </ul>
+              </div>
             </div>
         </nav>
     </div>
-    <!-- 이미지 슬라이드 -->
-    <div class="row" style="padding-top: 60px;">
+
+    <!-- navbar sub 메뉴 -->
+    <div class="row" style="position: absolute; z-index: 20; width: 100%;">
+        <div class="col-sm-3" style="padding: 0px;">
+            <div class="nav-subnav" style="display: none;">
+                <ul type='none'>
+                    <li style="color: white; margin-bottom: 0.5rem;"><strong>커피</strong></li>
+                    <li><a href="#">원두</a></li>
+                    <li style="color: white; margin-top: 1rem; margin-bottom: 0.5rem;"><strong>에스프레소 음료</strong></li>
+                    <li><a href="#">도피오</a></li>
+                    <li><a href="#">에스프레소 마키아또</a></li>
+                    <li><a href="#">아메리카노</a></li>
+                    <li ><a href="#">마키아또</a></li>
+                    <li><a href="#">카푸치노</a></li>
+                    <li><a href="#">라떼</a></li>
+                    <li><a href="#" style="margin-bottom: 0.1rem;">모카</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3" style="padding: 0px;">
+            <div class="nav-subnav" style="display: none;">
+                <ul type='none'>
+                    <li style="color: white; margin-bottom: 0.5rem;"><strong>음료</strong></li>
+                    <li><a href="#">콜드 브루</a></li>
+                    <li><a href="#">에스프레소</a></li>
+                    <li><a href="#">프라푸치노</a></li>
+                    <li><a href="#">할리치노</a></li>
+                    <li><a href="#">스파클링</a></li>
+                    <li><a href="#">기타 제조 음료</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3" style="padding: 0px;">
+            <div class="nav-subnav" style="display: none;">
+                <ul type='none'>
+                    <li style="color: white; margin-bottom: 2rem;"><strong><a href="#">매장검색</a></strong></li>
+                    <li style="color: white; margin-bottom: 0.5rem;"><strong>매장 이야기</strong></li>
+                    <li><a href="#">티바나 바 매장</a></li>  
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3" style="padding: 0px;">
+            <div class="nav-subnav" style="display: none;">
+                <ul type='none'>
+                    <li style="color: white; margin-bottom: 0.5rem;"><strong>공지사항</strong></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">이벤트</a></li>
+                    <li><a href="#">위치 및 연락처</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 메인 배너 이미지 슬라이드 -->
+    <div class="row" style="padding-top: 8px;">
         <div class="col-sm-12">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
                 <div class="carousel-indicators">
@@ -185,8 +259,82 @@
               </div>
         </div>
     </div>
-    
+
+    <!-- Accordion (클릭 콘텐츠) -->
     <div class="row" style="margin-top: 1rem; margin-bottom: 1rem;">
+        <div class="col-sm-12">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button style="background-color: #F6F5EF; color: black;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        프로모션
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <!-- 아코디언 이미지 슬라이드 시작 -->
+                            일단 냅두자...
+                            <!-- 아코디언 이미지 슬라이드 끝 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 이미지 테스트 용 div -->
+    <div class="row">
+        <div class="col-sm-12" style="height: 550px;">
+            <ul type="none" id="test">
+                <!-- <li><img src="../res/mainpage/accordionBanner-02.jpg" class="w-10"></li> -->
+                <li><img src="../res/mainpage/accordionBanner-03.jpg" class="w-100"></li>
+                <li><img src="../res/mainpage/accordionBanner-01.jpg" class="w-100"></li>
+                <li><img src="../res/mainpage/accordionBanner-02.jpg" class="w-100"></li>
+                <!-- <li><img src="../res/mainpage/accordionBanner-03.jpg" class="w-10"></li> -->
+                <!-- <li><img src="../res/mainpage/accordionBanner-01.jpg" class="w-10"></li> -->
+            </ul>
+        </div>
+    </div>
+    <script>
+        
+    </script>
+    <style>
+        #test > li {
+            float: left;
+            width: 80% !important;
+            position: relative;
+            opacity: 0.6;
+            height: 550px;
+            transform-origin: center;
+        }
+        #test > li:nth-child(1) {
+            /* display: none; */
+        }
+        #test > li:nth-child(3) {
+            /* position: relative !important; */
+            /* transform: translate(10%, 0%); */
+            /* transform: rotate3d(0,0,90deg); */
+            /* animation-name: test2; */
+            animation-duration: 10s;
+            animation-delay: 0s;
+            animation-iteration-count: 1;
+            animation-timing-function: linear;
+        }
+        #test > li:nth-child(4) {
+            /* transform: translate(111%, -100%); */
+        }
+        #test > li:nth-child(2) {
+            /* transform: translate(-91%, -200%); */
+        }
+        @keyframes test2 {
+            0% { transform: translate(10%, 0%); }
+            50% { transform: translate(111%, 0%); }
+            100% { transform: translate(-91%, 0%); }
+        }
+    </style>
+
+    <!-- bestmenu & 오시는길 -->
+    <div class="row" style="margin-bottom: 1rem;">
         <div class="col-md-1"></div>
         <div class="col-sm-12 col-md-8">
             <p style="font-size: 1.5rem;"><strong>Best Menu</strong></p>
