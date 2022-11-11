@@ -24,6 +24,12 @@
         .row {
             margin: 0px;
         }
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
         .container-fluid {
             justify-content: flex-end !important;
         }
@@ -36,12 +42,51 @@
         .nav-item > a {
             color: black;
         }
-        a {
-            text-decoration: none;
+        .nav-item:hover {
+            background-color: #2C2A29;
         }
-        a:hover {
-            text-decoration: underline;
+        .nav-item:hover > a {
+            color: white;
         }
+        .nav-subnav {
+            background-color: #2C2A29;
+            height: 330px;
+        }
+        .nav-subnav > ul {
+            color: #999;
+            padding-top: 1rem;
+        }
+        .nav-subnav > ul > li {
+            margin-bottom: 0.1rem;
+        }
+        .nav-subnav > ul > li > a {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        .nav-subnav > ul > li > strong > a {
+            color: white;
+        }
+        .imgw-22 {
+            width: 22% !important;
+        }
+
+        #footerLink { 
+            margin-top: 1rem;
+        }
+        #footerLink > span {
+            color: white;
+            font-size: 0.8rem;
+        }
+        #footerText {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        #footerText > p {
+            font-size: 0.8rem;
+            color: #de898e;
+            margin-bottom: 0px;
+        }
+
         @media (max-width: 992px) {
             #join-row {
                 display: none;
@@ -71,86 +116,6 @@
     	    }
         }
 
-        .imgw-22 {
-            width: 22% !important;
-        }
-
-        #footerLink { 
-            margin-top: 1rem;
-        }
-        #footerLink > span {
-            color: white;
-            font-size: 0.8rem;
-        }
-        #footerText {
-            padding-top: 1rem;
-            padding-bottom: 1rem;
-        }
-        #footerText > p {
-            font-size: 0.8rem;
-            color: #de898e;
-            margin-bottom: 0px;
-        }
-
-        .nav-item:hover {
-            background-color: #2C2A29;
-        }
-        .nav-item:hover > a {
-            color: white;
-        }
-        .nav-subnav {
-            background-color: #2C2A29;
-            height: 330px;
-        }
-        .nav-subnav > ul {
-            color: #999;
-            padding-top: 1rem;
-        }
-        .nav-subnav > ul > li {
-            margin-bottom: 0.1rem;
-        }
-        .nav-subnav > ul > li > a {
-            color: #999;
-            font-size: 0.9rem;
-        }
-        .nav-subnav > ul > li > strong > a {
-            color: white;
-        }
-
-        .accordion-body {
-            height: 500px;
-        }
-        #accordion-ul > li {
-            float: left;
-            position: absolute;
-            width: 70% !important;
-            height: 520px;
-            /* opacity: 0.6; */
-            transform-origin: center;
-        }
-        #accordion-ul > li > img {
-            height: 100%;
-            width: 100%;
-        }
-        .accordion-img-left {
-            /* transform: translate(-97%, 0%); */
-            margin-left: -67%;
-            opacity: 0.5;
-            z-index: 10;
-        }
-        .accordion-img-center {
-            /* transform: translate(5%, 0%); */
-            margin-left: 7%;
-            opacity: 1;
-            z-index: 10;
-        }
-        .accordion-img-right {
-            /* transform: translate(107%, 0%); */
-            margin-left: 81%;
-            opacity: 0.5;
-            z-index: 7;
-        }
-
     </style>
     <script>
         $(function() {
@@ -172,8 +137,10 @@
             });
 
             // accordion 이미지 슬라이드 애니메이션
-            function use_animated() { 
+            function use_animated(accordionDivWidth) {
+                console.log(accordionDivWidth);
                 $("#accordion-img1").animate({ 
+                    // marginLeft: '7%',
                     marginLeft: '7%',
                     opacity: '1',
                     zIndex: '10'
@@ -187,6 +154,7 @@
                 .delay(1000)
                 .animate({
                     marginLeft: '-67%',
+                    // marginLeft: -accordionDivWidth,
                     opacity: '0.5',
                     zIndex: '7'
                 }, 2001)
@@ -231,23 +199,45 @@
                 .delay(1000);
             }
 
-            let accordionImgCount = 0;
-            setInterval(function(){
-                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
-                    $.when($('#accordion-img1'), $('#accordion-img2'), $('#accordion-img3')).then(function() {
-                        use_animated();
-                    });
-                    accordionImgCount++;
-                } else {
-                    if(accordionImgCount > 0) {
-                        $('#accordion-ul > li').stop(true, true);
-                        // $("요소 선택").stop(clearQueue, finish);
-                        clearInterval();
-                        accordionImgCount = 0;
-                    }
-                }
-            }, 5000);
+            // let accordionImgCount = 0;
+            // let accordionDivWidth = $('#accordionPanelsStayOpenExample').outerWidth();
+            // // use_animated(accordionDivWidth);
+            // console.log('test:', $('#accordion-body-id').innerWidth());
 
+            // $("#accordion-img1").css('margin-left', accordionDivWidth*(-0.027));
+            // $("#accordion-img2").css('margin-left', accordionDivWidth*0.305);
+            // $("#accordion-img3").css('margin-left', accordionDivWidth*0.636);
+            // // div 위드에 따른 margin-left 값 구하는 방법 확인 완료
+            // // 반응형으로 하는 거에 따라서 어떻게 할 지 고민필요
+            // $("#accordion-img1").css('width', accordionDivWidth*0.3);
+            // $("#accordion-img2").css('width', accordionDivWidth*0.3);
+            // $("#accordion-img3").css('width', accordionDivWidth*0.3);
+
+            // $("#accordion-img1").css('height', accordionDivWidth*0.3);
+            // $("#accordion-img2").css('height', accordionDivWidth*0.3);
+            // $("#accordion-img3").css('height', accordionDivWidth*0.3);
+            // console.log($('#accordion-img2').offset());
+            // console.log($('#accordion-body-id').offset());
+            
+
+            // setInterval(function(){
+            //     if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+            //         $.when($('#accordion-img1'), $('#accordion-img2'), $('#accordion-img3')).then(function() {
+            //             use_animated();
+            //         });
+            //         accordionImgCount++;
+            //     } else {
+            //         if(accordionImgCount > 0) {
+            //             $('#accordion-ul > li').stop(true, true);
+            //             // $("요소 선택").stop(clearQueue, finish);
+            //             clearInterval();
+            //             accordionImgCount = 0;
+            //         }
+            //     }
+            // }, 5000);
+
+            // let accordionImgWidth = $('#accordionPanelsStayOpenExample').outerWidth();
+            // console.log(accordionDivWidth);
         });
     </script>
 </head>
@@ -374,35 +364,136 @@
 
     <!-- Accordion (클릭 콘텐츠) -->
     <div class="row" style="margin-top: 1rem; margin-bottom: 1rem;">
-        <div class="col-sm-12">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
             <div class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                        <button style="background-color: #F6F5EF; color: black;" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="false" aria-controls="panelsStayOpen-collapseOne">
+                        <button style="background-color: #F6F5EF; color: black;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
                         프로모션
                         </button>
                     </h2>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
                         <div class="accordion-body">
                             <!-- 아코디언 이미지 슬라이드 시작 -->
                             <div class="row">
-                                <div class="col-sm-12">
-                                    <ul type="none" id="accordion-ul">
-                                        <!-- <li><img src="../res/mainpage/accordionBanner-02.jpg" class="w-10"></li> -->
-                                        <li id="accordion-img1" class="accordion-img-left"><img src="../res/mainpage/accordionBanner-03.jpg" class="w-100"></li>
-                                        <li id="accordion-img2" class="accordion-img-center"><img src="../res/mainpage/accordionBanner-01.jpg" class="w-100"></li>
-                                        <li id="accordion-img3" class="accordion-img-right"><img src="../res/mainpage/accordionBanner-02.jpg" class="w-100"></li>
-                                        <!-- <li id="accordion-img4" class="accordion-img-back"><img src="../res/mainpage/accordionBanner-03.jpg" class="w-100"></li> -->
-                                        <!-- <li><img src="../res/mainpage/accordionBanner-01.jpg" class="w-10"></li> -->
+                                <div class="col-sm-12 col-md-12 col-lg-12" id="accordion-body-img">
+                                    <ul type="none" id="accordion-ul" style="padding: 0px;">
+                                        <li id="accordion-img-li">
+                                            <img src="../res/mainpage/accordionBanner-01.jpg" class="accordion-img">
+                                            <img src="../res/mainpage/accordionBanner-02.jpg" class="accordion-img">
+                                            <img src="../res/mainpage/accordionBanner-03.jpg" class="accordion-img">
+                                            <img src="../res/mainpage/accordionBanner-03.jpg" alt="clone" class="accordion-img" id="accordion-img-clone">
+                                        </li>
+                                        <li id="accordion-img-li-clone"><img src="../res/mainpage/accordionBanner-03.jpg" class="accordion-img"></li>
+
+                                        <!-- <li id="accordion-img-li1" class="accordion-img-li"><img src="../res/mainpage/accordionBanner-01.jpg" class="accordion-img"></li>
+                                        <li id="accordion-img-li2" class="accordion-img-li"><img src="../res/mainpage/accordionBanner-02.jpg" class="accordion-img"></li>
+                                        <li id="accordion-img-li3" class="accordion-img-li"><img src="../res/mainpage/accordionBanner-03.jpg" class="accordion-img"></li> -->
+                                        <!-- <li id="accordion-img-li-clone" class="accordion-img-li"><img src="../res/mainpage/accordionBanner-03.jpg" class="accordion-img"></li> -->
                                     </ul>
                                 </div>
                             </div>
+
+<!-- center - transform: perspective(150px) translateZ(10px) translateX(0px);
+right - transform: perspective(150px) translateZ(-60px) translateX(620px);
+left - transform: perspective(150px) translateZ(10px) translateX(0px);
+
+center => left => right
+right => center => left
+left => right => center
+
+li
+width: ul.width
+
+img
+width: 565.5px;
+position: absolute;
+z-index: 10;
+margin-left: 188px;
+transform: perspective(150px) translateZ(10px) translateX(0px); / center
+
+위 적어논 내용은 참고용이며, 내일 수업시간에 할 때 활용하면 됨
+li 태그 1개에다가 img 태그 다 때려넣고 안에서 transform으로 돌리는 애니메이션으로 하면 됨 -->
+
                             <!-- 아코디언 이미지 슬라이드 끝 -->
+                            <!-- 이미지 style -->
+                            <style>
+                                #accordion-ul > li {
+                                    float: left;
+                                    position: absolute;
+                                    overflow: hidden;
+                                }
+                                .accordion-img {
+                                    position: absolute;
+                                }
+                                #accordion-img-clone {
+                                    position: relative !important;
+                                }
+                                #accordion-img-li-clone, #accordion-img-li-clone > img {
+                                    position: relative !important;
+                                    opacity: 0;
+                                }
+/*
+할 내용
+img width 값 계산
+width 계산에 따라서 height 값 변경 (자동 비율 변한되는지 확인 필요)
+transform 위치 변경
+마지막 인터벌 설정
+*/
+
+                                /* 이전 style */
+
+                                #accordion-img-li1 {
+                                    z-index: 10;
+                                }
+                                #accordion-img-li2 {
+                                    z-index: 7;
+                                }
+                                #accordion-img-li3 {
+                                    z-index: 5;
+                                }
+                            </style>
+                            <!-- style 끝 -->
+                            <script>
+                                $(function() {
+                                    console.log($('#accordion-ul').outerWidth());
+                                    // console.log($('#accordion-ul').children().toArray());
+                                    let accordionWidth = $('#accordion-ul').outerWidth();
+                                    console.log(accordionWidth);
+                                    let accordionImgLiWidth = accordionWidth*0.8;
+                                    let accordionImgWidth = accordionWidth*0.8;
+                                    $('.accordion-img-li').css('width', accordionWidth*0.8);
+                                    $('.accordion-img').css('width', accordionWidth*0.6);
+                                    console.log($('.accordion-img-li').width());
+                                    console.log($('.accordion-img').width());
+                                    let temp = accordionWidth - accordionImgWidth;
+                                    console.log(temp);
+                                    $('#accordion-img-li1').css('margin-left', temp/2);
+                                    // $('#accordion-img-li1').css('transform', 'perspective(150px) translateZ(10px)');
+                                    $('#accordion-img-li2').css('margin-left', temp/2);
+                                    $('#accordion-img-li3').css('margin-left', temp/2);
+                                    // let accordionImgArray = $('#accordion-ul').children().toArray();
+                                    // let accordionImgArray = $('#accordion-ul').children().toArray();
+                                    // console.log(accordionImgArray[0].offsetWidth);
+                                    // accordionImgArray[0].offsetWidth = 1;
+                                    // accordionImgArray[0].css('width', 1);
+                                    // console.log(accordionImgArray[0].offsetWidth);
+                                    // console.log($('#accordion-ul').children().outerWidth());
+                                    // for(let i=0; i < accordionImgArray.length; i++) {
+                                    //     // console.log(accordionImgArray[i]);
+                                    //     // accordionImgArray[i].outerWidth = 1;
+                                    //     // console.log(accordionImgArray[i].outerWidth);
+                                    // }
+                                });
+                            </script>
+                            <!-- script 끝 -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="col-sm-1"></div>
     </div>
 
     <!-- bestmenu & 오시는길 -->
