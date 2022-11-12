@@ -377,7 +377,7 @@
                         <div class="accordion-body">
                             <!-- 아코디언 이미지 슬라이드 시작 -->
                             <div class="row">
-                                <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-8" id="accordion-body-img">
+                                <div class="col-sm-12 col-md-12 col-lg-12" id="accordion-body-img">
                                     <ul type="none" id="accordion-ul" style="padding: 0px;">
                                         <li id="accordion-img-li">
                                             <img src="../res/mainpage/accordionBanner-01.jpg" class="accordion-img">
@@ -436,7 +436,7 @@ li 태그 1개에다가 img 태그 다 때려넣고 안에서 transform으로 �
                                     z-index: 20;
                                 }
                                 .next-accordion {
-                                    transform: perspective(150px) translateX(620px) translateZ(-60px);
+                                    transform: perspective(150px) translateX(400px) translateZ(-60px);
                                     z-index: 15;
                                 }
                                 .hide-accordion {
@@ -444,7 +444,7 @@ li 태그 1개에다가 img 태그 다 때려넣고 안에서 transform으로 �
                                     z-index: 10;
                                 }
                                 .before-accordion {
-                                    transform: perspective(150px) translateX(-620px) translateZ(-60px);
+                                    transform: perspective(150px) translateX(-400px) translateZ(-60px);
                                     z-index: 15;
                                 }
 
@@ -517,6 +517,8 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
 
                                     // 이걸로 하면 클래스에서 순서에 따라 addClass 설정 가능
                                     $('.accordion-img:nth(0)').addClass('show-accordion');
+                                    $('.accordion-img:nth(1)').addClass('next-accordion');
+                                    $('.accordion-img:nth(2)').addClass('before-accordion');
                                     
                                     // console.log($('#accordion-img-li > img').first());
                                     // console.log($('#accordion-img-li > img')[3]);
