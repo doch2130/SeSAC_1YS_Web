@@ -364,8 +364,8 @@
 
     <!-- Accordion (클릭 콘텐츠) -->
     <div class="row" style="margin-top: 1rem; margin-bottom: 1rem;">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-10">
+        <div class="col-sm-1 col-xxl-2"></div>
+        <div class="col-sm-10 col-xxl-8">
             <div class="accordion" id="accordionPanelsStayOpenExample">
                 <div class="accordion-item">
                     <h2 class="accordion-header" id="panelsStayOpen-headingOne">
@@ -377,15 +377,15 @@
                         <div class="accordion-body">
                             <!-- 아코디언 이미지 슬라이드 시작 -->
                             <div class="row">
-                                <div class="col-sm-12 col-md-12 col-lg-12" id="accordion-body-img">
+                                <div class="col-sm-12 col-md-12 col-lg-12 col-xxl-8" id="accordion-body-img">
                                     <ul type="none" id="accordion-ul" style="padding: 0px;">
                                         <li id="accordion-img-li">
                                             <img src="../res/mainpage/accordionBanner-01.jpg" class="accordion-img">
                                             <img src="../res/mainpage/accordionBanner-02.jpg" class="accordion-img">
                                             <img src="../res/mainpage/accordionBanner-03.jpg" class="accordion-img">
-                                            <img src="../res/mainpage/accordionBanner-03.jpg" alt="clone" class="accordion-img" id="accordion-img-clone">
+                                            <img src="../res/mainpage/accordionBanner-04.jpg" alt="clone" class="accordion-img" id="accordion-img-clone">
                                         </li>
-                                        <li id="accordion-img-li-clone"><img src="../res/mainpage/accordionBanner-03.jpg" class="accordion-img"></li>
+                                        <li id="accordion-img-li-clone"><img src="../res/mainpage/accordionBanner-04.jpg" class="accordion-img"></li>
 
                                         <!-- <li id="accordion-img-li1" class="accordion-img-li"><img src="../res/mainpage/accordionBanner-01.jpg" class="accordion-img"></li>
                                         <li id="accordion-img-li2" class="accordion-img-li"><img src="../res/mainpage/accordionBanner-02.jpg" class="accordion-img"></li>
@@ -411,7 +411,7 @@ width: 565.5px;
 position: absolute;
 z-index: 10;
 margin-left: 188px;
-transform: perspective(150px) translateZ(10px) translateX(0px); / center
+transform: perspective(150px) translateX(0px) translateZ(10px) ; / center
 
 위 적어논 내용은 참고용이며, 내일 수업시간에 할 때 활용하면 됨
 li 태그 1개에다가 img 태그 다 때려넣고 안에서 transform으로 돌리는 애니메이션으로 하면 됨 -->
@@ -427,52 +427,117 @@ li 태그 1개에다가 img 태그 다 때려넣고 안에서 transform으로 �
                                 .accordion-img {
                                     position: absolute;
                                 }
-                                #accordion-img-clone {
-                                    position: relative !important;
-                                }
-                                #accordion-img-li-clone, #accordion-img-li-clone > img {
+                                #accordion-img-clone, #accordion-img-li-clone, #accordion-img-li-clone > img {
                                     position: relative !important;
                                     opacity: 0;
                                 }
-/*
-할 내용
-img width 값 계산
-width 계산에 따라서 height 값 변경 (자동 비율 변한되는지 확인 필요)
-transform 위치 변경
-마지막 인터벌 설정
-*/
-
-                                /* 이전 style */
-
-                                #accordion-img-li1 {
+                                .show-accordion {
+                                    transform: perspective(150px) translateX(0px) translateZ(5px);
+                                    z-index: 20;
+                                }
+                                .next-accordion {
+                                    transform: perspective(150px) translateX(620px) translateZ(-60px);
+                                    z-index: 15;
+                                }
+                                .hide-accordion {
+                                    transform: perspective(150px) translateX(0px) translateZ(-100px);
                                     z-index: 10;
                                 }
-                                #accordion-img-li2 {
-                                    z-index: 7;
+                                .before-accordion {
+                                    transform: perspective(150px) translateX(-620px) translateZ(-60px);
+                                    z-index: 15;
                                 }
-                                #accordion-img-li3 {
-                                    z-index: 5;
-                                }
+
+/*
+할 내용
+transform 위치 변경
+인터벌 설정
+좌우 버튼
+하단 버튼 or 표시
+
+- 2022-11-12 14:00 1차 정리 -
+class 방식
+show-accordion
+next-accordion
+hide-accordion
+before-accordion
+
+default value
+0 show
+1 next
+2 before
+
+switchClass
+show => next => hide(임시 저장 변수) => pre => show
+
+setInterval
+3초마다 갱신되서 클래스가 바뀌게 설정?
+
+하단 표시바는
+index 설정 후에 class에 show가 있으면 표시되게 하면 될듯
+button도 index 설정하고 class 여부에 따라서 바꾸면 될듯
+button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 후에 다시 setInterval 가동하면 될듯
+
+*/
                             </style>
                             <!-- style 끝 -->
                             <script>
                                 $(function() {
+                                    // 참고용 $('div').attr('style', 'color: #eee !important');
+
                                     console.log($('#accordion-ul').outerWidth());
-                                    // console.log($('#accordion-ul').children().toArray());
+                                    console.log($('#accordion-img-li').outerWidth());
+                                    console.log($('#accordion-img-li-clone').outerWidth());
+                                    
+                                    // accordion-ul 및 li width 설정
                                     let accordionWidth = $('#accordion-ul').outerWidth();
-                                    console.log(accordionWidth);
-                                    let accordionImgLiWidth = accordionWidth*0.8;
-                                    let accordionImgWidth = accordionWidth*0.8;
-                                    $('.accordion-img-li').css('width', accordionWidth*0.8);
+                                    // attr로 0px important를 먼저 준 후에 css를 적용하면 important 값으로 적용이 됨
+                                    $('#accordion-img-li').attr('style', 'width: 0px !important');
+                                    $('#accordion-img-li').css('width', accordionWidth);
+                                    // clone도 동일한 width 설정 적용
+                                    $('#accordion-img-li-clone').attr('style', 'width: 0px !important');
+                                    $('#accordion-img-li-clone').css('width', accordionWidth);
+
+                                    console.log($('#accordion-img-li').outerWidth());
+                                    
+                                    // img width 설정, li * 0.6
+                                    // img width 변경 시 height 자동 비율 변경 됨
                                     $('.accordion-img').css('width', accordionWidth*0.6);
-                                    console.log($('.accordion-img-li').width());
-                                    console.log($('.accordion-img').width());
+                                    let accordionImgWidth = $('.accordion-img').outerWidth();
+                                    
+                                    console.log(accordionImgWidth);
+
                                     let temp = accordionWidth - accordionImgWidth;
                                     console.log(temp);
-                                    $('#accordion-img-li1').css('margin-left', temp/2);
-                                    // $('#accordion-img-li1').css('transform', 'perspective(150px) translateZ(10px)');
-                                    $('#accordion-img-li2').css('margin-left', temp/2);
-                                    $('#accordion-img-li3').css('margin-left', temp/2);
+                                    $('.accordion-img').css('margin-left', temp/2);
+
+                                    // 해당 문구로 클래스 추가 가능 (attr로 실행하면 클래스가 아예 바뀌어 버림)
+                                    // $('#accordion-img-li > img').addClass('show-accordion');
+                                    // $('.accordion-img').addClass('show-accordion');
+
+                                    // 이걸로 하면 클래스에서 순서에 따라 addClass 설정 가능
+                                    $('.accordion-img:nth(0)').addClass('show-accordion');
+                                    
+                                    // console.log($('#accordion-img-li > img').first());
+                                    // console.log($('#accordion-img-li > img')[3]);
+
+                                    // console.log($('#accordion-ul').children().toArray());
+                                    // let accordionWidth = $('#accordion-ul').outerWidth();
+                                    // console.log(accordionWidth);
+                                    // let accordionImgLiWidth = accordionWidth*0.8;
+                                    // let accordionImgWidth = accordionWidth*0.8;
+                                    // $('.accordion-img-li').css('width', accordionWidth);
+                                    // $('.accordion-img-li').css('width', $('#accordion-ul').outerWidth());
+                                    // console.log($('#accordion-img-li').outerWidth());
+                                    // $('.accordion-img').css('width', accordionWidth*0.6);
+                                    // // console.log($('.accordion-img-li').width());
+                                    // // console.log($('.accordion-img').width());
+                                    // let temp = accordionWidth - accordionImgWidth;
+                                    // console.log(temp);
+                                    // $('#accordion-img-li1').css('margin-left', temp/2);
+                                    // // $('#accordion-img-li1').css('transform', 'perspective(150px) translateZ(10px)');
+                                    // $('#accordion-img-li2').css('margin-left', temp/2);
+                                    // $('#accordion-img-li3').css('margin-left', temp/2);
                                     // let accordionImgArray = $('#accordion-ul').children().toArray();
                                     // let accordionImgArray = $('#accordion-ul').children().toArray();
                                     // console.log(accordionImgArray[0].offsetWidth);
@@ -481,9 +546,9 @@ transform 위치 변경
                                     // console.log(accordionImgArray[0].offsetWidth);
                                     // console.log($('#accordion-ul').children().outerWidth());
                                     // for(let i=0; i < accordionImgArray.length; i++) {
-                                    //     // console.log(accordionImgArray[i]);
-                                    //     // accordionImgArray[i].outerWidth = 1;
-                                    //     // console.log(accordionImgArray[i].outerWidth);
+                                        // console.log(accordionImgArray[i]);
+                                        // accordionImgArray[i].outerWidth = 1;
+                                        // console.log(accordionImgArray[i].outerWidth);
                                     // }
                                 });
                             </script>
