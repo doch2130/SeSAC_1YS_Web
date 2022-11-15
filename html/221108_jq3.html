@@ -502,7 +502,20 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     
                                     // img width 설정, li * 0.6
                                     // img width 변경 시 height 자동 비율 변경 됨
-                                    $('.accordion-img').css('width', accordionWidth*0.6);
+                                    // $('.accordion-img').css('width', accordionWidth*0.6);
+                                    // min-width: 576px
+                                    console.log(accordionWidth);
+                                    // col 이 변경되서 ul width값으로 기준을 잡기에는 어려움
+                                    // 상단의 $('#accordionPanelsStayOpenExample').parent()로 width를 잡아야 하며 기준점은 466.1임
+                                    // 아래 코드는 수정 필요
+                                    if (accordionWidth >= 376.104) { 
+                                        $('.accordion-img').css('width', accordionWidth*0.6);
+                                        console.log('576이상');
+                                    } else {
+                                        $('.accordion-img').css('width', accordionWidth*0.78);
+                                        console.log('576미만');
+                                    }
+
                                     let accordionImgWidth = $('.accordion-img').outerWidth();
                                     
                                     console.log(accordionImgWidth);
