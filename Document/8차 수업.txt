@@ -45,7 +45,10 @@ git push origin --delete test
 git checkout -b test
 - test 브랜치를 생성하고 이동까지 함
 
-git merge b / case 1
+(main) git merge a
+- main에 a branch 내용을 합침
+
+*merge case 1*
 - branch에서 다른 파일을 수정하였을 때
 ex) a branch에서는 readme 파일 수정, b branch에서는 test.html 파일 수정
 - b 브랜치를 현재 위치의 브랜치와 합친다.
@@ -54,4 +57,100 @@ ex) a branch에서는 readme 파일 수정, b branch에서는 test.html 파일 �
 :q! => 저장하지 않고 종료 / :wq => 저장하고 종료
 마지막으로 git push origin a 까지 해주면 됨
 그리고 홈페이지에서 a branch 선택 후 b branch에서 수정한 내용이 제대로 들어갔는지 체크하면 끝
+
+*merge case 2*
+- branch에서 같은 파일이지만 다른 부분을 수정하였을 때
+ex) c branch에서 test.html 파일의 Title 수정 후 commit 까지 진행
+main Branch로 복귀 후
+d Branch 생성 및 이동
+d branch에서 test.html 파일의 h1 태그 내용 수정 후 commit 까지 진행
+c branch로 이동 후 git merge d 실행
+c branch에 c와 d 내용이 합쳐진 거 확인
+
+*merge case 3*
+- branch에서 같은 파일에서 같은 부분을 수정하였을 때
+ex) e branch에서 test.html의 title을 수정 후 commit 까지 진행
+다시 main으로 이동
+f branch 생성 후 이동
+test.html의 title 수정 후 commit 까지 진행
+e branch로 이동
+git merge f
+- merge 명령어 실행 시 코드가 바로 합쳐지지 않고 표시가 됨
+- bash창에서는 (e)가 (e|MERGING)으로 표시 됨
+*충돌이 생긴 상태*
+VS Code에 다음과 같이 선택할 수 있는 보기가 나옴 (해당 선택지를 선택해도 되고, 수동으로 수정해도 됨)
+Accept Current Change => 현재 위치(E)가 최신이므로 E를 선택하겠다.
+Accept Incoming Change => F가 최신이므로 F를 선택하겠다.
+Accept Both Change => 둘다 반영하겠다 => 해당 Ex의 경우에는 title이 2개가 생김
+Compare Change => 비교를 정확하게 보고 싶은 경우 선택
+
+수정 후 저장하였으면, 다시 add, commit 해주면 됨
+commit하면 (e|MERGING)에서 (e)로 다시 바뀜, 충돌 해결
+
+
+branch -develop
+- 다음 출시 버전을 개발하는 브랜치
+- 기능 개발을 위한 브랜치들을 병합하기 위해 사용
+- 평소 개발을 진행할 떄 사용
+
+branch -feature
+- 기능 개발을 진행하는 브랜치
+- 새로운 기능 개발 및 버그 수정을 할 때마다 'develop'에서 분기
+- 로컬에서 작업 후 develop에 merge로만 공유
+- 이름 : feature/~~
+
+branch -release
+- 출시 버전을 준비하는 브랜치
+- 배포를 위한 전용 브랜치
+- 이름 : release-0.0
+
+branch -hotfix
+- 출시 버전에서 발생한 버그 수정 브랜치
+- 배포한 버전에 긴급하게 수정해야 할 필요가 있는 경우 사용
+- Master에서 분기
+- 이름 : hotfix-0.0.0
+
+
+git commit -am '커밋메시지'
+- git add . + git commit -m '' 을 합친 명령어
+- add를 사용하면 특정 파일만 add를 하는것이 가능하지만 -am을 사용하는 경우 무조건 전체 파일이 올라간다.
+
+git add한 거는 vs Code에서 취소할 수 있음
+commit까지 진행하면 명령어 이용
+
+git reset HEAD^
+- 가장 최근 커밋 취소
+
+git reset --hard 0ce0abaf60c834262ce66f954af8f9ffad4487c2
+- 해당 ID 값으로 reset
+
+git log로 commit의 ID 값 확인 가능
+
+
+Pull Request
+- push 권한이 없는 오픈 소스 프로젝트에 기여할 때 많이 사용함.
+- 내가 수정한 코드가 있으니 내 branch를 검토 후 병합(merge)해달라는 내용
+base:a <= compare:b
+b의 내용을 a에다가 올리겠다.
+
+create merge
+- 기본 merge 방법
+
+Squash merge
+- merge의 history를 없애고 마지막 결과물만 합치는 방법
+
+Rebase merge
+- 기존 master 트리에 이어서 작업하는 방법인듯 / 정확한 내용은 확인 필요
+
+.gitignore
+- git 버전 관리에서 제외할 파일 목록을 지정하는 파일
+- git에 올리기 전에 제외할 파일들을 gitignore에 추가하여 제외시킬 수 있다.
+
+gitignore 파일에 파일을 추가해놓으면 git status를 입력해도 목록에 있는 파일은 제외하고 보여준다.
+- git에 한 번이라도 파일이 등록되어 있으면 나중에 gitignore에 추가를 해도 제외를 하지 않는다.
+
+*.txt => txt 확장자 파일 무시
+!test.txt => test.txt는 무시하지 않음
+test/ => test 폴더 내부 파일 모두 무시
+/test => test/ 랑 다를게 없는듯...
 
