@@ -45,19 +45,6 @@ git push origin --delete test
 git checkout -b test
 - test 브랜치를 생성하고 이동까지 함
 
+git merge b
+- b 브랜치와 현재 위치의 브랜치를 합침
 
-
-
-
-$('.show-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
-$('.next-accordion').css('transform', 'perspective(150px) translateX(accordionWidth*0.76) translateZ(-60px)');
-$('.hide-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(-100px)');
-$('.before-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*(-0.76)+') translateZ(-60px)');
-                                    
-
-
-$('.next-accordion').css({
-transform: perspective(150px),
-transform: translateX(accordionWidth*0.76),
-transform: translateZ(-60px)
-});
