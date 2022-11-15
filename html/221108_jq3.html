@@ -499,19 +499,27 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     $('#accordion-img-li-clone').css('width', accordionWidth);
 
                                     console.log($('#accordion-img-li').outerWidth());
+                                    console.log('div parent: ',$('#accordionPanelsStayOpenExample').parent().parent().outerWidth());
                                     
                                     // img width 설정, li * 0.6
                                     // img width 변경 시 height 자동 비율 변경 됨
                                     // $('.accordion-img').css('width', accordionWidth*0.6);
                                     // min-width: 576px
                                     console.log(accordionWidth);
-                                    // col 이 변경되서 ul width값으로 기준을 잡기에는 어려움
-                                    // 상단의 $('#accordionPanelsStayOpenExample').parent()로 width를 잡아야 하며 기준점은 466.1임
-                                    // 아래 코드는 수정 필요
-                                    if (accordionWidth >= 376.104) { 
+                                    // width 변경 시 col이 변경되서 ul width 값도 변경이 되어 기준으로 잡기에는 어려움
+                                    // 상단의 $('#accordionPanelsStayOpenExample').parent().parent()로 width를 기준으로 잡으면 되며
+                                    // max-width: 576px이라고 하였을 때 466.1이 기준 값
+                                    // if ($('#accordionPanelsStayOpenExample').parent().parent().outerWidth() >= 559.33) {
+                                        // 576px ~ 9999px
+                                        // $('.accordion-img').css('width', accordionWidth*0.6);
+                                        // console.log('576이상');
+                                    // 768px로 기준 값 변경
+                                    if ($('#accordionPanelsStayOpenExample').parent().parent().outerWidth() >= 751.33) {
+                                        // 768px ~ 9999px
                                         $('.accordion-img').css('width', accordionWidth*0.6);
-                                        console.log('576이상');
+                                        console.log('768이상');
                                     } else {
+                                        // 0px ~ 576px
                                         $('.accordion-img').css('width', accordionWidth*0.78);
                                         console.log('576미만');
                                     }
@@ -570,6 +578,60 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                         // accordionImgArray[i].outerWidth = 1;
                                         // console.log(accordionImgArray[i].outerWidth);
                                     // }
+
+                                    let imgID;
+                                    function accordionSlideFunction(imgID) {
+                                        console.log(imgID);
+                                        if(imgID.hasClass('before-accordion')) {
+                                            // before > hide
+                                            imgID.switchClass('before-accordion', 'hide-accordion', 500);
+                                            console.log('test');
+                                        } else if(imgID.hasClass('show-accordion')) {
+                                            // show > before
+                                            imgID.switchClass('show-accordion', 'before-accordion', 1000);
+                                        } else if(imgID.hasClass('next-accordion')) {
+                                            // next > show
+                                            imgID.switchClass('next-accordion', 'show-accordion', 1000);
+                                        }
+
+                                        if(imgID.hasClass('hide-accordion')) {
+                                            // hide > next (else if로 넣으면 실행이 안되서 따로 뺌)
+                                            imgID.switchClass('hide-accordion', 'next-accordion', 500);
+                                        }
+                                    }
+                                    let aa = $('.accordion-img:nth(0)');
+                                    // console.log(aa);
+                                    // accordionSlideFunction(aa);
+                                    let j = 0;
+                                    // setInterval(function() {
+                                    //     $('.accordion-img').each(function() {
+                                    //         console.log('j: ', j);
+                                    //         accordionSlideFunction($('.accordion-img:nth('+j+')'));
+                                    //             // $(.accordion-img:nth('+i+')'));
+                                    //         j++;
+                                    //         console.log('tttt');
+                                    //         if(j == 3) {
+                                    //             j = 0;
+                                    //             return false;
+                                    //         }
+                                    //     });
+
+                                    //     if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+                                    //         // accordionSlideFunction(aa);
+                                    //     } else {
+                                    //         // if(accordionImgCount > 0) {
+                                    //         //     $('#accordion-ul > li').stop(true, true);
+                                    //         //     // $("요소 선택").stop(clearQueue, finish);
+                                    //         //     clearInterval();
+                                    //         //     accordionImgCount = 0;
+                                    //         // }
+                                    //     }
+                                    // }, 5000);
+                                    // if($('.accordion-img:nth(0)').hasClass('show-accordion')) {
+                                    //         // before > hide
+                                    //         $('.accordion-img:nth(0)').switchClass('show-accordion', 'before-accordion', 1000);
+                                    //         console.log('test');
+                                    //     }
                                 });
                             </script>
                             <!-- script 끝 -->
