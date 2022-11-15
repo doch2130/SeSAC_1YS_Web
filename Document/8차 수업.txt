@@ -25,9 +25,9 @@ git branch 'test' (branch 이름)
 git checkout test (branch 이름)
 - test 이름의 branch로 이동
 
-git push
+git push / git push origin
 - master 에서는 git push를 하면 되지만 branch를 변경 후에 하는 경우에는
-- git push origin test 식으로 입력해야 한다. (test, 브랜치 이름)
+  git push origin test 식으로 입력해야 한다. (test, 브랜치 이름)
 
 git branch -d test
 - test branch 삭제
@@ -45,6 +45,13 @@ git push origin --delete test
 git checkout -b test
 - test 브랜치를 생성하고 이동까지 함
 
-git merge b
-- b 브랜치와 현재 위치의 브랜치를 합침
+git merge b / case 1
+- branch에서 다른 파일을 수정하였을 때
+ex) a branch에서는 readme 파일 수정, b branch에서는 test.html 파일 수정
+- b 브랜치를 현재 위치의 브랜치와 합친다.
+- merge 이후 창이 입력 창이 나오는데 commit -m "메시지" 입력하는 것처럼 i 눌러서 INSERT로 바꾸면 내용 입력할 수 있음
+메시지 입력 창에서 ESC 누른 후 아래 내용 중에서 선택해서 입력해주면 됨
+:q! => 저장하지 않고 종료 / :wq => 저장하고 종료
+마지막으로 git push origin a 까지 해주면 됨
+그리고 홈페이지에서 a branch 선택 후 b branch에서 수정한 내용이 제대로 들어갔는지 체크하면 끝
 
