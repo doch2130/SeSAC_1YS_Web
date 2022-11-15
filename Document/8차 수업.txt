@@ -1,0 +1,63 @@
+2022-11-15 화요일
+
+1. Waterfall Model (폭포수 모델)
+- 가장 기본적인 모델
+- 순차적으로 진행
+
+2. Agile (애자일)
+- 개발과 함께 즉시 피드백을 받아서 유동적으로 개발하는 방법이다.
+
+2-1. Scrum(스크럼)
+- 프로젝트 관리를 위한 상호, 점진적 개발방법론이며, 애자일 소프트웨어 개발 중의 하나이다.
+
+3. Git
+- 소스 코드를 효율적으로 관리하기 위한 프로그램
+
+3-1. Branch (Git)
+- 여러 명이 작업시 독립적으로 작업을 하기 위해 필요한 개념
+
+git branch
+- 로컬 내의 branch 목록 확인
+
+git branch 'test' (branch 이름)
+- test 이름으로 branch 생성
+
+git checkout test (branch 이름)
+- test 이름의 branch로 이동
+
+git push
+- master 에서는 git push를 하면 되지만 branch를 변경 후에 하는 경우에는
+- git push origin test 식으로 입력해야 한다. (test, 브랜치 이름)
+
+git branch -d test
+- test branch 삭제
+- 단 branch가 main보다 최신인 경우에는 삭제되지 않고 경고 메시지가 출력 됨
+*삭제 전에 다른 branch로 이동해야 함
+
+git branch -D test
+- test bracn 삭제, 경고를 무시하고 삭제 됨
+*삭제 전에 다른 branch로 이동해야 함
+*git branch -d(D) test 명령어로 삭제해도 remote에 있는 branch는 그대로 남아 있으므로 아래 명령어를 이용해서 삭제를 해야 함
+
+git push origin --delete test
+- remote에 있는 test 브랜치를 삭제
+
+git checkout -b test
+- test 브랜치를 생성하고 이동까지 함
+
+
+
+
+
+$('.show-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
+$('.next-accordion').css('transform', 'perspective(150px) translateX(accordionWidth*0.76) translateZ(-60px)');
+$('.hide-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(-100px)');
+$('.before-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*(-0.76)+') translateZ(-60px)');
+                                    
+
+
+$('.next-accordion').css({
+transform: perspective(150px),
+transform: translateX(accordionWidth*0.76),
+transform: translateZ(-60px)
+});

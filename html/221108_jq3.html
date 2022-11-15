@@ -432,19 +432,19 @@ li 태그 1개에다가 img 태그 다 때려넣고 안에서 transform으로 �
                                     opacity: 0;
                                 }
                                 .show-accordion {
-                                    transform: perspective(150px) translateX(0px) translateZ(5px);
+                                    /* transform: perspective(150px) translateX(0px) translateZ(5px); */
                                     z-index: 20;
                                 }
                                 .next-accordion {
-                                    transform: perspective(150px) translateX(400px) translateZ(-60px);
+                                    /* transform: perspective(150px) translateX(400px) translateZ(-60px); */
                                     z-index: 15;
                                 }
                                 .hide-accordion {
-                                    transform: perspective(150px) translateX(0px) translateZ(-100px);
+                                    /* transform: perspective(150px) translateX(0px) translateZ(-100px); */
                                     z-index: 10;
                                 }
                                 .before-accordion {
-                                    transform: perspective(150px) translateX(-400px) translateZ(-60px);
+                                    /* transform: perspective(150px) translateX(-400px) translateZ(-60px); */
                                     z-index: 15;
                                 }
 
@@ -519,6 +519,13 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     $('.accordion-img:nth(0)').addClass('show-accordion');
                                     $('.accordion-img:nth(1)').addClass('next-accordion');
                                     $('.accordion-img:nth(2)').addClass('before-accordion');
+
+                                    $('.show-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
+                                    $('.next-accordion').css('transform', 'perspective(150px) translateX(accordionWidth*0.76) translateZ(-60px)');
+                                    // $('.next-accordion').css('transform', 'perspective(150px) translateX('&accordionWidth&') translateZ(-60px)');
+                                    // $('.next-accordion').css('transform', 'perspective(150px) translateX('&&accordionWidth*0.76&&') translateZ(-60px)');
+                                    $('.hide-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(-100px)');
+                                    $('.before-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*(-0.76)+') translateZ(-60px)');
                                     
                                     // console.log($('#accordion-img-li > img').first());
                                     // console.log($('#accordion-img-li > img')[3]);
