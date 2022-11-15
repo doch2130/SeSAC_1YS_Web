@@ -431,22 +431,22 @@ li 태그 1개에다가 img 태그 다 때려넣고 안에서 transform으로 �
                                     position: relative !important;
                                     opacity: 0;
                                 }
-                                .show-accordion {
-                                    /* transform: perspective(150px) translateX(0px) translateZ(5px); */
+                                /* .show-accordion {
+                                    transform: perspective(150px) translateX(0px) translateZ(5px);
                                     z-index: 20;
-                                }
+                                } */
                                 .next-accordion {
-                                    /* transform: perspective(150px) translateX(400px) translateZ(-60px); */
+                                    transform: perspective(150px) translateX(400px) translateZ(-60px);
                                     z-index: 15;
                                 }
                                 .hide-accordion {
-                                    /* transform: perspective(150px) translateX(0px) translateZ(-100px); */
+                                    transform: perspective(150px) translateX(0px) translateZ(-100px);
                                     z-index: 10;
                                 }
-                                .before-accordion {
-                                    /* transform: perspective(150px) translateX(-400px) translateZ(-60px); */
+                                /* .before-accordion {
+                                    transform: perspective(150px) translateX(-400px) translateZ(-60px);
                                     z-index: 15;
-                                }
+                                } */
 
 /*
 할 내용
@@ -537,17 +537,70 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     // $('.accordion-img').addClass('show-accordion');
 
                                     // 이걸로 하면 클래스에서 순서에 따라 addClass 설정 가능
-                                    $('.accordion-img:nth(0)').addClass('show-accordion');
+                                    // $('.accordion-img:nth(0)').addClass('show-accordion');
                                     $('.accordion-img:nth(1)').addClass('next-accordion');
                                     $('.accordion-img:nth(2)').addClass('before-accordion');
+                                    // $('.show-accordion').css({
+                                    //     transform: 'perspective(150px) translateX(0px) translateZ(5px)',
+                                    //     zIndex: '20'
+                                    // })
 
-                                    $('.show-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
+                                    // $('.show-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
                                     $('.next-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px)');
                                     $('.hide-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(-100px)');
                                     $('.before-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px)');
-                                    
+
                                     // console.log($('#accordion-img-li > img').first());
                                     // console.log($('#accordion-img-li > img')[3]);
+
+                                    $('.accordion-img:nth(0)').addClass('show-accordion');
+
+                                    // $('.show-accordion').attr('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
+                                            // zIndex, '20'
+                                    // );
+                                    // $('.accordion-img:nth(0)').addClass('show-accordion').attr({
+                                    //     transform: 'perspective(150px) translateX(0px) translateZ(5px)',
+                                    //     zIndex: '20'
+                                    // })
+                                    let testStyle = document.createElement('style');
+                                    console.log('testStyle: ', testStyle);
+                                    testStyle.type = 'text/css';
+                                    testStyle.innerHTML = '.show-accordion {transform: perspective(150px) translateX(0px) translateZ(5px); z-index: 20;}';
+                                    document.getElementsByTagName('head')[0].appendChild(testStyle);
+                                    let testStyle2 = document.createElement('style');
+                                    testStyle2.type = 'text/css';
+                                    testStyle2.innerHTML = '.before-accordion {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); z-index: 20;}';
+                                    document.getElementsByTagName('head')[0].appendChild(testStyle2);
+
+                                    // document.getElementById('someElementId').className = 'cssClass';
+                                    
+                                    $('.accordion-img').click(function() {
+                                        sizeup();
+                                        console.log('testtest');
+                                    });
+                                    
+                                    function sizeup() {
+                                        // $('div').switchClass("second", "sizeup", 1000);
+                                        $('.accordion-img:nth(0)').switchClass('show-accordion', 'before-accordion', 1000);
+                                    }
+
+
+                                    // ****************switchClass로는 애니메이션 효과가 안나옴
+                                    // 아래 방법으로 진행
+                                    
+                                    // 변수로 해당 애니메이션 변수 및 애니메이션 등록
+                                    // let testStyle3 = document.createElement('style');
+                                    // testStyle3.type = 'text/css';
+                                    // testStyle3.innerHTML = '@keyframes moveSquare3 {from {transform: perspective(150px) translateX(0px) translateZ(5px);}to {transform: perspective(150px) translateX(-350px) translateZ(-60px);}}';
+                                    // document.getElementsByTagName('head')[0].appendChild(testStyle3);
+                                    
+                                    // style 시트에 해당 애니메이션 등록
+                                    // #ani3 {
+                                    //     animation-name: moveSquare3;
+                                    //     animation-duration: 5s;
+                                    //     animation-iteration-count: infinite;
+                                    // }
+                       
 
                                     // console.log($('#accordion-ul').children().toArray());
                                     // let accordionWidth = $('#accordion-ul').outerWidth();
@@ -627,6 +680,7 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     //         // }
                                     //     }
                                     // }, 5000);
+
                                     // if($('.accordion-img:nth(0)').hasClass('show-accordion')) {
                                     //         // before > hide
                                     //         $('.accordion-img:nth(0)').switchClass('show-accordion', 'before-accordion', 1000);

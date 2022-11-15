@@ -25,6 +25,32 @@
         .sizeup {
             font-size: 30px;
         }
+        .show {
+            transform: perspective(150px) translateX(0px) translateZ(5px);
+            z-index: 20;
+        }
+        .before {
+            transform: perspective(150px) translateX(300px) translateZ(-60px);
+            z-index: 20;
+        }
+        #ani {
+            animation-name: moveSquare;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            perspective: 100px;
+        }
+        #ani2 {
+            animation-name: moveSquare2;
+            animation-duration: 2s;
+            animation-iteration-count: infinite;
+            perspective: 150px;
+        }
+        #ani3 {
+            animation-name: moveSquare3;
+            animation-duration: 5s;
+            animation-iteration-count: infinite;
+            /* transform: perspective(150px); */
+        }
     </style>
     <script>
         function second() {
@@ -44,6 +70,27 @@
         function first() {
             $('div').switchClass("third", "first", 3000);
         }
+        function test() {
+            $('div').switchClass("show", "before", 3000);
+        }
+        function test2() {
+            $('div').switchClass("before", "show", 3000);
+        }
+        let testStyle2 = document.createElement('style');
+        testStyle2.type = 'text/css';
+        testStyle2.innerHTML = '@keyframes moveSquare {from {transform: translateX(-100px) rotateY(90deg);}to {transform: translateX(100px) rotateY(0deg);}}';
+        document.getElementsByTagName('head')[0].appendChild(testStyle2);
+
+        let testStyle = document.createElement('style');
+        testStyle.type = 'text/css';
+        testStyle.innerHTML = '@keyframes moveSquare2 {from {transform: translateX(0px) translateZ(500px);}to {transform: translateX(300px) translateZ(-400px);}}';
+        document.getElementsByTagName('head')[0].appendChild(testStyle);
+
+        let testStyle3 = document.createElement('style');
+        testStyle3.type = 'text/css';
+        testStyle3.innerHTML = '@keyframes moveSquare3 {from {transform: perspective(150px) translateX(0px) translateZ(5px);}to {transform: perspective(150px) translateX(-350px) translateZ(-60px);}}';
+        document.getElementsByTagName('head')[0].appendChild(testStyle3);
+
     </script>
 </head>
 <body>
@@ -53,5 +100,11 @@
     <button type="button" onclick="sizeup();">second => sizeup</button>
     <button type="button" onclick="third();">sizeup => third</button>
     <button type="button" onclick="first();">third => first</button>
+    <button type="button" onclick="test();">show => before</button>
+    <button type="button" onclick="test2();">before => show</button>
+    <div class="" id="ani">ani</div>
+    <div class="" id="ani2">ani</div>
+    <div class="" id="ani3" style="margin-left: 200px;">ani</div>
+
 </body>
 </html>
