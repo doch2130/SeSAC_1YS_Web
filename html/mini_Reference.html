@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // accordion Img Style 기본 위치값 설정
+        let accordionImgStyle1 = document.createElement('style');
+        let accordionImgStyle2 = document.createElement('style');
+        let accordionImgStyle3 = document.createElement('style');
+        let accordionImgStyle4 = document.createElement('style');
+        accordionImgStyle1.type = 'text/css';
+        accordionImgStyle2.type = 'text/css';
+        accordionImgStyle3.type = 'text/css';
+        accordionImgStyle4.type = 'text/css';
+        accordionImgStyle1.innerHTML = '.show-accordion {transform: perspective(150px) translateX(0px) translateZ(5px); z-index: 20;}';
+        document.getElementsByTagName('head')[0].appendChild(accordionImgStyle1);
+        accordionImgStyle2.innerHTML = '.right-accordion {transform: perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px); z-index: 15;}';
+        document.getElementsByTagName('head')[0].appendChild(accordionImgStyle2);
+        accordionImgStyle3.innerHTML = '.hide-accordion {transform: perspective(150px) translateX(0px) translateZ(-100px); z-index: 10;}';
+        document.getElementsByTagName('head')[0].appendChild(accordionImgStyle3);
+        accordionImgStyle4.innerHTML = '.left-accordion {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); z-index: 15;}';
+        document.getElementsByTagName('head')[0].appendChild(accordionImgStyle4);
+
+        // switchClass로는 애니메이션 효과가 안나옴, 아래 방법으로 진행
+        let accordionImgMoveLeft = document.createElement('style');
+        let accordionImgMoveHide = document.createElement('style');
+        let accordionImgMoveRight = document.createElement('style');
+        let accordionImgMoveCenter = document.createElement('style');
+        accordionImgMoveLeft.type = 'text/css';
+        accordionImgMoveHide.type = 'text/css';
+        accordionImgMoveRight.type = 'text/css';
+        accordionImgMoveCenter.type = 'text/css';
+
+        // 변수로 해당 애니메이션 변수 및 애니메이션 등록
+        accordionImgMoveLeft.innerHTML = '@keyframes accordionMoveLeft {from {transform: perspective(150px) translateX(0px) translateZ(5px); opacity: 1;} to {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); opacity: 0.5;}}';
+        accordionImgMoveHide.innerHTML = '@keyframes accordionMoveHide {from {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); opacity: 0.5;} to {transform: perspective(150px) translateX(0px) translateZ(-100px); opacity: 0;}}';
+        accordionImgMoveRight.innerHTML = '@keyframes accordionMoveRight {from {transform: perspective(150px) translateX(0px) translateZ(-100px); opacity: 0;} to {transform: perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px); opacity: 0.5;}}';
+        accordionImgMoveCenter.innerHTML = '@keyframes accordionMoveCenter {from {transform: perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px); opacity: 0.5;} to {transform: perspective(150px) translateX(0px) translateZ(5px); opacity: 1;}}';
+        
+        // head 스타일 시트에 등록
+        document.getElementsByTagName('head')[0].appendChild(accordionImgMoveLeft);
+        document.getElementsByTagName('head')[0].appendChild(accordionImgMoveHide);
+        document.getElementsByTagName('head')[0].appendChild(accordionImgMoveRight);
+        document.getElementsByTagName('head')[0].appendChild(accordionImgMoveCenter);
+
+
+        // css 등록 방법 + 변수포함
+        $('.show-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
+        $('.right-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px)');
+        $('.hide-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(-100px)');
+        $('.left-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px)');
+
+
+        // 해당 문구로 클래스 추가 가능 (attr로 실행하면 클래스가 아예 바뀌어 버림)
+        $('#accordion-img-li > img').addClass('show-accordion');
+        $('.accordion-img').addClass('show-accordion');
+
+        // 이걸로 하면 클래스에서 순서에 따라 addClass 설정 가능
+        $('.accordion-img:nth(0)').addClass('show-accordion');
+        $('.accordion-img:nth(1)').addClass('right-accordion');
+        $('.accordion-img:nth(2)').addClass('left-accordion');
+
+        // attr로 0px important를 먼저 준 후에 css를 적용하면 important 값으로 적용이 됨
+        $('#accordion-img-li').attr('style', 'width: 0px !important');
+        $('#accordion-img-li').css('width', accordionWidth);
+
+        // 참고용
+        $('div').attr('style', 'color: #eee !important');
+
+        // 길이 구하는 값
+        console.log($('#accordion-ul').outerWidth());
+        console.log($('#accordion-img-li').outerWidth());
+        console.log($('#accordion-img-li-clone').outerWidth());
+        console.log($('#accordion-img-li').outerWidth());
+        console.log('div parent: ',$('#accordionPanelsStayOpenExample').parent().parent().outerWidth());
+
+
+        let imgID;
+        function accordionSlideFunction(imgID) {
+            // console.log(imgID);
+            if(imgID.hasClass('left-accordion')) {
+                // before > hide
+                imgID.switchClass('left-accordion', 'hide-accordion', 1000);
+                // imgID.switchClass('hide-accordion', 'right-accordion', 1000);
+                // console.log('test');
+            } else if(imgID.hasClass('show-accordion')) {
+                // show > before
+                imgID.switchClass('show-accordion', 'left-accordion', 1000);
+            } else if(imgID.hasClass('right-accordion')) {
+                // next > show
+                imgID.switchClass('right-accordion', 'show-accordion', 1000);
+            }
+            if(imgID.hasClass('hide-accordion')) {
+                // hide > next (else if로 넣으면 실행이 안되서 따로 뺌)
+                imgID.switchClass('hide-accordion', 'right-accordion', 1000);
+            }
+        }
+
+
+
+        setInterval(function(){
+                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+                    $.when($('#accordion-img1'), $('#accordion-img2'), $('#accordion-img3')).then(function() {
+                        use_animated();
+                    });
+                    accordionImgCount++;
+                } else {
+                    if(accordionImgCount > 0) {
+                        $('#accordion-ul > li').stop(true, true);
+                        // $("요소 선택").stop(clearQueue, finish);
+                        clearInterval();
+                        accordionImgCount = 0;
+                    }
+                }
+            }, 5000);
+
+            let accordionImgWidth = $('#accordionPanelsStayOpenExample').outerWidth();
+            console.log(accordionDivWidth);
+
+
+
+
+            let accordionImgCount = 0;
+            setInterval(function(){
+                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+                    $.when($('#accordion-img1'), $('#accordion-img2'), $('#accordion-img3')).then(function() {
+                        use_animated();
+                    });
+                    accordionImgCount++;
+                } else {
+                    if(accordionImgCount > 0) {
+                        $('#accordion-ul > li').stop(true, true);
+                        // $("요소 선택").stop(clearQueue, finish);
+                        clearInterval();
+                        accordionImgCount = 0;
+                    }
+                }
+            }, 5000);
+            let j = 0;
+            setInterval(function() {
+                $('.accordion-img').each(function() {
+                    console.log('j: ', j);
+                    accordionSlideFunction($('.accordion-img:nth('+j+')'));
+                        // $(.accordion-img:nth('+i+')'));
+                    j++;
+                    console.log('tttt');
+                    if(j == 3) {
+                        j = 0;
+                        return false;
+                    }
+                });
+
+                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+                    // accordionSlideFunction(aa);
+                } else {
+                    // if(accordionImgCount > 0) {
+                    //     $('#accordion-ul > li').stop(true, true);
+                    //     // $("요소 선택").stop(clearQueue, finish);
+                    //     clearInterval();
+                    //     accordionImgCount = 0;
+                    // }
+                }
+            }, 5000);
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

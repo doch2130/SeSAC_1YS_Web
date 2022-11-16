@@ -431,22 +431,6 @@ li 태그 1개에다가 img 태그 다 때려넣고 안에서 transform으로 �
                                     position: relative !important;
                                     opacity: 0;
                                 }
-                                /* .show-accordion {
-                                    transform: perspective(150px) translateX(0px) translateZ(5px);
-                                    z-index: 20;
-                                } */
-                                .next-accordion {
-                                    transform: perspective(150px) translateX(400px) translateZ(-60px);
-                                    z-index: 15;
-                                }
-                                .hide-accordion {
-                                    transform: perspective(150px) translateX(0px) translateZ(-100px);
-                                    z-index: 10;
-                                }
-                                /* .before-accordion {
-                                    transform: perspective(150px) translateX(-400px) translateZ(-60px);
-                                    z-index: 15;
-                                } */
 
 /*
 할 내용
@@ -479,6 +463,32 @@ button도 index 설정하고 class 여부에 따라서 바꾸면 될듯
 button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 후에 다시 setInterval 가동하면 될듯
 
 */
+                                    /* style 시트에 해당 애니메이션 등록 */
+                                    /* .accordion-img:nth-child(1) */
+                                    .show-accordion {
+                                        z-index: 20;
+                                        animation-name: accordionMoveLeft;
+                                        animation-duration: 3s;
+                                        animation-iteration-count: infinite;
+                                    }
+                                    .right-accordion {
+                                        z-index: 15;
+                                        animation-name: accordionMoveCenter;
+                                        animation-duration: 3s;
+                                        animation-iteration-count: infinite;
+                                    }
+                                    .hide-accordion {
+                                        z-index: 10;
+                                        animation-name: accordionMoveRight;
+                                        animation-duration: 3s;
+                                        animation-iteration-count: infinite;
+                                    }
+                                    .left-accordion {
+                                        z-index: 15;
+                                        animation-name: accordionMoveHide;
+                                        animation-duration: 3s;
+                                        animation-iteration-count: infinite;
+                                    }
                             </style>
                             <!-- style 끝 -->
                             <script>
@@ -507,19 +517,14 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     // min-width: 576px
                                     console.log(accordionWidth);
                                     // width 변경 시 col이 변경되서 ul width 값도 변경이 되어 기준으로 잡기에는 어려움
-                                    // 상단의 $('#accordionPanelsStayOpenExample').parent().parent()로 width를 기준으로 잡으면 되며
-                                    // max-width: 576px이라고 하였을 때 466.1이 기준 값
-                                    // if ($('#accordionPanelsStayOpenExample').parent().parent().outerWidth() >= 559.33) {
-                                        // 576px ~ 9999px
-                                        // $('.accordion-img').css('width', accordionWidth*0.6);
-                                        // console.log('576이상');
+                                    // 상단의 $('#accordionPanelsStayOpenExample').parent().parent()로 width를 기준으로 잡으면 됨
                                     // 768px로 기준 값 변경
                                     if ($('#accordionPanelsStayOpenExample').parent().parent().outerWidth() >= 751.33) {
                                         // 768px ~ 9999px
                                         $('.accordion-img').css('width', accordionWidth*0.6);
                                         console.log('768이상');
                                     } else {
-                                        // 0px ~ 576px
+                                        // 0px ~ 768px
                                         $('.accordion-img').css('width', accordionWidth*0.78);
                                         console.log('576미만');
                                     }
@@ -537,23 +542,21 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     // $('.accordion-img').addClass('show-accordion');
 
                                     // 이걸로 하면 클래스에서 순서에 따라 addClass 설정 가능
-                                    // $('.accordion-img:nth(0)').addClass('show-accordion');
-                                    $('.accordion-img:nth(1)').addClass('next-accordion');
-                                    $('.accordion-img:nth(2)').addClass('before-accordion');
+                                    $('.accordion-img:nth(0)').addClass('show-accordion');
+                                    $('.accordion-img:nth(1)').addClass('right-accordion');
+                                    $('.accordion-img:nth(2)').addClass('left-accordion');
                                     // $('.show-accordion').css({
                                     //     transform: 'perspective(150px) translateX(0px) translateZ(5px)',
                                     //     zIndex: '20'
                                     // })
 
                                     // $('.show-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
-                                    $('.next-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px)');
-                                    $('.hide-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(-100px)');
-                                    $('.before-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px)');
+                                    // $('.right-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px)');
+                                    // $('.hide-accordion').css('transform', 'perspective(150px) translateX(0px) translateZ(-100px)');
+                                    // $('.left-accordion').css('transform', 'perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px)');
 
                                     // console.log($('#accordion-img-li > img').first());
                                     // console.log($('#accordion-img-li > img')[3]);
-
-                                    $('.accordion-img:nth(0)').addClass('show-accordion');
 
                                     // $('.show-accordion').attr('transform', 'perspective(150px) translateX(0px) translateZ(5px)');
                                             // zIndex, '20'
@@ -562,45 +565,47 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     //     transform: 'perspective(150px) translateX(0px) translateZ(5px)',
                                     //     zIndex: '20'
                                     // })
-                                    let testStyle = document.createElement('style');
-                                    console.log('testStyle: ', testStyle);
-                                    testStyle.type = 'text/css';
-                                    testStyle.innerHTML = '.show-accordion {transform: perspective(150px) translateX(0px) translateZ(5px); z-index: 20;}';
-                                    document.getElementsByTagName('head')[0].appendChild(testStyle);
-                                    let testStyle2 = document.createElement('style');
-                                    testStyle2.type = 'text/css';
-                                    testStyle2.innerHTML = '.before-accordion {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); z-index: 20;}';
-                                    document.getElementsByTagName('head')[0].appendChild(testStyle2);
 
-                                    // document.getElementById('someElementId').className = 'cssClass';
-                                    
-                                    $('.accordion-img').click(function() {
-                                        sizeup();
-                                        console.log('testtest');
-                                    });
-                                    
-                                    function sizeup() {
-                                        // $('div').switchClass("second", "sizeup", 1000);
-                                        $('.accordion-img:nth(0)').switchClass('show-accordion', 'before-accordion', 1000);
-                                    }
+                                    // accordion Img Style 기본 위치값 설정
+                                    let accordionImgStyle1 = document.createElement('style');
+                                    let accordionImgStyle2 = document.createElement('style');
+                                    let accordionImgStyle3 = document.createElement('style');
+                                    let accordionImgStyle4 = document.createElement('style');
+                                    accordionImgStyle1.type = 'text/css';
+                                    accordionImgStyle2.type = 'text/css';
+                                    accordionImgStyle3.type = 'text/css';
+                                    accordionImgStyle4.type = 'text/css';
+                                    accordionImgStyle1.innerHTML = '.show-accordion {transform: perspective(150px) translateX(0px) translateZ(5px); z-index: 20;}';
+                                    document.getElementsByTagName('head')[0].appendChild(accordionImgStyle1);
+                                    accordionImgStyle2.innerHTML = '.right-accordion {transform: perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px); z-index: 15;}';
+                                    document.getElementsByTagName('head')[0].appendChild(accordionImgStyle2);
+                                    accordionImgStyle3.innerHTML = '.hide-accordion {transform: perspective(150px) translateX(0px) translateZ(-100px); z-index: 10;}';
+                                    document.getElementsByTagName('head')[0].appendChild(accordionImgStyle3);
+                                    accordionImgStyle4.innerHTML = '.left-accordion {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); z-index: 15;}';
+                                    document.getElementsByTagName('head')[0].appendChild(accordionImgStyle4);
 
+                                    // switchClass로는 애니메이션 효과가 안나옴, 아래 방법으로 진행
+                                    let accordionImgMoveLeft = document.createElement('style');
+                                    let accordionImgMoveHide = document.createElement('style');
+                                    let accordionImgMoveRight = document.createElement('style');
+                                    let accordionImgMoveCenter = document.createElement('style');
+                                    accordionImgMoveLeft.type = 'text/css';
+                                    accordionImgMoveHide.type = 'text/css';
+                                    accordionImgMoveRight.type = 'text/css';
+                                    accordionImgMoveCenter.type = 'text/css';
 
-                                    // ****************switchClass로는 애니메이션 효과가 안나옴
-                                    // 아래 방법으로 진행
+                                    accordionImgMoveLeft.innerHTML = '@keyframes accordionMoveLeft {from {transform: perspective(150px) translateX(0px) translateZ(5px); opacity: 1;} to {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); opacity: 0.5;}}';
+                                    accordionImgMoveHide.innerHTML = '@keyframes accordionMoveHide {from {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); opacity: 0.5;} to {transform: perspective(150px) translateX(0px) translateZ(-100px); opacity: 0;}}';
+                                    accordionImgMoveRight.innerHTML = '@keyframes accordionMoveRight {from {transform: perspective(150px) translateX(0px) translateZ(-100px); opacity: 0;} to {transform: perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px); opacity: 0.5;}}';
+                                    accordionImgMoveCenter.innerHTML = '@keyframes accordionMoveCenter {from {transform: perspective(150px) translateX('+accordionWidth*0.76+'px) translateZ(-60px); opacity: 0.5;} to {transform: perspective(150px) translateX(0px) translateZ(5px); opacity: 1;}}';
                                     
+                                    document.getElementsByTagName('head')[0].appendChild(accordionImgMoveLeft);
+                                    document.getElementsByTagName('head')[0].appendChild(accordionImgMoveHide);
+                                    document.getElementsByTagName('head')[0].appendChild(accordionImgMoveRight);
+                                    document.getElementsByTagName('head')[0].appendChild(accordionImgMoveCenter);
                                     // 변수로 해당 애니메이션 변수 및 애니메이션 등록
-                                    // let testStyle3 = document.createElement('style');
-                                    // testStyle3.type = 'text/css';
-                                    // testStyle3.innerHTML = '@keyframes moveSquare3 {from {transform: perspective(150px) translateX(0px) translateZ(5px);}to {transform: perspective(150px) translateX(-350px) translateZ(-60px);}}';
+                                    // testStyle3.innerHTML = '@keyframes moveLeftAccordio {from {transform: perspective(150px) translateX(0px) translateZ(5px); opacity: 1;} to {transform: perspective(150px) translateX('+accordionWidth*(-0.76)+'px) translateZ(-60px); opacity: 0.5;}}';
                                     // document.getElementsByTagName('head')[0].appendChild(testStyle3);
-                                    
-                                    // style 시트에 해당 애니메이션 등록
-                                    // #ani3 {
-                                    //     animation-name: moveSquare3;
-                                    //     animation-duration: 5s;
-                                    //     animation-iteration-count: infinite;
-                                    // }
-                       
 
                                     // console.log($('#accordion-ul').children().toArray());
                                     // let accordionWidth = $('#accordion-ul').outerWidth();
@@ -632,27 +637,29 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                         // console.log(accordionImgArray[i].outerWidth);
                                     // }
 
+                                    
                                     let imgID;
                                     function accordionSlideFunction(imgID) {
-                                        console.log(imgID);
-                                        if(imgID.hasClass('before-accordion')) {
+                                        // console.log(imgID);
+                                        if(imgID.hasClass('left-accordion')) {
                                             // before > hide
-                                            imgID.switchClass('before-accordion', 'hide-accordion', 500);
-                                            console.log('test');
+                                            imgID.switchClass('left-accordion', 'hide-accordion', 1000);
+                                            // imgID.switchClass('hide-accordion', 'right-accordion', 1000);
+                                            // console.log('test');
                                         } else if(imgID.hasClass('show-accordion')) {
                                             // show > before
-                                            imgID.switchClass('show-accordion', 'before-accordion', 1000);
-                                        } else if(imgID.hasClass('next-accordion')) {
+                                            imgID.switchClass('show-accordion', 'left-accordion', 1000);
+                                        } else if(imgID.hasClass('right-accordion')) {
                                             // next > show
-                                            imgID.switchClass('next-accordion', 'show-accordion', 1000);
+                                            imgID.switchClass('right-accordion', 'show-accordion', 1000);
                                         }
-
                                         if(imgID.hasClass('hide-accordion')) {
                                             // hide > next (else if로 넣으면 실행이 안되서 따로 뺌)
-                                            imgID.switchClass('hide-accordion', 'next-accordion', 500);
+                                            imgID.switchClass('hide-accordion', 'right-accordion', 1000);
                                         }
                                     }
                                     let aa = $('.accordion-img:nth(0)');
+
                                     // console.log(aa);
                                     // accordionSlideFunction(aa);
                                     let j = 0;
@@ -686,7 +693,141 @@ button 클릭하면 애니메이션 stop 시키고 이동시킨다음에 3~5초 
                                     //         $('.accordion-img:nth(0)').switchClass('show-accordion', 'before-accordion', 1000);
                                     //         console.log('test');
                                     //     }
+
+
+
+
+                                    // setTimeout(function() {
+                                        
+                                    //     setInterval(function() {
+                                    //         $('.left-accordion').switchClass('left-accordion', 'hide-accordion', 1000);
+                                    //         $('.show-accordion').switchClass('show-accordion', 'left-accordion', 1000);
+                                    //         $('.right-accordion').switchClass('right-accordion', 'show-accordion', 1000);
+                                    //         $('.hide-accordion').switchClass('hide-accordion', 'right-accordion', 1000);
+                                    //     },3000)
+                                    // },1000);
+                                    //     $('.left-accordion').switchClass('left-accordion', 'hide-accordion');
+                                    //     $('.show-accordion').switchClass('show-accordion', 'left-accordion');
+                                    //     $('.right-accordion').switchClass('right-accordion', 'show-accordion');
+                                    //     setTimeout(function() {
+                                    //         $('.hide-accordion').switchClass('hide-accordion', 'right-accordion');
+                                    //     }, 1)
+                                    // }, 2000)
+                                    // setTimeout(testAni(accordionWidth), 5000);
+                                    testAni(accordionWidth);
+                                    function testAni(accordionWidth) {
+                                        console.log('ani test');
+                                        console.log('음', accordionWidth);
+                                        // $('.show-accordion').animateTransform('translate('+accordionWidth*(-0.76)+'px', 0, function() {
+                                        //     console.log('nimation completed after 750ms');
+                                        // });
+          
+                                        // $("#myElement").animateTransform("rotate(180deg)", 750, function(){
+                                        //     console.log("animation completed after 750ms");
+                                        // });
+                                        $('.show-accordion').animate({
+                                            // transform: perspective(150px) translateX(accordionWidth*(-0.76)px) translateZ(-60px);
+                                            // transform: perspective(150) translateX(100) translateZ(-60),
+                                            // transform: perspective('150px'),
+                                            // "-webkit-transform":"translate(1000px,1000px)",
+                                            // "-ms-transform":"translate(1000px,1000px)",
+                                            // "transform":"translate(1000px,1000px)",
+                                            // transfrom: translate(accordionWidth*(-0.76), 0),
+                                            // transform: translateX(accordionWidth*(-0.76)),
+                                            // transform: translateZ(-60),
+                                            // opacity: 0.5,
+                                            // marginLeft: accordionWidth*(-0.76)
+                                            marginLeft: accordionWidth*(-0.1)
+                                            // opacity: '1',
+                                            // zIndex: '10'
+                                            
+                                        }, 3000, function() {
+                                            $('.show-accordion').switchClass('show-accordion', 'left-accordion');
+                                        });
+                                    };
+
+                                            
+                    
+                                        // for (t = 0; t < 3; t++) {
+                                        //         console.log('ㄱ', $('.accordion-img:nth('+t+')'));
+                                        //         accordionSlideFunction($('.accordion-img:nth('+t+')'));
+                                        //     }
+                                        
+
+                                        // .delay(1000)
+                                        // .animate({ 
+                                        //     marginLeft: '81%',
+                                        //     opacity: '0.5',
+                                        //     zIndex: '7'
+                                        // }, 2000)
+                                        // .delay(1000)
+                                        // .animate({
+                                        //     marginLeft: '-67%',
+                                        //     // marginLeft: -accordionDivWidth,
+                                        //     opacity: '0.5',
+                                        //     zIndex: '7'
+                                        // }, 2000)
+                                        // .delay(1000);
+
+                                        // $('.accordion-img').each(function() {
+                                        //     console.log('tsas',$('.accordion-img'));
+                                        //     console.log('j: ', j);
+                                        //     accordionSlideFunction($('.accordion-img'));
+                                        //         // $(.accordion-img:nth('+i+')'));
+                                        //     j++;
+                                        //     console.log('tttt');
+                                        //     if(j == 2) {
+                                        //         // j = 0;
+                                        //         return false;
+                                        //     }
+                                        // });
+
+                                        // for (let t = 0; t < 3; t++) {
+                                        //     console.log('ㄱ', $('.accordion-img:nth('+t+')'));
+                                        //     accordionSlideFunction($('.accordion-img:nth('+t+')'));
+                                        // }
+                                
                                 });
+
+
+
+                                function accordionAnimation(accordionWidth) {
+                                    console.log('ani test', accordionWidth);
+                                    $('.show-accordion').animate({
+                                        marginLeft: accordionWidth*(-0.1),
+                                        opacity: '0.5',
+                                    }, 3000, function() {
+                                        $('.show-accordion').switchClass('show-accordion', 'left-accordion');
+                                    });
+
+                                    $('.right-accordion').animate({
+                                        marginLeft: accordionWidth*(-0.1),
+                                        opacity: '1',
+                                    }, 3000, function() {
+                                        $('.right-accordion').switchClass('right-accordion', 'show-accordion');
+                                    });
+
+                                    // 일단 보류
+                                    // $('.hide-accordion').animate({
+                                    //     marginLeft: accordionWidth*(-0.1),
+                                    //     opacity: '0.5',
+                                    // }, 3000, function() {
+                                    //     $('.hide-accordion').switchClass('hide-accordion', 'right-accordion');
+                                    // });
+
+                                    // left 에서 hide 실행 후 hide에서 right 바로 실행
+                                    $('.left-accordion').animate({
+                                        marginLeft: accordionWidth*(-0.1),
+                                        opacity: '0',
+                                    }, 3000, function() {
+                                        $('.left-accordion').switchClass('left-accordion', 'hide-accordion');
+                                    }, $('.hide-accordion').animate({
+                                        marginLeft: accordionWidth*(-0.1),
+                                        opacity: '0.5',
+                                    }, 3000, function() {
+                                        $('.hide-accordion').switchClass('hide-accordion', 'right-accordion');
+                                    }));
+                                };
                             </script>
                             <!-- script 끝 -->
                         </div>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <!-- jquery UI -->
+    <script src="../res/jquery-ui-1.13.2/jquery-ui.js"></script>
+    <link href="../res/jquery-ui-1.13.2/jquery-ui.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    
+    <!-- sweetAlert -->
+    <!-- <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" integrity="sha384-RIQuldGV8mnjGdob13cay/K1AJa+LR7VKHqSXrrB5DPGryn4pMUXRLh92Ev8KlGF" crossorigin="anonymous"></script> -->
+
+    <!-- bxSlider -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script> -->
+    <title>개인 프로젝트 - 페이지 만들기(front)</title>
+    <style>
+        .row {
+            margin: 0px;
+        }
+        a {
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .container-fluid {
+            justify-content: flex-end !important;
+        }
+        .fixed-top {
+            top: 36px;
+        }
+        #loginBtn:link, #loginBtn:visited, #registerBtn:link, #registerBtn:visited {
+            color: black;   
+        }
+        .nav-item > a {
+            color: black;
+        }
+        .nav-item:hover {
+            background-color: #2C2A29;
+        }
+        .nav-item:hover > a {
+            color: white;
+        }
+        .nav-subnav {
+            background-color: #2C2A29;
+            height: 330px;
+        }
+        .nav-subnav > ul {
+            color: #999;
+            padding-top: 1rem;
+        }
+        .nav-subnav > ul > li {
+            margin-bottom: 0.1rem;
+        }
+        .nav-subnav > ul > li > a {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        .nav-subnav > ul > li > strong > a {
+            color: white;
+        }
+        .imgw-22 {
+            width: 22% !important;
+        }
+
+        #footerLink { 
+            margin-top: 1rem;
+        }
+        #footerLink > span {
+            color: white;
+            font-size: 0.8rem;
+        }
+        #footerText {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+        #footerText > p {
+            font-size: 0.8rem;
+            color: #de898e;
+            margin-bottom: 0px;
+        }
+
+        #accordion-ul > li {
+            float: left;
+            position: absolute;
+            overflow: hidden;
+        }
+        .accordion-img {
+            position: absolute;
+        }
+        #accordion-img-clone, #accordion-img-li-clone, #accordion-img-li-clone > img {
+            position: relative !important;
+            opacity: 0;
+        }
+        .show-accordion {
+            z-index: 20;
+            opacity: 1;
+        }
+        .right-accordion {
+            z-index: 15;
+            opacity: 0.5;
+        }
+        .hide-accordion {
+            z-index: 10;
+            opacity: 0;
+        }
+        .left-accordion {
+            z-index: 15;
+            opacity: 0.5;
+        }
+
+        @media (max-width: 992px) {
+            #join-row {
+                display: none;
+            }
+            .fixed-top {
+                top: 0px !important;
+            }
+        }
+        @media (min-width: 1320px) {
+	        .carousel-item > img {
+		        height: 500px;
+    	    }
+        }
+        @media (min-width: 992px) and (max-width: 1320px) {
+	        .carousel-item > img {
+		        height: 400px;
+    	    }
+        }
+        @media (min-width: 768px) and (max-width: 992px) {
+	        .carousel-item > img {
+		        height: 300px;
+    	    }
+        }
+        @media (max-width: 768px) {
+            .carousel-item > img {
+		        height: 250px;
+    	    }
+        }
+
+    </style>
+    <script>
+        $(function() {
+            // nav 마우스 이벤트로 메뉴 호출 및 삭제
+            $('.nav-item').mouseover(function () {
+                // $('.nav-subnav').css('display', 'block');
+                $(".nav-subnav").slideDown();
+            });
+            $('.nav-subnav').mouseover(function () {
+                $('.nav-subnav').css('display', 'block');
+            });
+            $('.nav-subnav').parent().parent().mouseleave(function () {
+                $(".nav-subnav").slideUp();
+                // $('.nav-subnav').css('display', 'none');
+            });
+            // 필요없을거 같으면 삭제
+            $(".nav-item").click(function() {
+                $(".nav-subnav").slideToggle();
+            });
+
+            let accordionInterval = setInterval(function() {
+                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+                    accordionAnimation(accordionMarginTemp);
+                    // console.log('실행');
+                } else {
+                        // $("요소 선택").stop(clearQueue, finish);
+                        $('.accordion-img').stop(true, true);
+                        clearInterval(accordionAnimation);;
+                        // console.log('종료');
+                }
+            }, 5000);
+
+            // accordion img width, margin 셋팅
+            console.log('accordion img width, margin 셋팅 함수');
+            // accordion-ul 및 li width 설정
+            let accordionWidth = $('#accordion-ul').outerWidth();
+
+            // attr로 0px important를 먼저 준 후에 css를 적용하면 important 값으로 적용이 됨
+            $('#accordion-img-li').attr('style', 'width: 0px !important');
+            $('#accordion-img-li').css('width', accordionWidth);
+
+            // clone도 동일한 width 설정 적용
+            $('#accordion-img-li-clone').attr('style', 'width: 0px !important');
+            $('#accordion-img-li-clone').css('width', accordionWidth);
+
+            // img width 변경 시 height 자동 비율 변경 됨
+            // width 변경 시 col이 변경되서 ul width 값도 변경이 되어 기준으로 잡기에는 어려움
+            // 상단의 $('#accordionPanelsStayOpenExample').parent().parent()로 width를 기준으로 잡으면 됨
+            // 768px로 기준 값 변경
+            if ($('#accordionPanelsStayOpenExample').parent().parent().outerWidth() >= 751.33) {
+                // 768px ~ 9999px
+                $('.accordion-img').css('width', accordionWidth*0.6);
+            } else {
+                // 0px ~ 768px
+                $('.accordion-img').css('width', accordionWidth*0.78);
+            }
+
+            // img width 설정 및 차이 값 설정, img margin 적용
+            let accordionImgWidth = $('.accordion-img').outerWidth();
+            let accordionMarginTemp = accordionWidth - accordionImgWidth;
+            $('.accordion-img:nth(0)').css('margin-left', accordionMarginTemp/2);
+            $('.accordion-img:nth(1)').css('margin-left', accordionMarginTemp/2*4.25);
+            $('.accordion-img:nth(2)').css('margin-left', accordionMarginTemp/2*(-2.26));
+            
+            // accordion 애니메이션 함수
+            function accordionAnimation(accordionMarginTemp) {
+                // console.log('accordion 애니메이션 함수');
+                $('.show-accordion').animate({
+                    marginLeft: accordionMarginTemp/2*(-2.26),
+                    opacity: '0.5',
+                    zIndex: '15'
+                }, 2000, function() {
+                    $('.show-accordion').switchClass('show-accordion', 'left-accordion');
+                });
+                $('.right-accordion').animate({
+                    marginLeft: accordionMarginTemp/2,
+                    opacity: '1',
+                    zIndex: '20'
+                }, 2000, function() {
+                    $('.right-accordion').switchClass('right-accordion', 'show-accordion');
+                });
+                let leftAnimate = $('.left-accordion').animate({
+                    marginLeft: accordionMarginTemp/2,
+                    opacity: '0',
+                    zIndex: '10'
+                }, 1000, function() {
+                    $('.left-accordion').switchClass('left-accordion', 'hide-accordion');
+                });
+                // $.when 이용해서 leftanimate 끝나면 바로 hide 함수 실행되게 설정
+                $.when(leftAnimate).then(function() {
+                    $('.hide-accordion').animate({
+                    marginLeft: accordionMarginTemp/2*4.25,
+                    opacity: '0.5',
+                    zIndex: '15'
+                }, 1000, function() {
+                    $('.hide-accordion').switchClass('hide-accordion', 'right-accordion');
+                });
+                })
+            };
+        });
+    </script>
+</head>
+<body>
+    <div class="row" id="join-row" style="margin-top: 1rem;">
+        <div class="col-sm-12" style="text-align: right;">
+            <a href="#" id="loginBtn" data-bs-toggle="modal" data-bs-target="#loginModal"><span>로그인</span></a>
+            <!-- <button class="btn btn-primary">로그인</button> -->
+            <a href="#" id="registerBtn" target_="_self"><span>회원가입</span></a>
+        </div>
+    </div>
+
+    <div class="row">
+        <nav class="navbar navbar-expand-lg" style="padding-bottom: 0px;">
+            <div class="container-fluid">
+              <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav" style="margin: auto;">
+                  <li class="nav-item">
+                    <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+                    <a class="nav-link" href="#">COFFEE</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">MENU</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">STORE</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">WHAT'S NEW</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </nav>
+    </div>
+
+    <!-- navbar sub 메뉴 -->
+    <div class="row" style="position: absolute; z-index: 20; width: 100%;">
+        <div class="col-sm-3" style="padding: 0px;">
+            <div class="nav-subnav" style="display: none;">
+                <ul type='none'>
+                    <li style="color: white; margin-bottom: 0.5rem;"><strong>커피</strong></li>
+                    <li><a href="#">원두</a></li>
+                    <li style="color: white; margin-top: 1rem; margin-bottom: 0.5rem;"><strong>에스프레소 음료</strong></li>
+                    <li><a href="#">도피오</a></li>
+                    <li><a href="#">에스프레소 마키아또</a></li>
+                    <li><a href="#">아메리카노</a></li>
+                    <li ><a href="#">마키아또</a></li>
+                    <li><a href="#">카푸치노</a></li>
+                    <li><a href="#">라떼</a></li>
+                    <li><a href="#" style="margin-bottom: 0.1rem;">모카</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3" style="padding: 0px;">
+            <div class="nav-subnav" style="display: none;">
+                <ul type='none'>
+                    <li style="color: white; margin-bottom: 0.5rem;"><strong>음료</strong></li>
+                    <li><a href="#">콜드 브루</a></li>
+                    <li><a href="#">에스프레소</a></li>
+                    <li><a href="#">프라푸치노</a></li>
+                    <li><a href="#">할리치노</a></li>
+                    <li><a href="#">스파클링</a></li>
+                    <li><a href="#">기타 제조 음료</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3" style="padding: 0px;">
+            <div class="nav-subnav" style="display: none;">
+                <ul type='none'>
+                    <li style="color: white; margin-bottom: 2rem;"><strong><a href="#">매장검색</a></strong></li>
+                    <li style="color: white; margin-bottom: 0.5rem;"><strong>매장 이야기</strong></li>
+                    <li><a href="#">티바나 바 매장</a></li>  
+                </ul>
+            </div>
+        </div>
+        <div class="col-sm-3" style="padding: 0px;">
+            <div class="nav-subnav" style="display: none;">
+                <ul type='none'>
+                    <li style="color: white; margin-bottom: 0.5rem;"><strong>공지사항</strong></li>
+                    <li><a href="#">공지사항</a></li>
+                    <li><a href="#">이벤트</a></li>
+                    <li><a href="#">위치 및 연락처</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 메인 배너 이미지 슬라이드 -->
+    <div class="row" style="padding-top: 8px;">
+        <div class="col-sm-12">
+            <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+                <div class="carousel-indicators">
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                  <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                  <div class="carousel-item active">
+                    <img src="../res/mainpage/mainBanner-01.jpg" class="d-block w-100" alt="임시">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../res/mainpage/mainBanner-02.jpg" class="d-block w-100" alt="임시2">
+                  </div>
+                  <div class="carousel-item">
+                    <img src="../res/mainpage/mainBanner-03.jpg" class="d-block w-100" alt="임시3">
+                  </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              </div>
+        </div>
+    </div>
+
+    <!-- Accordion (클릭 콘텐츠) -->
+    <div class="row" style="margin-top: 1rem; margin-bottom: 1rem;">
+        <div class="col-sm-1 col-xxl-2"></div>
+        <div class="col-12 col-sm-10 col-xxl-8">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button style="background-color: #F6F5EF; color: black;" class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                        프로모션
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body">
+                            <!-- 아코디언 이미지 슬라이드 시작 -->
+                            <div class="row">
+                                <div class="col-sm-12 col-md-12 col-lg-12" id="accordion-body-img">
+                                    <ul type="none" id="accordion-ul" style="padding: 0px;">
+                                        <li id="accordion-img-li">
+                                            <img src="../res/mainpage/accordionBanner-01.jpg" class="accordion-img show-accordion">
+                                            <img src="../res/mainpage/accordionBanner-02.jpg" class="accordion-img right-accordion">
+                                            <img src="../res/mainpage/accordionBanner-03.jpg" class="accordion-img left-accordion">
+                                            <img src="../res/mainpage/accordionBanner-04.jpg" alt="clone" class="accordion-img" id="accordion-img-clone">
+                                        </li>
+                                        <li id="accordion-img-li-clone"><img src="../res/mainpage/accordionBanner-04.jpg" class="accordion-img"></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- 아코디언 이미지 슬라이드 끝 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-1"></div>
+    </div>
+
+    <!-- bestmenu & 오시는길 -->
+    <div class="row" style="margin-bottom: 1rem;">
+        <div class="col-md-1"></div>
+        <div class="col-sm-12 col-md-8">
+            <p style="font-size: 1.5rem;"><strong>Best Menu</strong></p>
+            <div style="margin-bottom: 1rem;">
+                <img src="../res/mainpage/bestmenu-01.png" class="imgw-22">
+                <img src="../res/mainpage/bestmenu-02.png" class="imgw-22">
+                <img src="../res/mainpage/bestmenu-03.png" class="imgw-22">
+                <img src="../res/mainpage/bestmenu-04.png" class="imgw-22">
+            </div>
+        </div>
+        <div class="col-12 col-md-3">
+            <p style="font-size: 1.5rem;"><strong>오시는 길</strong></p>
+            <img src="../res/mainpage/roadmap-01.png" class="w-100" style="opacity: 0.8;">
+        </div>
+    </div>
+
+    <!-- footer -->
+    <div class="row" style="background-color: #BA000C;">
+        <div class="col-md-1"></div>
+        <div class="col-sm-12 col-md-10">
+            <div id="footerLink">
+                <span>개인정보처리방침</span>
+                <span>|</span>
+                <span>서비스이용약관</span>
+                <span>|</span>
+                <span>고객문의</span>
+                <span>|</span>
+                <span>사이트맵</span>
+            </div>
+            <div id="footerText">
+                <p>법인명: 청년취업사관학교 용산캠퍼스</p>
+                <p>대표자: 박효현 사업자등록번호 000-00-00000 통신판매업: 제2022-서울종로-0001호</p>
+                <p>주소 : 서울 용산구 청파로 109 나진상가 3층</p>
+                <p>대표전화 : 02-2078-2182</p>
+                <p>COPYRIGHT (C) Park HyoHyun All Rights Reserved.</p>
+            </div>
+        </div>
+    </div>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="loginModalLabel">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <!-- <label for="loginId">ID : </label>
+            <input id="loginId" tpye="text">
+            <br>
+            <label for="loginPwd">PW : </label>
+            <input id="loginPwd" tpye="p"> -->
+            <div class="input-group mb-3">
+                <!-- <span class="input-group-text" id="inputGroup-sizing-default">ID</span> -->
+                <input type="text" id="loginId" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="아이디를 입력해 주세요.">
+            </div>
+            <div class="input-group mb-3">
+                <!-- <span class="input-group-text" id="inputGroup-sizing-default">비밀번호</span> -->
+                <input type="password" id="loginPwd"  class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" placeholder="비밀번호를 입력해 주세요.">
+            </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="loginBtn" class="btn btn-primary">Login</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
