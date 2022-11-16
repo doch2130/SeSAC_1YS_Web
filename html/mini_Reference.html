@@ -165,6 +165,19 @@
                 }
             }, 5000);
 
+            // accordion Interval
+            let accordionInterval = setInterval(function() {
+                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+                    accordionAnimation(accordionMarginTemp);
+                    // console.log('실행');
+                } else {
+                        // $("요소 선택").stop(clearQueue, finish);
+                        $('.accordion-img').stop(true, true);
+                        clearInterval(accordionAnimation);
+                        // console.log('종료');
+                }
+            }, 5000);
+
     </script>
 </head>
 <body>

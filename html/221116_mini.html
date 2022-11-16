@@ -165,20 +165,67 @@
                 $(".nav-subnav").slideToggle();
             });
 
-            let accordionInterval = setInterval(function() {
-                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
-                    accordionAnimation(accordionMarginTemp);
-                    // console.log('실행');
-                } else {
-                        // $("요소 선택").stop(clearQueue, finish);
-                        $('.accordion-img').stop(true, true);
-                        clearInterval(accordionAnimation);;
-                        // console.log('종료');
-                }
-            }, 5000);
+            // accordion default setInterval 실행
+            let accordionInterval = setInterval(accordionAnimationFunction, 5000);
 
-            // accordion img width, margin 셋팅
-            console.log('accordion img width, margin 셋팅 함수');
+            // accordion Width responsive setInterval 함수
+            setTimeout(function(){
+                let responsiveaccordionInterval = setInterval(function() {
+
+                let checkAccordionWidth = $('#accordion-body-img').outerWidth();
+
+                if(accordionCheckWidth != checkAccordionWidth) {
+                    console.log('위드 변경 인터벌 재시작');
+                    clearInterval(accordionInterval);
+                    $('.accordion-img').stop(true, true);
+                    clearInterval(accordionAnimation);
+
+                    let intervalAccordionWidth = $('#accordion-ul').outerWidth();
+                    $('#accordion-img-li').attr('style', 'width: 0px !important');
+                    $('#accordion-img-li').css('width', intervalAccordionWidth);
+                    $('#accordion-img-li-clone').attr('style', 'width: 0px !important');
+                    $('#accordion-img-li-clone').css('width', intervalAccordionWidth);
+
+                    if ($('#accordionPanelsStayOpenExample').parent().parent().outerWidth() >= 751.33) {
+                        // 768px ~ 9999px
+                        $('.accordion-img').css('width', intervalAccordionWidth*0.6);
+                    } else {
+                        // 0px ~ 768px
+                        $('.accordion-img').css('width', intervalAccordionWidth*0.78);
+                    }
+
+                    // img width 설정 및 차이 값 설정, img margin 적용
+                    let intervalAccordionImgWidth = $('.accordion-img').outerWidth();
+                    let intervalAccordionMarginTemp = intervalAccordionWidth - intervalAccordionImgWidth;
+                    $('.accordion-img:nth(0)').css('margin-left', intervalAccordionMarginTemp/2);
+                    $('.accordion-img:nth(1)').css('margin-left', intervalAccordionMarginTemp/2*4.25);
+                    $('.accordion-img:nth(2)').css('margin-left', intervalAccordionMarginTemp/2*(-2.26));
+                    
+                    // 초기화로 인한 클래스 삭제 후 재 등록
+                    $('.accordion-img').removeClass('show-accordion');
+                    $('.accordion-img').removeClass('left-accordion');
+                    $('.accordion-img').removeClass('right-accordion');
+                    $('.accordion-img').removeClass('hide-accordion');
+
+                    $('.accordion-img:nth(0)').addClass('show-accordion');
+                    $('.accordion-img:nth(1)').addClass('right-accordion');
+                    $('.accordion-img:nth(2)').addClass('left-accordion');
+
+                    accordionCheckWidth = checkAccordionWidth;
+                    accordionInterval = setInterval(accordionAnimationFunction, 5000);
+                }
+            }, 1000)}, 5000);
+
+            // responsive 위한 accordion check 변수 (로딩 후 체크를 위해 3초 후 측정)
+            let accordionCheckWidth = 0;
+            setTimeout(function() {
+                accordionCheckWidth = $('#accordion-body-img').outerWidth();
+                // console.log('accordionCheckWidth', accordionCheckWidth);
+            }, 3000);
+
+
+            // Default accordion Width Setting
+
             // accordion-ul 및 li width 설정
             let accordionWidth = $('#accordion-ul').outerWidth();
 
@@ -208,7 +255,7 @@
             $('.accordion-img:nth(0)').css('margin-left', accordionMarginTemp/2);
             $('.accordion-img:nth(1)').css('margin-left', accordionMarginTemp/2*4.25);
             $('.accordion-img:nth(2)').css('margin-left', accordionMarginTemp/2*(-2.26));
-            
+
             // accordion 애니메이션 함수
             function accordionAnimation(accordionMarginTemp) {
                 // console.log('accordion 애니메이션 함수');
@@ -244,6 +291,20 @@
                 });
                 })
             };
+
+            // setInterval 위한 함수로 모듈한 상태
+            function accordionAnimationFunction() {
+                if($('#panelsStayOpen-collapseOne').hasClass('show')) {
+                    accordionAnimation(accordionMarginTemp);
+                    // console.log('실행');
+                } else {
+                        // $("요소 선택").stop(clearQueue, finish);
+                        $('.accordion-img').stop(true, true);
+                        clearInterval(accordionAnimation);
+                        // console.log('종료');
+                }
+            };
+
         });
     </script>
 </head>
