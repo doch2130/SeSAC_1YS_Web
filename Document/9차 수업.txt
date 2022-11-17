@@ -1,82 +1,9 @@
 2022-11-17 목요일
 
-1. Node JS
-런타임
-- 프로그래밍 언어가 구동되는 환경
-- javascript를 서버단 언어로 사용하기 위해 나온 것이 node.js이며 웹 브라우저 없이 실행 가능
+*공홈*
+https://nodejs.org/dist/latest-v14.x/docs/api/url.html#url_urlsearchparams_delete_name
 
-1-1. 특징
-자바스크립트 언어 사용
-Single Thread
-- 에러를 처리하지 못하면 프로그램이 중단 됨
-=> 하나가 죽으면 다른 애들도 같이 죽음
-=> 예외처리 작업이 중요함
-
-비동기 I/O 방식 (Non-blocking I/O)
-- 동기 방식과는 다르게 차례를 기다리지 않고 실행이 됨
-- 동기 방식은 요청1이 서버에 요청을 보내고 결과를 받은 다음에 요청2가 일을 시작한다면 비동기 방식은 요청1, 2에 상관없이 각자의 일을 시작한다.
-
-동기 특징
-- 한 요청에 서버의 응답이 이주어질 때까지 계속 대기해야 한다.
-장점 : 설계가 매우 간단하고 직관적이다.
-단점 : 결과가 나올 때까지 아무것도 못하고 기다려야 한다.
-
-비동기 특징
-- 요청 후 응답을 기다리지 않고 달느 활동을 한다.
-장점 : 요청에 따른 결과가 반환되는 시간 동안 다른 작업을 수행할 수 있다.
-단점 : 동기식보다 설계가 복잡하다.
-서비스 - 스트리밍, 채팅 등
-
-
-로컬에 node js 설치
-LTS 버전: 18.12.1 / 2022-11-15 기준
-
-서버 putty 접속 후 해당 명령어로 설치 진행 (18.x 인거는 로컬에 설치한 버전이 18.x 버전이라서 맞추려고 하는 거임)
-curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
-apt-get install nodejs
-apt-get install npm
-
-node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by node)
-ubuntu 18.xx 버전 및 몇몇 OS에서 node 18버전을 지원하지 않는다.
-1. ubuntu 버전 변경 : 20.xx 버전으로 변경
-2. node 버전 변경 : node 18.xx 버전 이외의 버전을 사용한다.
-
-sudo apt-get remove nodejs
-sudo apt-get remove npm
-
-curl -sL https://deb.nodesource.com/setup_16.x | sudo -E bash -
-sudo apt-get install nodejs
-
-root@sesac-web:~# node -v
-16.18.1
-root@sesac-web:~# npm -v
-8.19.2
-
-=> 로컬 버전도 맞추는게 좋긴 한데...크게 문제는 없을 거 같아서 그대로 진행
-로컬 18.12.1 / 서버 16.18.1
-https://nodejs.org/dist/v16.18.1/
-https://nodejs.org/download/release/v16.18.1/
--> 혹시 모르니까 보류
-node-v16.18.1-x64.msi
-windowns 64비트이므로 해당 파일 설치
-
-새로 설치하지 않고 NVM 설치 진행
-NVM (Node Version Manager) - Node.js 버전 관리 도구
-https://github.com/coreybutler/nvm-windows
-하단의 NVM for Windows 에서 Download Now! 클릭
-nvm-setup.exe 실행 후 설치
-설치 후 cmd 창 실행해서 명령어 실행
-nvm install 16
-팝업창 나오면 yes
-설치 후 명령어 실행
-nvm use 16.18.1
-마지막으로 버전 확인
-node -v
-npm -v
-
-최종버전
-Node 로컬 16.18.1 / 서버 16.18.1
-npm 8.19.2
+Node JS
 
 2. 모듈 (Module)
 - 특정한 기능을 하는 함수나 변수들의 집합
@@ -92,4 +19,60 @@ npm 8.19.2
 - 노드의 전역 객체
 - 모든 파일에서 접근 가능
 - 생략하여 사용 가능 ex) global.console.log => console.log
+
+3-2. Timer 메소드
+- setTimeout(콜백 함수, 밀리초)
+=> 밀리초 이후에 함수 실행
+
+- setInterval(콜백 함수, 밀리초)
+=> 밀리초마다 함수 실행
+=> setInterval 함수는 1번 실행 후 주기가 도는게 아니라 바로 주기가 돈다고 보면 됨
+
+- setImmediate(콜백 함수)
+=> 즉시 실행 함수
+
+- claerTimeout(아이디)
+=> setTiemout 함수 초기화
+
+- clearInterval(아이디)
+=> setInterval 함수 초기화
+
+3-3. 경로 함수
+__filename : 현재 파일 경로
+__dirname : 현재 폴더 경로
+
+3-4. process 객체 
+- 현재 실행 중인 노드 프로세스 정보
+process.version
+process.arch
+process.platform
+process.cpuUsage()
+그 외 등등
+
+4. 내장 모듈
+- 내장 객체와 다르게 require 함수로 불러와서 사용해야 함
+
+4-1. OS 모듈
+const os = require('os');
+os.type()
+os.cpus()
+os.homedir()
+os.freemem()
+그 외 등등
+
+4-2. path 모듈
+const path = require('path');
+const file = __filename;
+path.extname(file))
+path.parse(file))
+그 외 등등
+
+4-3. url 모듈
+- 인터넷 주소를 쉽게 조작하도록 도와주는 모듈
+
+5. 구조분해
+
+6. 클래스
+
+7. 콜백 함수
 
