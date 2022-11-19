@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+    <!-- jquery UI -->
+    <script src="../res/jquery-ui-1.13.2/jquery-ui.js"></script>
+    <link href="../res/jquery-ui-1.13.2/jquery-ui.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+    
+    <title>Document</title>
+    <style>
+        table, th, td {
+            border: 2px solid black;
+            text-align: center;
+        }
+        td {
+            width: 50px;
+            height: 100px;
+        }
+        p {
+            font-size: 0.7px;
+        }
+    </style>
+    <script>
+        $(function() {
+            $('td').on('click', function() {
+                // console.log(this);
+                // console.log($(this).text());
+                // $('#date').val($(this).text());
+                let temp = $(this).html().split('<')[0];
+                $('#date').val(temp);
+            });
+
+            $('#apply').click(function () {
+                let $p = $('<p>', {text: $('#content').val()});
+                for (var i = 0; i < $('td').length; i++) {
+                    if($('td').eq(i).html().split('<')[0] == $('#date').val()) {
+                            // console.log($('td').eq(i).children('p').length);
+                        if($('td').eq(i).children('p').length == '0') {
+                            // console.log('p 없으므로 생성');
+                            $('td').eq(i).append($p);   
+                        } else {
+                            // console.log('p 있으므로 기존꺼 변경');
+                            $('td').eq(i).children('p').text($('#content').val());
+                        }
+                    }
+                }
+                
+            });
+        });
+
+
+    </script>
+</head>
+<body>
+    <div style="margin-top: 2rem;">
+        <label>날짜</label>
+        <input type="text" id="date">
+    </div>
+    <div style="margin-bottom: 0.5rem;">
+        <label>내용</label>
+        <input type="text" id="content">
+    </div>
+    <div style="margin-bottom: 1rem;">
+        <button type="button" id="apply">적용</button>
+    </div>
+
+    <div style="text-align: center;">
+            2022년 7월
+    </div>
+    
+    <table style="margin: auto;">
+        <tr>
+            <td>일</td>
+            <td>월</td>
+            <td>화</td>
+            <td>수</td>
+            <td>목</td>
+            <td>금</td>
+            <td>토</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>4</td>
+            <td>5</td>
+            <td>6</td>
+            <td>7</td>
+            <td>8</td>
+            <td>9</td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>11</td>
+            <td>12</td>
+            <td>13</td>
+            <td>14</td>
+            <td>15</td>
+            <td>16</td>
+        </tr>
+        <tr>
+            <td>17</td>
+            <td>18</td>
+            <td>19</td>
+            <td>20</td>
+            <td>21</td>
+            <td>22</td>
+            <td>23</td>
+        </tr>
+        <tr>
+            <td>24</td>
+            <td>25</td>
+            <td>26</td>
+            <td>27</td>
+            <td>28</td>
+            <td>29</td>
+            <td>30</td>
+        </tr>
+        <tr>
+            <td>31</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+</body>
+</html>

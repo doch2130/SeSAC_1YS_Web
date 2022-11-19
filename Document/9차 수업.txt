@@ -70,9 +70,74 @@ path.parse(file))
 4-3. url 모듈
 - 인터넷 주소를 쉽게 조작하도록 도와주는 모듈
 
+4-5. fs 모듈
+- 파일 관련 처리 모듈
+
 5. 구조분해
 
 6. 클래스
 
 7. 콜백 함수
+7-1. 콜백 헬
+
+8. 프로미스(Promise)
+- callback hell 로 인한 복잡도 증가와 예외처리의 어려움을 해결하기 위해 만들어진 것
+- 비동기 작업에서 성공과 실패를 분리해 메소드를 수행한다.
+- resolve(value) : 일이 성공적으로 끝난 경우
+ 프로미스를 실행한 곳의 then으로 들어간다.
+- reject(error) : 일이 실패한 경우, 에러 발생 시
+ 프로미스를 실행한 곳의 catch로 들어간다.
+
+8-1 프로미스 상태
+- Pending
+Promse를 수행 중인 상태
+- Fulfilled
+Promise가 resolve 된 상태
+- Rejected
+Promise가 지켜지지 못한 상태
+- Settled
+fulfilled 혹은 rejected로 결론이 난 상태
+
+ex)
+	function func1() {
+		return new Promise(function(resolve, reject) {
+			resolve('성공');
+		});
+	}
+	func1().then(function(result) {
+		console.log('result : ', result);
+	});
+=> .then 명령어가 func1 함수가 resolve 값을 넘겨줄 때까지 기다렸다가 다음 함수를 실행시킨다.
+=> 이 때 resolve로 받은 인자 값은 다음 함수에 전달해주며 result = '값'으로 사용된다.
+
+ex2)
+	func2().then(function(result) {
+		console.log('result2 : ', result);
+	});
+	func2().then(function(result) {
+		console.log('result3 : ', result);
+		return 'a';
+	}).then(function(abc) {
+		console.log('abc : ', abc);
+	});
+=> .then 뒤에 사용 방법에 따라서 함수 return으로 값을 넘겨주는 경우도 있다.
+
+ex3)
+	login('kim', '1234')
+	.then(function(id) {
+		console.log('user : ', id);
+		return getVideo(id);
+	})
+	.then(function(videos) {
+		console.log('videos : ', videos);
+		return getDetail(videos);
+	})
+	.then(function(video) {
+		console.log('비디오 제목 : ' + video);
+	});
+
+9. throw
+- 주로 error를 던지는 명령어로 사용
+- throw err;
+- 콘솔에 error 메시지를 표시하며, error 표시 후 프로그램이 종료된다.
 
