@@ -102,22 +102,18 @@
         .show-accordion {
             z-index: 20;
             opacity: 1;
-            /* transform: perspective(150px) translateZ(5px); */
         }
         .right-accordion {
             z-index: 15;
             opacity: 0.5;
-            /* transform: perspective(150px) translateZ(-50px); */
         }
         .hide-accordion {
             z-index: 10;
             opacity: 0;
-            /* transform: perspective(150px) translateZ(-100px); */
         }
         .left-accordion {
             z-index: 15;
             opacity: 0.5;
-            /* transform: perspective(150px) translateZ(-50px); */
         }
 
         @media (max-width: 992px) {
@@ -198,13 +194,6 @@
                         $('.accordion-img').css('width', intervalAccordionWidth*0.78);
                     }
 
-                    // img width 설정 및 차이 값 설정, img margin 적용
-                    let intervalAccordionImgWidth = $('.accordion-img').outerWidth();
-                    let intervalAccordionMarginTemp = intervalAccordionWidth - intervalAccordionImgWidth;
-                    $('.accordion-img:nth(0)').css('margin-left', intervalAccordionMarginTemp/2);
-                    $('.accordion-img:nth(1)').css('margin-left', intervalAccordionMarginTemp/2*4.25);
-                    $('.accordion-img:nth(2)').css('margin-left', intervalAccordionMarginTemp/2*(-2.26));
-                    
                     // 초기화로 인한 클래스 삭제 후 재 등록
                     $('.accordion-img').removeClass('show-accordion');
                     $('.accordion-img').removeClass('left-accordion');
@@ -214,6 +203,13 @@
                     $('.accordion-img:nth(0)').addClass('show-accordion');
                     $('.accordion-img:nth(1)').addClass('right-accordion');
                     $('.accordion-img:nth(2)').addClass('left-accordion');
+
+                    // img width 설정 및 차이 값 설정, img margin 적용
+                    let intervalAccordionImgWidth = $('.accordion-img').outerWidth();
+                    let intervalAccordionMarginTemp = intervalAccordionWidth - intervalAccordionImgWidth;
+                    $('.accordion-img:nth(0)').css('margin-left', intervalAccordionMarginTemp/2);
+                    $('.accordion-img:nth(1)').css('margin-left', intervalAccordionMarginTemp/2*4.25);
+                    $('.accordion-img:nth(2)').css('margin-left', intervalAccordionMarginTemp/2*(-2.26));
 
                     accordionCheckWidth = checkAccordionWidth;
                     accordionInterval = setInterval(accordionAnimationFunction, 5000);
