@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJS Form post 실습 결과</title>
+    <style>
+        span {
+            color: blue;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        이름 : <span><%= data.name %></span>
+    </div>
+    <div>
+        성별 : <span><%= data.gender %></span>
+    </div>
+    <div>
+        생일 : <span><%= data.birthYear %>년 <%= data.birthMonth %>월 <%= data.birthDay %>일</span>
+    </div>
+    <div>
+        관심사 : <span><%= data.interest %></span>
+    </div>
+    <div>
+        좋아하는 색 : <span><%= data.color %></span>
+    </div>
+    <div>
+        좋아하는 숫자 : <span><%= data.number %></span>
+    </div>
+    <div>
+        연락처 : <span><%= data.tel %></span>
+    </div>
+    <div>
+        가입시간 : <span><%= data.time %></span>
+    </div>
+</body>
+</html>

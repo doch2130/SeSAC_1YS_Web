@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJS Form</title>
+</head>
+<body>
+    <h3>get 요청</h3>
+    <form action="/getForm" method="get" name="getform">
+        <input type="text" name="id" required>
+        <input type="password" name="pw" required>
+        <br>
+        <fieldset>
+            <legend>성별</legend>
+            <input type="radio" name="gender" id="radio_man" value="man"><label for='radio_man'>남자</label>
+            <input type="radio" name="gender" id="radio_woman" value="woman"><label for='radio_woman'>여자</label>
+        </fieldset>
+        <br>
+        <fieldset>
+            <legend>취미</legend>
+            <input type="checkbox" name="interest" value="movie">넷플보기
+            <input type="checkbox" name="interest" value="music">음악감상
+            <input type="checkbox" name="interest" value="sport">운동
+        </fieldset>
+        
+        <br>
+        <button type="submit">제출</button>
+    </form>
+
+    <h3>post 요청</h3>
+        <form action="/postForm" method="post" name="getform">
+            <input type="text" name="id" value="aaa" readonly required>
+            <input type="password" name="pw" placeholder='비밀번호' autofocus required>
+            <select name="birthMonth">
+                <% for (let i = 1; i<=12; i++) { %>
+                    <option value="<%= i %>"><%= i %>월</option>
+                <% } %>
+            </select>
+
+            <br>
+            <textarea name="content" rows="30" cols="50" required></textarea>
+
+            <button type="submit">제출</button>
+        </form>
+
+
+    <script>
+        console.log(document.forms['getform']);
+    </script>
+</body>
+</html>
