@@ -1,7 +1,7 @@
 2022-11-17 목요일
 
 *공홈*
-https://nodejs.org/dist/latest-v14.x/docs/api/url.html#url_urlsearchparams_delete_name
+https://nodejs.org/dist/latest-v16.x/docs/api/url.html#url_urlsearchparams_delete_name
 
 Node JS
 

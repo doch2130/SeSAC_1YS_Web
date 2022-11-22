@@ -44,7 +44,6 @@ not 요소를 제외한 모든 요소에 CSS 적용
 
 
 
-
 3. position 사용
 
 static

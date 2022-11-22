@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nodeJS Express EJS Template</title>
+</head>
+<body>
+    <%-include('navbar') %>
+    <div>
+        <span style="color: aqua; font-size: 3rem;">Node JS Express EJS Template 1st</span>
+    </div>
+    <div>
+        <img src="/public/img/img01.png" alt="img01" style="width: 200px; height: 200px;">
+        <img src="/static/img/apple.png" alt="img02" style="width: 200px; height: 200px;">
+    </div>
+
+    <% for(let i = 0; i < 5; i++) { %>
+        <div>안녕1</div>
+    <% } %>
+
+    <!-- { 중괄호를 for문 다음 줄에 작성하는 경우 인식을 못해서 정상적인 출력이 안된다. -->
+    <% for(let i = 0; i < 5; i++) %>
+    <% { %>
+        <div>안녕1</div>
+    <% } %>
+
+    <% if(true) { %>
+    <% } else if(true) { %>
+    <% } else { %>
+    <% } %>
+    <hr>
+
+    <% for(let i = 0; i < 5; i++) { %>
+        <div>안녕<%=i+1 %> </div>
+    <% } %>
+    <div style="color: red;"><%='안녕' %></div>
+    <!-- < % = 로 작성하는 경우 태그를 문자로 인식 -->
+    <div style="color: red;"><%="<span style='color: blue'>안녕</span>" %></div>
+    <!-- < % - 로 작성하는 경우 태그를 인식하여 원하는 값으로 출력 가능 -->
+    <div style="color: red;"><%-"<span style='color: blue'>안녕</span>" %></div>
+
+
+    <%-include('./test.ejs') %>
+</body>
+</html>
