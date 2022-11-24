@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios 비동기 방식</title>
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+
+    <script>
+        function login() {
+            let form = document.getElementById('form_info');
+            let loginMsg = document.getElementById('loginMsg');
+            axios({
+                method: "post",
+                url: "/login",
+                data: {
+                    id : form.id.value,
+                    pw : form.pw.value
+                }
+            })
+            .then(function(res) {
+                console.log(res);
+                // alert(res.data.msg);
+                loginMsg.innerHTML = res.data.msg;
+            });
+        }
+
+        function 
+    </script>
+</head>
+<body>
+    <div>
+        <form id='form_info' action="/login" method="post">
+            아이디 : <input tpye="text" name="id">
+            비밀번호 : <input tpye="text" name="pw">
+            <br>
+            <button type="button" onclick="login();">로그인</button>
+        </form>
+        <div id='loginMsg'></div>
+    </div>
+</body>
+</html>

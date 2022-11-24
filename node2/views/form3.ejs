@@ -8,7 +8,8 @@
 </head>
 <body>
     <form action="/postresult" method="post">
-        <label for="name">이름</label><input type="text" id="name" name="name" autofocus required>
+        <label for="name">이름</label><input type="text" id="name" name="name" autofocus required
+        pattern="^([a-zA-z0-9가-힣]){3,}$">
         <fieldset>
             <legend>성별</legend>
             <input type="radio" id="man" name="gender" value="남자" required><label for="man">남자</label>
@@ -50,7 +51,7 @@
             <br>
             <label>좋아하는 숫자</label><input type="text" name="number">
             <br>
-            <label>연락처</label><input type="tel" name="tel">
+            <label>연락처</label><input type="tel" name="tel" pattern="^([0-9]){3}-([0-9]){3,4}-([0-9]){4}$">
             <br>
             <label>시간</label><input type="time" name="time">
         </fieldset>

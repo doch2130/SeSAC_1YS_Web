@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios 비동기 방식</title>
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+
+    <!-- JQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script>
+        function sendGet() {
+            let form = document.getElementById('form_info');
+            // form.name.value
+            // form 태그 안에서 name을 가진 input의 값을 가져오겠다.
+            // form 태그에서만 사용 가능한 방법
+
+            // axios get을 이용한 통신
+            axios({
+                method: "get",
+                url: "/form",
+                params: {
+                    // name: "codingOn"
+                    name: form.name.value
+                }
+            })
+            .then(function(res) {
+                console.log(res);
+                console.log('Axios Get');
+                // 방법 1
+                alert(res.data);
+                // 방법 2
+                // alert(res.data.msg);
+            });
+        }
+
+        function sendPost() {
+            let form = document.getElementById('form_info');
+            // axios post를 이용한 통신
+            axios({
+                method: "post",
+                url: "/form",
+                data: {
+                    // name: "codingOn"
+                    name: form.name.value
+                }
+            })
+            .then(function(res) {
+                console.log(res);
+                console.log('Axios Post');
+                // 방법 1
+                // alert(res.data);
+                // 방법 2
+                alert(res.data.msg);
+            });
+        }
+
+        // Ajax
+
+        function sendGetAjax() {
+            let form = document.getElementById('form_info');
+            $.ajax({
+                url: '/form',
+                type: 'get',
+                data: {
+                    name: form.name.value
+                },
+                success: function(data) {
+                    console.log('Ajax Get');
+                    alert(data);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+        function sendPostAjax() {
+            let form = document.getElementById('form_info');
+            $.ajax({
+                url: '/form',
+                type: 'post',
+                data: {
+                    name: form.name.value
+                },
+                success: function(data) {
+                    console.log('Ajax Post');
+                    alert(data.msg);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        // Fetch
+        function sendGetFetch() {
+            let form = document.getElementById('form_info');
+            let urlQuery = '?name='+form.name.value;
+            fetch('/formFetch'+urlQuery, {
+                method: 'get',
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                console.log('Fetch Get');
+                alert(data.msg);
+            });
+        }
+
+        function sendPostFetch() {
+            let form = document.getElementById('form_info');
+            fetch('/form', {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: form.name.value
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                console.log('Fetch Post');
+                alert(data.msg);
+            });
+        }
+
+
+    </script>
+</head>
+<body>
+    <div>
+        <button type="button" onclick="sendGet();">get 전송</button>
+        <button type="button" onclick="sendPost();">post 전송</button>
+    </div>
+    <div>
+        <button type="button" onclick="sendGetAjax();">get 전송 - Ajax</button>
+        <button type="button" onclick="sendPostAjax();">post 전송 - Ajax</button>
+    </div>
+    <div>
+        <button type="button" onclick="sendGetFetch();">get 전송 - Fetch</button>
+        <button type="button" onclick="sendPostFetch();">post 전송 - Fetch</button>
+    </div>
+    
+    <form id='form_info' action="/form" method="post">
+        이름 : <input tpye="text" name="name">
+        <!-- 나이 : <input tpye="text" name="age"> -->
+    </form>
+</body>
+</html>

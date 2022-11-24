@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios 실습</title>
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script>
+        function sendGet() {
+            let form = document.getElementById('form_info');
+            axios({
+                method: "get",
+                url: "/form",
+                params: {
+                    name: form.name.value,
+                    gender: form.gender.value,
+                    birth: form.birthYear.value + '년 ' + form.birthMonth.value + '월 ' + form.birthDate.value + '일',
+                    interest: form.interest.value,
+                    birth2: [form.birthYear.value, form.birthMonth.value, form.birthDate.value]
+                    // list 방식으로 넘겨줄 수 도 있음
+                }
+            })
+            .then(function(res) {
+                console.log(res.data);
+                console.log('Axios Get');
+                alert('Axios Get 이름은 ' + res.data.name + ' / 성별은 ' + res.data.gender + ' / 생일은 ' + res.data.birth);
+                // alert('성별은 ' + res.data.gender);
+                // alert('생일은 ' + res.data.birth);
+                // alert(res.data.interest);
+            });
+        }
+
+        function sendGetAjax() {
+            let form = document.getElementById('form_info');
+            $.ajax({
+                url: '/form',
+                type: 'get',
+                data: {
+                    name: form.name.value,
+                    gender: form.gender.value,
+                    birth: [form.birthYear.value, form.birthMonth.value, form.birthDate.value],
+                    interest: form.interest.value
+                },
+                success: function(data) {
+                    console.log(data);
+                    console.log('Ajax Get');
+                    alert('Ajax Get 이름은 ' + data.name + ' / 성별은 ' + data.gender + ' / 생일은 ' + 
+                    data.birth[0] + '-' + data.birth[1] + '-' + data.birth[2]);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function sendGetFetch() {
+            let form = document.getElementById('form_info');
+            let birth = form.birthYear.value + '년 ' + form.birthMonth.value + '월 ' + form.birthDate.value + '일';
+            let urlQuery = '?name=' + form.name.value + '&gender=' + form.gender.value + '&birth=' + birth + '&interest=' + form.interest.value;
+            fetch('/form'+urlQuery, {
+                method: 'get'
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                console.log('Fetch Get');
+                alert('Fetch Get 이름은 ' + data.name + ' / 성별은 ' + data.gender + ' / 생일은 ' + data.birth);
+            });
+        }
+
+    </script>
+    
+</head>
+<body>
+    <form action="/form" method="get" id="form_info">
+        <label for="name">이름</label><input type="text" id="name" name="name" autofocus required>
+        <fieldset>
+            <legend>성별</legend>
+            <input type="radio" id="man" name="gender" value="남자"><label for="man">남자</label>
+            <input type="radio" id="woman" name="gender" value="여자"><label for="woman">여자</label>
+        </fieldset>
+
+        <fieldset>
+            <legend>생년월일</legend>
+            <select name="birthYear">
+                <% for (let i = 2010; i <= 2022; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+                <% } %>
+            </select>
+            <span>년</span>
+            <select name="birthMonth">
+                <% for (i = 1; i <= 12; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+                <% } %>
+            </select>
+            <span>월</span>
+            <select name="birthDate">
+                <% for (i = 1; i<= 31; i++) { %>
+                <option value="<%= i %>"><%= i %></option>
+                <% } %>
+            </select>
+            <span>일</span>
+        </fieldset>
+
+        <fieldset>
+            <legend>관심사</legend>
+            <input type="checkbox" name="interest" id="interestTravel" value="여행"><label for="interestTravel">여행</label>
+            <input type="checkbox" name="interest" id="interestfff" value="패션"><label for="interestfff">패션</label>
+            <input type="checkbox" name="interest" id="interestFood" value="음식"><label for="interestFood">음식</label>
+        </fieldset>
+        
+        <br>
+        <!-- <button type="submit" onclick="sendGet()">회원가입</button> -->
+        <button type="button" onclick="sendGet()">회원가입 - Axios</button>
+        <button type="button" onclick="sendGetAjax()">회원가입 - Ajax</button>
+        <button type="button" onclick="sendGetFetch()">회원가입 - Fetch</button>
+    </form>
+</body>
+</html>

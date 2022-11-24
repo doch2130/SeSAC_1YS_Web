@@ -1,0 +1,31 @@
+npm init --yes
+npm install express
+npm install ejs
+
+npm install -g nodemon (전역 설치를 진행하였기 때문에 다른 곳에서 1번 했으면 안해도 됨)
+
+views 폴더 생성
+
+.gitignore 파일 생성 및 2줄 입력
+**/node_modules
+/package-lock.json
+
+
+index.js 처음 설정
+const express = require('express');
+const app = express();
+const port = 8080;
+
+app.set('view engine', 'ejs');
+app.use(express.urlencoded({ extended: true}));
+app.use(express.json());
+
+app.get('/', (req, res) => {
+    res.render('첫 페이지');
+});
+
+
+app.listen(port, () => {
+    console.log('server open : ', port);
+});
+

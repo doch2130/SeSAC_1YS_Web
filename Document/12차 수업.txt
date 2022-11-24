@@ -1,0 +1,239 @@
+2022-11-24 목요일
+
+1. form validation (유효성 검사)
+- required : 필수 값
+- minlenght / maxlenght : 최소/최대 문자수
+- min / max : 최소/최대 값
+- type : 입력받는 정보 타입
+- pattern : 정규식으로 검사
+
+1-1. pattern 속성에서 정규식 사용
+- 정규표현식 : reges(regular expression)
+
+정규 표현식 문서(mdn web docs) 바로가기
+https://developer.mozilla.org/ko/docs/Web/JavaScript/Guide/Regular_Expressions
+
+
+input pattern 속성
+아이디
+pattern="^([a-zA-Z0-9가-힣]){4,}$"
+비밀번호
+pattern="^([a-z0-9]){8,12}$"
+연락처
+pattern="^([0-9]){3}-([0-9]){3,4}-([0-9]){4}$"
+=> 010-1234-5678 or 010-123-5678
+스크립트 정규 표현식
+연락처
+/^\d{3}-\d{3,4}-\d{4}$/
+
+
+2. nodemon
+- 서버측 코드 (app.js 등) 가 변경될 때마다 ctrl + c 단축키로 node 명령어를 종료하고 node app.js 명령을 다시 입력하지 않아도 파일들을 모니터링 하다가 소스 코드 변경시 자동으로 node 재실행하는 패키지
+
+npm install 패키지 이름 (지역 설치)
+- 해당 프로젝트 내에서만 사용 가능
+npm install -g 패키지 이름 (전역 설치)
+- 모든 프로젝트가 공통으로 사용 가능
+
+
+npm install -g nodemon
+- nodemon은 전역 설치로 해야한다.
+
+nodemon -v
+- 버전 확인
+
+nodemon app.js (서버 파일)
+- 실행 명령어
+- powershell 실행 불가 (터미널 변경 후 사용)
+
+3. 동기와 비동기 통신
+동기 방식
+- 한 번에 하나만 처리 => 페이지를 아예 이동해 서버가 데이터 처리
+
+비동기 방식
+- 서버에 데이터를 보내고 응답을 기다리는 동안 페이지 이동 없이 처리하는 방식
+
+dynamic
+- 웹 문서가 정적으로 멈춰있는 것이 아니라 일부 내용이 실시간으로 변경되는 것
+비동기 HTTP 통신
+- 폼의 데이터를 서버와 dynamic하게 송수신 하는 것
+
+비동기 HTTP 통신 방법
+3-1. Ajax
+- 자바스크립트를 이용해 클라이언트와 서버 간에 데이터를 주고 받는 비동기 HTTP 통신
+
+3-1-1. 장점
+- JQuery를 통해 쉽게 구현 가능
+- Error, Success, Complete의 상태를 통해 실행 흐름을 조절할 수 있다.
+
+3-1-2. 단점
+- JQuery를 사용해야만 간편하고 환성이 보장된다
+- Promise 기반이 아니다.
+
+3-2. Axios
+- Node.js와 브라우저를 위한 Promise API를 활용
+- 비동기 HTTP 통신이 가능, return이 Promise 객체로 온다.
+
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+
+3-2-1. 장점
+- Timeout 기능이 존재한다.
+- Promise 기반으로 만들어졌다.
+- 브라우저 호환성이 뛰어나다.
+3-2-2. 단점
+- 모듈 설치 or 호출을 해줘야 사용이 가능하다.
+
+3-3. Fetch
+- ES6부터 들어온 JavaScript 내장 라이브러리
+- Promise 기반
+
+3-3-1. 장점
+JavaScript 내장 라이브러리이므로 별도의 import 필요 X
+Promise기반
+
+3-3-2. 단점
+최신 문법 - 호환 문제가 생길 수 있다.
+Timeout 기능이 없다. => 대기 시간이 무한 정이다.
+상대적으로 Axios에 비해 기능 부족
+
+4. JSON
+- "키-값 쌍"으로 이루어진 데이터 오브젝트를 전달하기 위해 인간이 읽을 수 있는 텍스트를 사용하는 개방형 표준 포맷이다.
+- 비동기 브라우저/서버 통신을 위해 사용하는 데이터 포맷이다.
+
+예시)
+{
+	"이름": "홍길동",
+	"나이": 55,
+	"성별": "남",
+	"주소": "서울특별시 양천구 목동",
+	"특기": ["검술", "코딩"],
+	"가족관계": {"#": 2, "아버지": "홍판서", "어머니": "춘섬"},
+	"회사": "경기 수원시 팔달구 우만동"
+}
+
+5. Axios
+get method 사용 시 params로 데이터를 전달, 서버에서 req.query로 받아야 함
+post method 사용 시 data로 데이터를 전달, 서버에서 req.body로 받아야 함
+
+*간략 설명*
+1. 클라이언트에서 axios 함수를 통해 요청을 서버에게 보내는데 이때 보내는 요청 데이터가 axios({data: {여기가 데이터 들어갈 부분 ( key:value 형태로 )}})
+2. 서버에서는 클라이언트의 요청 데이터를 get 방식일 경우에는 params로 보낸 걸 req.query로 받고, post 방식일 경우에는 data로 보낸 걸 req.body로 받는다.
+2-1. 즉, 클라이언트에서 data: { a: 1 } 이렇게 보냈으면 서버에서 req.body = { a: 1 }
+2-2. 비동기 http 통신을 할 때는 요청을 보냈으면 그에 대한 응답을 무조건 보내야 한다. 만약, 응답을 보내지 않으면 클라이언트(요청을 보낸 쪽)은 무한정 기다린다. ( 대기상태 )
+3. 서버에서는 추가작업을 하고, 클라이언트에게 응답한다. 이때, 응답하는 함수가 res.send()
+4. 클라이언트는 보낸 요청에 대한 응답을 .then( function(rrr){ }) 으로 받는데, 이때 rrr에 들어오는 값이 res.send(~~~~) 에서 보낸 ~~~~ 값이다.
+
+
+function getDefault() {
+	axios({
+		method: "get",
+		url: "/test1",
+		params: {
+			id : form.id.value,
+			pw : form.pw.value
+		}
+	})
+	.then(function(res) {
+		console.log(res);
+	});
+}
+
+function postDefault() {
+	axios({
+		method: "post",
+		url: "/test1",
+		data: {
+			id : form.id.value,
+			pw : form.pw.value
+		}
+	})
+	.then(function(res) {
+		console.log(res);
+	});
+}
+
+6. Ajax
+get, post 메소드 사용시 type 말고는 동일
+
+function getDefault() {
+	$.ajax({
+		url: "/test1",
+		type: 'get'
+		data: {
+			id : form.id.value,
+			pw : form.pw.value
+		},
+		success: function(data) {
+			console.log(data);
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	});
+}
+
+function postDefault() {
+	$.ajax({
+		url: "/test1",
+		type: 'post'
+		data: {
+			id : form.id.value,
+			pw : form.pw.value
+		},
+		success: function(data) {
+			console.log(data);
+		},
+		error: function(error) {
+			console.log(error);
+		}
+	});
+}
+
+7. Fetch
+get 메소드 사용시 urlQuery문을 기본적으로 선언을 한 후에 메소드를 실행한다.
+post 메소드 사용시 urlQuery문을 사용하지 않지만 headers, body 등 추가로 입력을 해줘야 한다.
+get과 post 메소드의 데이터 전달 방식이 다르기 때문에 사용시 주의가 필요하다.
+*서버에서 데이터를 json으로 보내줘야 한다.*
+
+function sendGetFetch() {
+	let form = document.getElementById('form_info');
+	let urlQuery = '?name='+form.name.value;
+	fetch('/formFetch'+urlQuery, {
+		method: 'get',
+	})
+	.then((response) => response.json())
+	.then((data) => {
+		console.log(data);
+		console.log('Fetch Get');
+		alert(data.msg);
+	});
+}
+
+
+function sendPostFetch() {
+	let form = document.getElementById('form_info');
+	fetch('/form', {
+		method: 'post',
+		headers: {
+			"Content-Type": "application/json",
+		},
+		body: JSON.stringify({
+			name: form.name.value
+		})
+	})
+	.then((response) => response.json())
+	.then((data) => {
+		console.log(data);
+		console.log('Fetch Post');
+		alert(data.msg);
+	});
+}
+
+
+
+
+
+
+`?name=${form.name.value}&gender=&{form.gender.value}`;
+`?id=${form.id.value}&pw=&{form.pw.value}`;
+

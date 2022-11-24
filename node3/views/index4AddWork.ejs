@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Axios 비동기 방식</title>
+    <!-- Axios CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <script>
+        function loginAjax() {
+            let form = document.getElementById('form_info');
+            let loginMsg = document.getElementById('loginMsg');
+            $.ajax({
+                url: '/login',
+                type: 'post',
+                data: {
+                    id: form.id.value,
+                    pw: form.pw.value
+                },
+                success: function(data) {
+                    console.log(data);
+                    console.log('ajax');
+                    loginMsg.innerHTML = data.msg;
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function loginFetch() {
+            let form = document.getElementById('form_info');
+            let loginMsg = document.getElementById('loginMsg');
+            fetch('/login', {
+                method: 'post',
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                // data: {
+                //     id : form.id.value,
+                //     pw : form.pw.value
+                // },
+                // body: JSON.stringify(data)
+                body: JSON.stringify({
+                    id : form.id.value,
+                    pw : form.pw.value
+                })
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                console.log('fetch');
+                loginMsg.innerHTML = data.msg;
+            });
+        }
+
+        function loginAxios() {
+            let form = document.getElementById('form_info');
+            let loginMsg = document.getElementById('loginMsg');
+            axios({
+                method: "post",
+                url: "/login",
+                data: {
+                    id : form.id.value,
+                    pw : form.pw.value
+                }
+            })
+            .then(function(res) {
+                console.log(res);
+                console.log('axios');
+                // alert(res.data.msg);
+                loginMsg.innerHTML = res.data.msg;
+            });
+        }
+
+
+
+
+
+        function loginAjaxGet() {
+            let form = document.getElementById('form_info');
+            let loginMsg = document.getElementById('loginMsg');
+            $.ajax({
+                url: '/login',
+                type: 'get',
+                data: {
+                    id: form.id.value,
+                    pw: form.pw.value
+                },
+                success: function(data) {
+                    console.log(data);
+                    console.log('ajax get');
+                    loginMsg.innerHTML = data.msg;
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
+        }
+
+        function loginFetchGet() {
+            let form = document.getElementById('form_info');
+            let loginMsg = document.getElementById('loginMsg');
+            // let urlQuery = '?id=' + form.id.value + '&pw=' + form.pw.value;
+            let urlQuery = `?id=${form.id.value}&pw=${form.pw.value}`;
+            // ` 으로 사용하면 위 방식처럼 사용 가능
+            fetch('/login'+urlQuery, {
+                method: 'get',
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                console.log(data);
+                console.log('fetch get');
+                loginMsg.innerHTML = data.msg;
+            });
+        }
+
+        function loginAxiosGet() {
+            let form = document.getElementById('form_info');
+            let loginMsg = document.getElementById('loginMsg');
+            axios({
+                method: "get",
+                url: "/login",
+                params: {
+                    id : form.id.value,
+                    pw : form.pw.value
+                }
+            })
+            .then(function(res) {
+                console.log(res);
+                console.log('axios get');
+                // alert(res.data.msg);
+                loginMsg.innerHTML = res.data.msg;
+            });
+        }
+
+    </script>
+</head>
+<body>
+    <div>
+        <form id='form_info' action="/login" method="post">
+            아이디 : <input tpye="text" name="id">
+            비밀번호 : <input tpye="text" name="pw">
+            <br>
+            <button type="button" onclick="loginAxios();">로그인 - Axios - Post</button>
+            <button type="button" onclick="loginAjax();">로그인 - Ajax  - Post</button>
+            <button type="button" onclick="loginFetch();">로그인 - Fetch  - Post</button>
+            <br>
+            <button type="button" onclick="loginAxiosGet();">로그인 - Axios  - Get</button>
+            <button type="button" onclick="loginAjaxGet();">로그인 - Ajax   - Get</button>
+            <button type="button" onclick="loginFetchGet();">로그인 - Fetch   - Get</button>
+        </form>
+        <div id='loginMsg'></div>
+    </div>
+</body>
+</html>
