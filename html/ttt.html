@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 선택자 2</title>
+    <style>
+        .fruits span:first-child {
+            color: red;
+        }
+        .fruits div:first-child {
+            color: white;
+        }
+        .fruits h3:last-child {
+            color: red;
+        }
+        .fruits span:nth-child(2) {
+            background-color: pink;
+        }
+        .fruits *:not(span) {
+            background-color: skyblue;
+        }
+
+        .test span:nth-child(3) {
+            color: red;
+        }
+        .test div:first-child {
+            background-color: blue;
+        }
+        .test span:last-child {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="fruits">
+        <div>오렌지</div>
+        <span>딸기</span>
+        <span>수박</span>
+        <p>망고</p>
+        <h3>사과</h3>
+    </div>
+    <hr>
+    <hr>
+    <hr>
+    <hr>
+    <div class="test">
+        <span>-1</span>
+        <div>0</div>
+        <span>1</span>
+        <span>2</span>
+        <h2>3</h2>
+    </div>
+</body>
+</html>

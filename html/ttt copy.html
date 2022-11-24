@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS 선택자 2</title>
+    <style>
+        /* test 클래스의 3번째 자식에 CSS 적용 */
+        .test span:nth-child(3) {
+            color: red;
+        }
+        /* test 클래스의 1번째 자식이 div 태그인 경우 CSS 적용 */
+        .test div:first-child {
+            background-color: blue;
+        }
+        /* test 클래스의 마지막 자식이 span 태그인 경우 CSS 적용 */
+        .test span:last-child {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="test">
+        <span>-1</span>
+        <div>0</div>
+        <span>1</span>
+        <span>2</span>
+        <h2>3</h2>
+    </div>
+</body>
+</html>
