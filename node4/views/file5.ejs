@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>file 업로드 + 회원가입</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+
+    <style>
+        form {
+            width: 70%;
+        }
+    </style>
+    <script>
+        function fileUpload() {
+            const formData = new FormData();
+            const file = document.getElementById('user-file');
+            const form = document.getElementById('userform');
+            formData.append('id', form.id.value);
+            formData.append('pw', form.pw.value);
+            formData.append('name', form.name.value);
+            formData.append('age', form.age.value);
+            // 이미지 파일을 제일 마지막에 넣어줘야 multer() 함수에서도 req.body 값이 제대로 들어간다.
+            formData.append('userfile', file.files[0]);
+
+            axios({
+                method: 'post',
+                url: '/upload',
+                data: formData,
+                headers: {
+                    'Content-Type' : 'multipart/form-data'
+                }
+            }).then(function (response) {
+                console.log(response);
+                console.log(response.data);
+                console.log(response.data.path);
+                document.querySelector('img').src = response.data.path;
+            });
+        }
+
+   
+    </script>
+
+</head>
+<body>
+    <form action='/upload' method='post' enctype="multipart/form-data" id="userform">
+        <fieldset>
+            <legend>개인 정보</legend>
+            아이디 : <input type="text" name="id" required><br>
+            비밀번호 : <input type="password" name="pw"><br>
+            이름 : <input type="text" name="name"><br>
+            나이 : <input type="text" name="age"><br>
+        </fieldset>
+        <input type="file" name="userfile" id="user-file" required>
+        <button type="reset">리셋</button>
+        <button type="button" onclick="fileUpload()">회원가입</button>
+    </form>
+    <img src="" width="200" />
+
+</body>
+</html>

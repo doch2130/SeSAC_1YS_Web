@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일 업로드 - 동적</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+    <style>
+        form {
+            width: 40%;
+        }
+    </style>
+    <script>
+        function fileUpload() {
+            const formData = new FormData();
+            const file = document.getElementById('dynamic-file');
+            formData.append('dynamic-userfile', file.files[0]);
+            console.log(file.files[0]);
+            axios({
+                method: 'post',
+                url: '/dynamicFile',
+                data: formData,
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(function (response) {
+                console.log(response);
+                console.log(response.data);
+                console.log(response.data.path);
+                document.querySelector('img').src = response.data.path;
+            })
+        }
+    </script>
+</head>
+<body>
+    <h2>동적 파일 업로드</h2>
+    <input type="file" name="dynamic-userfile" id="dynamic-file" required>
+    <br>
+    <button type="button" onclick="fileUpload()">회원가입</button>
+    <br>
+    <img src="" width="200" />
+
+</body>
+</html>
