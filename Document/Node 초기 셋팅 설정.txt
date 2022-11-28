@@ -11,7 +11,7 @@ views 폴더 생성
 /package-lock.json
 
 
-index.js 처음 설정
+----index.js 처음 설정----
 const express = require('express');
 const app = express();
 const port = 8080;
@@ -36,7 +36,6 @@ app.listen(port, () => {
 npm init --yes
 npm install express
 npm install ejs
-npm install multer
 
 npm install -g nodemon (전역 설치를 진행하였기 때문에 다른 곳에서 1번 했으면 안해도 됨)
 
@@ -47,9 +46,10 @@ views 폴더 생성
 /package-lock.json
 
 
-index.js 처음 설정
+----index.js 처음 설정----
 const express = require('express');
 const multer = require('multer');
+const path = require('path');
 const app = express();
 const port = 8080;
 
