@@ -1,0 +1,229 @@
+2022-11-29 화요일
+
+1. 데이터베이스
+- 데이터를 저장하는 구조/자료의 모음
+- 데이터의 집합소
+
+데이터베이스 이전에는 파일 시스템을 사용하였다.
+
+파일 시스템
+- DBMS를 사용하기 전 데이터의 저장을 위해 이용했던 시스템
+- 컴퓨터에서 파일이나 자료를 쉽게 발견 및 접근할 수 있도록 보관 또는 조직하는 체제를 가리키는 말이다.
+
+파일 시스템 단점
+- 데이터 중복
+- 데이터 불일치
+
+2. DBMS
+- DataBase Management System
+- 파일 시스템이 가진 문제를 해결하기 위해 만들어진 것
+- 데이터베이스에 접근하고 이를 관리하기 위해 존재한다.
+
+2-1. 관계형 데이터베이스
+- RDBMS (Relational DBMS)
+- 종류 : Oracle, MS SQL Server SYBASE, MySQL, MariaDB 등
+
+3. 데이터베이스 용어
+- 열 (Column, Attribute, 속성)
+- 행 (Record, Tuple, 튜플)
+- 테이블 (Table, Relation)
+- Key
+	데이터베이스에서 튜플을 찾거나 순서대로 정렬할 때 구분하고 정렬의 기준이 되는 속성
+- 기본키 (PK, Primary Key)
+	메인 키로 한 테이블에서 특정 튜플을 유일하게 구별할 수 있는 속성
+	테이블 당 오직1개의 필드에만 설정이 가능
+	Null 값 불가
+		Null 값이란, 아무것도 없는 빈 데이터 값을 말합니다.
+	중복 값 불가
+- 외래키 (FK, Foreign Key)
+	어떤 테이블의 기본키를 참조하는 속성
+	속성 이름은 달라도 되지만, 그 안의 값은 동일해야 한다.
+
+4. MySQL
+- 
+
+4-1. 설치
+
+
+5. SQL문
+- Structured Query Language
+- 구조적 질의 언어
+- 데이터베이스를 제어하고 관리할 수 있는 목적의 프로그래밍 언어
+
+6. DDL (Data Definition Language)
+- 데이터베이스를 정의하는 언어
+- CREATE
+	데이터베이스, 테이블 등을 생성하는 역할을 한다.
+- ALTER
+	테이블을 수정하는 역할을 한다.
+- DROP
+	데이터베이스, 테이블을 삭제하는 역할을 한다.
+- TRUNCATE
+	테이블의 내용을 초기화 시키는 역할을 한다.
+
+7. 데이터 형식
+7-1. 문자형 데이터 형식
+char(n)
+varchar(n)
+tinytext(n)
+text(n)
+mediumtext(n)
+longtext(n)
+
+7-2. 숫자형 데이터 형식
+tinyint(n)
+smallint(n)
+mediumint(n)
+int(n)
+bigint(n)
+float(길이, 소수)
+decimal(길이, 소수)
+double(길이, 소수)
+
+7-3. 날짜형 데이터 형식
+date
+time
+datetime
+timestamp
+year
+
+
+CREATE DATABASE test DEFAULT CHARACTER SET utf8 DEFAULT COLLATE utf8_general_ci;
+use test;
+create table member (
+	name varchar(10),
+	gender varchar(2),
+	age int,
+	registered timestamp
+);
+
+create table member (
+	ID varchar(10) not null,
+	name varchar(10) not null,
+	birthday date not null
+);
+
+
+
+alter table member drop column birthday;
+
+alter table member add column birthday date;
+
+alter table member modify column birthday not null;
+
+drop table member;
+
+
+
+
+create table member (
+	ID varchar(10) not null primary key,
+	name varchar(10) not null default '홍길동',
+	birthday date not null
+);
+
+
+
+create table member (
+	id varchar(20) not null primary key,
+	name varchar(5) not null,
+	age int,
+	gender varchar(2) not null,
+	email varchar(50),
+	promotion varchar(2) default 'x'
+);
+
+
+alter table member modify id varchar(10) not null;
+desc member;
+
+alter table member drop age;
+desc member;
+
+alter table member add interest varchar(100);
+desc member;
+
+
+8. DML
+- Data Manipulation Language
+- 데이터베이스의 내부 데이터를 관리하기 위한 언어
+
+- SELECT
+	데이터베이스에서 데이터를 검색하는 역할을 한다.
+- INSERT
+	테이블에 데이터를 추가하는 역할을 한다.
+- UPDATE
+	테이블에 데이터를 수정하는 역할을 한다.
+- DELETE
+	테이블에 데이터를 삭제하는 역할을 한다.
+
+
+
+create table user (
+	ID varchar(10) not null primary key,
+	name varchar(5) not null default '홍길동',
+	age int not null
+);
+
+insert into 테이블이름 (열) values (값)
+insert into user (ID, name, age) values ('a', '테스트', 99);
+
+
+insert into user (ID, name, age) values ('b', '테스트', 99);
+
+insert into user values('c', '테스트', 99);
+
+
+
+select * from 테이블;
+
+select * from user where name = '테스트';
+
+select * from user order by ID ASC;
+
+select * from user where name = '테스트' order by id desc;
+
+
+insert into user (ID, name, age) values ('e', '홍길동2', 80);
+select * from user where age between 81 and 99;
+
+
+select * from user where name in('홍길동');
+
+
+select * from user where name like '%길%';
+
+
+
+update user set age = 20 where name = '테스트';
+
+
+Error Code: 1175. You are using safe update mode and you tried to update a table without a WHERE that uses a KEY column.  To disable safe mode, toggle the option in Preferences -> SQL Editor and reconnect.c
+
+
+delete from user where ID = 'a';
+
+
+
+truncate user;
+
+
+
+
+
+
+
+NodeJS + mysql
+
+npm install mysql
+
+
+# mysql 사용자 추가하기
+CREATE USER 'user'@'%' IDENTIFIED BY '비밀번호';
+# DB 권한 부여 (모든 DB에 접근 가능하도록)
+GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;
+# 현재 사용중인 MySQL의 캐시를 지우고 새로운 설정을 적용하기 위해 사용
+FLUSH PRIVILEGES;
+select host, user, plugin, authentication_string from mysql.user;
+# mysql 계정 비밀번호를 바꾸고 싶을 때
+ALTER USER 'user'@'%' IDENTIFIED WITH mysql_native_password BY '비밀번호';
