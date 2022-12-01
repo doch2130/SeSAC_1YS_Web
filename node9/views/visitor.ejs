@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MVC 구조 만들기 - 2</title>
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="*" method="post" id="form_register"></form>
+        <fieldset>
+            <legend>방명록 등록</legend>
+            이름 : <input type="text" placeholder="사용자 이름" name="name"><br>
+            방명록 : <input type="text" placeholder="방명록" name="content"><br>
+            <div class="register-btn">
+                <button type="button" onclick="register();">등록</button>
+            </div>
+            </fieldset>
+        </form>
+    </div>
+    <div>
+        <table cellspacing="0" cellpadding="10" style="margin-top: 30px;">
+            <tr>
+                <th>ID</th>
+                <th>작성자</th>
+                <th>방명록</th>
+                <th>수정</th>
+                <th>삭제</th>
+            </tr>
+            <% for(let i = 0; i < data.length; i++) { %>
+                <tr>
+                    <td><%= data[i].id %></td>
+                    <td><%= data[i].name %></td>
+                    <td><%= data[i].comment %></td>
+                    <td><button type="button">수정</button></td>
+                    <td><button type="button">삭제</button></td>
+                </tr>
+            <% } %>
+        </table>
+    </div>
+</body>
+</html>
