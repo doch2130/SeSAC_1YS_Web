@@ -17,18 +17,18 @@
 
 
 
-const num = require('./221117_module.js');
-const aa = num.aa;
-const bb = num.bb;
+// const num = require('./221117_module.js');
+// const aa = num.aa;
+// const bb = num.bb;
 
-console.log('num', num);
+// console.log('num', num);
 
-function add() {
-    return aa + bb;
-}
+// function add() {
+//     return aa + bb;
+// }
 
-// 1개인 경우
-module.exports = add;
+// // 1개인 경우
+// module.exports = add;
 
 // 여러 개인 경우
 // {} 묶어서 보내면 받는 곳에서도 상태가 달라짐
