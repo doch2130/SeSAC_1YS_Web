@@ -16,18 +16,3 @@ exports.register = (req, res) => {
     });
 }
 
-
-// function get_visitor() {
-//     let sql = 'select * from visitor';
-//     cnn.query(sql, (err, rows) => {
-//         if(err) throw err;
-
-//         console.log('visitors : ', rows);
-//         // cb(rows) 가 아래 함수라고 생각하면 됨
-//     });
-//     function register_visitor(rows) {
-//         console.log(rows);
-//         res.render('visitor', { data: rows});
-//     }
-// }
-
