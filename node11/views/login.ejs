@@ -51,12 +51,31 @@
                     pw: form.pw.value
                 }
             })
+            // 1안
+            // .then((response) => {
+            //     if(!response.data) {
+            //         document.location.href='./login';
+            //         alert('아이디 또는 패스워드가 일치하지 않습니다.');
+            //     }
+            // });
+
+            // 2안(선생님 답 참조)
+            // 수정한다면 이걸로 바꾸면 됨
             .then((response) => {
-                if(!response.data) {
-                    document.location.href='./login';
+                if(response.data) {
+                    form.submit();
+                } else {
+                    // reset만 해주면 될듯
+                    // document.location.href='./login';
+                    form.reset();
                     alert('아이디 또는 패스워드가 일치하지 않습니다.');
                 }
             });
+            // 버튼 타입을 submit에서 button으로 바꾸면 될듯
+            // <button type="button" class="btn btn-primary" onclick="login()">로그인</button>
+
+            // 1안과 2안의 차이는 1안은 login()함수가 실행되면서 submit도 같이 진행이 되었는데
+            // 2안은 login 함수가 종료된 후에 submit가 실행이 되기 때문에 프로세스 로직을 봤을 때는 2안 방식으로 진행하는 것이 많다.
         }
     </script>
 </head>
@@ -68,7 +87,8 @@
                     <legend>로그인</legend>
                     아이디 : <input type="text" name="id" placeholder="아이디를 입력하세요."> <br>
                     비밀번호 : <input type="password" name="pw" placeholder="비밀번호를 입력하세요."> <br><br>
-                    <button type="submit" class="btn btn-primary" onclick="login()">로그인</button>
+                    <!-- <button type="submit" class="btn btn-primary" onclick="login()">로그인</button> -->
+                    <button type="button" class="btn btn-primary" onclick="login()">로그인</button>
                     <button type="button" class="btn btn-primary"><a href="./register">회원가입</a></button>
                 </fieldset>
             </form>
