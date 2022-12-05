@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일 업로드</title>
+</head>
+<body>
+    <h2>업로드</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <!-- enctype="multipart/form-data" => 파일 전송 시 추가 작성 문구, 데이터를 넘겨줄 때 인코딩 작업이 생기는데
+        해당 문구를 추가하면 파일 업로드시 인코딩을 하지 않고 전송한다. 인코딩을 하고 파일을 전송하면 파일이 깨진다. -->
+        <input type="file" name="userfile">
+        <button>업로드</button>
+    </form>
+
+    <hr>
+
+    <h2>업로드2</h2>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="text" name="name">
+        <input type="file" name="userfile">
+        <input type="text" name="name2">
+        <button>업로드2</button>
+    </form>
+
+    <hr>
+
+    <h2>2개 이상 업로드</h2>
+    <form action="/upload-multiple" method="post" enctype="multipart/form-data">
+        <input type="file" name="userfile" multiple>
+        <!-- input에 multiple 속성을 추가하면 2개 이상의 파일 업로드가 가능하다. -->
+        <!-- multiple 속성을 주고 파일을 2개 이상 업로드하면 array 형식으로 서버에 보내준다. -->
+        <button>2개 이상 업로드</button>
+    </form>
+
+    <hr>
+    <h2>1개씩 여러 번 업로드</h2>
+    <form action="/upload-fields" method="post" enctype="multipart/form-data">
+        <input type="file" name="userfile1">
+        <input type="file" name="userfile2">
+        <input type="file" name="userfile3">
+        <button>1개씩 여러 번 업로드</button>
+    </form>
+</body>
+</html>
