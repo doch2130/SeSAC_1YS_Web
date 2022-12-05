@@ -11,9 +11,12 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
     <style>
+        body {
+            background-color: cornsilk;
+        }
         .row {
             margin: auto;
-            height: 1000px;
+            height: 700px;
             text-align: center;
         }
         a {
@@ -30,8 +33,10 @@
             padding-top: 1rem;
             padding-bottom: 1rem;
             border: 1px solid black;
+            border-radius: 20px;
             margin: auto;
             width: 50%;
+            background-color: white;
         }
     </style>
 
@@ -51,10 +56,13 @@
                     }
                 })
                 .then((response) => {
-                    if(response.data) {
+                    if(response.data == '1') {
                         alert(form.id.value + '님 회원가입에 성공하였습니다.');
-                        document.location.href='./login.ejs';
-                    } else {
+                        document.location.href='./login';
+                    } else if(response.data == '0') {
+                        alert('사용중인 아이디입니다. 다른 아이디를 입력해 주세요.')
+                    }
+                    else {
                         alert('회원가입 중 오류가 발생하였습니다. 새로 고침 후 다시 시도해주세요.');
                     }
                 });
@@ -67,12 +75,12 @@
         <div class="col-12">
             <form id="register_form">
                 <fieldset>
-                    <legend>회원가입 창</legend>
+                    <legend>회원가입</legend>
                     아이디 : <input type="text" name="id" placeholder="아이디를 입력하세요."> <br>
                     비밀번호 : <input type="password" name="pw" placeholder="비밀번호를 입력하세요."> <br>
                     이름 : <input type="text" name="name" placeholder="이름을 입력하세요."> <br>
                     <button type="button" class="btn btn-primary" onclick="register()">회원가입</button>
-                    <button type="button" class="btn btn-primary"><a href="./login.ejs">로그인</a></button>
+                    <button type="button" class="btn btn-primary"><a href="./login">로그인</a></button>
                 </fieldset>
             </form>
         </div>

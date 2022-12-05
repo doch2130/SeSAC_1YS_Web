@@ -8,12 +8,23 @@ const cnn = mysql.createConnection({
 });
 
 exports.register_model = (info, cb) => {
-    let sql = `insert into user2 values ('${info.id}', '${info.pw}', '${info.name}')`;
+    // 아이디 중복 검사
+    let sql = `select id from user2 where id = '${info.id}'`;
     cnn.query(sql, (err, result) => {
         if (err) throw err;
-
-        console.log("회원가입 : ", result);
-        cb();
+        // console.log('중복 검사: ', result[0]);
+        if(result[0]) {
+            cb('0');
+        } else {
+            // 중복 아닌 경우 실행
+            let sql = `insert into user2 values ('${info.id}', '${info.pw}', '${info.name}')`;
+            cnn.query(sql, (err, result) => {
+                if (err) throw err;
+        
+                console.log("회원가입 : ", result);
+                cb('1');
+            });
+        }
     });
 }
 
@@ -27,9 +38,9 @@ exports.login_model = (info, cb) => {
     });
 }
 
-exports.mypage_model = (id, cb) => {
-    console.log('mypage_model: ', id);
-    let sql = `select * from user2 where id = '${id}'`;
+exports.mypage_model = (info, cb) => {
+    console.log('mypage_model: ', info);
+    let sql = `select * from user2 where id = '${info.id}' and pw = '${info.pw}'`;
     cnn.query(sql, (err, result) => {
         if (err) throw err;
 
@@ -49,56 +60,13 @@ exports.mypage_edit_model = (info, cb) => {
     });
 }
 
+exports.mypage_delete_model = (info, cb) => {
+    console.log('mypage_model_delete: ', info);
+    let sql = `delete from user2 where id = '${info.id}'`;
+    cnn.query(sql, (err, result) => {
+        if (err) throw err;
 
-
-// exports.get_visitor = (cb) => {
-//     let sql = 'select * from visitor';
-//     cnn.query(sql, (err, rows) => {
-//         if(err) throw err;
-
-//         console.log('visitors : ', rows);
-//         cb(rows);
-//     });
-// }
-
-// exports.register_visitor = (info, cb) => {
-//     let sql = `insert into visitor (name, comment) values ('${info.name}', '${info.comment}')`;
-//     cnn.query(sql, (err, result) => {
-//         if (err) throw err;
-
-//         console.log('insert result: ', result);
-//         console.log('insert result: ', result.insertId);
-//         cb(result.insertId);
-//     });
-// }
-
-// exports.delete_visitor = (id, cb) => {
-//     // id의 경우에는 숫자라서 '' 문자열 처리를 안해도 된다.
-//     let sql = `delete from visitor where id = ${id}`;
-//     cnn.query(sql, (err, result) => {
-//         if (err) throw err;
-        
-//         console.log('delete result: ', result);
-//         cb();
-//     });
-// }
-
-// exports.get_visitor_by_id_model = (id, cb) => {
-//     let sql = `select * from visitor where id = ${id}`;
-//     cnn.query(sql, (err, rows) => {
-//         if (err) throw err;
-
-//         console.log('select by id: ', rows);
-//         cb(rows[0]);
-//     });
-// }
-
-// exports.update_visitor = (info, cb) => {
-//     let sql = `update visitor set name='${info.name}', comment='${info.comment}' where id=${info.id}`;
-//     cnn.query(sql, (err, result) => {
-//         if (err) throw err;
-
-//         console.log('update result: ', result);
-//         cb();
-//     });
-// }
+        console.log('mypage_model_delete 결과: ', result);
+        cb();
+    });
+}
