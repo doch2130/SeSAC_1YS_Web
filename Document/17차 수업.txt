@@ -1,0 +1,7 @@
+2022-12-06 화요일
+
+1. Sequelize
+- 자바스크립트 구문을 알아서 SQL로 변환해준다.
+- DB 작업을 쉽게 할 수 있도록 도와주는 ORM(Object - Relation Mapping) 라이브러리 중 하나이다.
+
+
