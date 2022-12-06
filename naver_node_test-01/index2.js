@@ -1,4 +1,4 @@
-
+// 삭제 예정
 
 // let test = {"startDate":"2022-10-01","endDate":"2022-11-30","timeUnit":"month","results":[{"title":"한글","keywords":["한글","korean"],"data":[{"period":"2022-10-01","ratio":100},{"period":"2022-11-01","ratio":85.88779}]},{"title":"영어","keywords":["영어","english"],"data":[{"period":"2022-10-01","ratio":18.85482},{"period":"2022-11-01","ratio":27.53036}]}]};
 

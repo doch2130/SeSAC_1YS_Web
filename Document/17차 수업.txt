@@ -4,4 +4,65 @@
 - 자바스크립트 구문을 알아서 SQL로 변환해준다.
 - DB 작업을 쉽게 할 수 있도록 도와주는 ORM(Object - Relation Mapping) 라이브러리 중 하나이다.
 
+sequelize, sequelize-cli, mysql2 모듈 설치
+npm install sequelize sequelize-cli mysql2
 
+sequelize - 시쿼라이즈 패키지
+sequelize-cli - 시퀄라이즈 명령어 실행
+mysql2 - mysql과 시퀄라이즈 연결하는 드라이버
+
+
+config 폴더 - config.json
+
+
+
+{
+개발환경일떄 사용
+    "development": {
+        "host": "localhost",
+        "database": "test",
+        "username": "test",
+        "password": "qwer1234",
+        "dialect": "mysql" //사용하는 데이터베이스 이름
+    },
+배포할때 사용
+    "production": {
+        "host": "localhost",
+        "database": "test",
+        "username": "test",
+        "password": "qwer1234",
+        "dialect": "mysql"
+    }
+}
+
+
+
+model - index.js
+- 시퀄라이즈 모듈을 불러와서 사용하는 파일
+
+
+
+async + await 문법
+
+
+
+findOne, findAll 함수 둘다 사용 가능
+attributes
+=> 시퀄라이즈 함수에서 특정 컬럼만 조회하고 싶을 때 사용
+where => 조건
+order => 정렬
+limit => 조회 개수 제한
+
+ex)
+// async + await 문법
+exports.get_visitor_by_id = async (req, res) => {
+    let result = await Visitor.findOne({
+        attributes: ['id', 'name', 'comment'],
+        where: {
+            id: req.query.id
+        },
+        order: [['id', 'desc']],
+        limit: 1
+    });
+    res.send(result);
+}

@@ -1,0 +1,51 @@
+<!-- chart.js 이용하여 Line 그래프 출력하기 -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Line Chart Test</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js" integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+
+<div>
+    <canvas id="myChart"></canvas>
+  </div>
+  <script>
+    const ctx = document.getElementById('myChart');
+  
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [
+            {
+                label: 'Dataset 1',
+                data: [7000, 1900, 3000, 5000, 2000, 3000],
+                borderWidth: 1
+            },
+            {
+                label: 'Dataset 2',
+                data: [12000, 1600, 2700, 3400, 4900, 6000],
+                borderColor: 'blue',
+            }
+        ]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'bottom',
+                },
+                title: {
+                    display: true,
+                    text: 'Chart.js Line Chart'
+                }
+            }
+        }
+    });
+  </script>
+  </body>
+  </html>

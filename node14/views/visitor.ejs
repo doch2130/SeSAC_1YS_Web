@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>방명록</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+
+
+    <!-- Axios 사용을 위한 cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+    <style>
+        table, th, td {
+            border: 1px solid black;
+        }
+
+        .d-none {
+            display: none;
+        }
+        .btn > a {
+            color: white;
+        }
+    </style>
+
+    <script>
+        let update_tr;
+
+        function update_visitor(){
+            var form = document.getElementById("form_register");
+            axios({
+                method: 'patch',
+                url: "/visitor/update",
+                data: {
+                    id: form.id.value,
+                    name: form.name.value,
+                    comment: form.comment.value
+                }
+            })
+            .then((response)=>{
+                update_tr.children[1].innerText = form.name.value;
+                update_tr.children[2].innerText = form.comment.value;
+
+                form.id.value = "";
+                form.name.value = "";
+                form.comment.value = "";
+                $(".update-btn").addClass("d-none");
+                $(".register-btn").removeClass("d-none");
+            });
+        }
+
+        function update_load(id, element){
+            axios({
+                method: 'get',
+                url : "/visitor/get_visitor",
+                params: { id: id }
+            })
+            .then((response)=>{
+                var form = document.getElementById("form_register");
+                form.id.value = response.data.id;
+                form.name.value = response.data.name;
+                form.comment.value = response.data.comment;
+                $(".update-btn").removeClass("d-none");
+                $(".register-btn").addClass("d-none");
+
+                update_tr = element.parentElement.parentElement;
+            });
+        }
+
+        function delete_visitor(delete_id, element){
+            axios({
+                method: 'delete',
+                url: '/visitor/delete', 
+                data: {id : delete_id}
+            })
+            .then((response) => {
+                if(response.data) element.parentElement.parentElement.remove();
+                else alert("알 수 없는 오류 발생");
+            });
+        }
+
+        function register(){
+            let form = document.getElementById("form_register");
+            let data = {
+                name: form.name.value,
+                comment: form.comment.value
+            }
+            axios({
+                method: 'post',
+                url: '/visitor/register',
+                data: data
+            })
+            .then((response)=>{
+                $("table").append(`
+                    <tr>
+                        <td>${response.data}</td>
+                        <td>${data.name}</td>
+                        <td>${data.comment}</td>
+                        <td><button type="button" onclick="update_load(${response.data}, this)">수정</button></td>
+                        <td><button type="button" onclick="delete_visitor(${response.data}, this)">삭제</button></td>
+                    </tr>
+                `)
+            });
+        }
+
+        function cancel_visitor() {
+            let form = document.getElementById("form_register");
+            form.name.value = '';
+            form.comment.value = '';
+            $(".update-btn").addClass("d-none");
+            $(".register-btn").removeClass("d-none");
+        }
+    </script>
+
+</head>
+<body>
+    <form id="form_register">
+        <fieldset style="display: inline-block;">
+            <legend>방명록 등록</legend>
+            <input type="hidden" name="id">
+            이름 : <input type="text" name="name" placeholder="사용자 이름"><br>
+            방명록 : <input type="text" name="comment" placeholder="방명록"><br>
+            <div class="update-btn d-none">
+                <button type="button" onclick="update_visitor();">수정</button>
+                <button type="button" onclick="cancel_visitor()">취소</button>
+            </div>
+            <div class="register-btn">
+                <button type="button" onclick="register();">등록</button>
+            </div>
+        </fieldset>
+	</form>
+
+    <table cellspacing="0" cellpadding="10" style="margin-top: 30px;">
+        <tr>
+            <th>ID</th>
+            <th>작성자</th>
+            <th>방명록</th>
+            <th>수정</th>
+            <th>삭제</th>
+        </tr>
+        <% for(let i=0; i<data.length; i++ ) { %>
+            <tr>
+                <td><%=data[i].id%></td>
+                <td><%=data[i].name%></td>
+                <td><%=data[i].comment%></td>
+                <td><button type="button" onclick="update_load('<%=data[i].id%>', this);">수정</button></td>
+                <td><button type="button" onclick="delete_visitor('<%=data[i].id%>', this);">삭제</button></td>
+            </tr>
+        <% } %>
+    </table>
+    <button type="button" class="btn btn-primary" style="margin-top: 0.5rem; margin-left: 4rem;"><a href="../">메인 페이지로 돌아가기</a></button>
+</body>
+</html>

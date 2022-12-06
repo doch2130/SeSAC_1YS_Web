@@ -1,8 +1,16 @@
+// search Trend api 호출
+// 결과 값 받아서 데이터 출력
+// json 파일로 자동 저장
+// MVC 형식으로는 분류 안한 상태
+
 const express = require('express');
 const app = express();
 const port = 8080;
-// var request = require('request');
 const fs = require('fs');
+
+// 일단 추가해보고 나중에 테스트
+app.set('json replacer', replacer); // JSON 문자열에 포함시킬 객체의 프로퍼티를 지정해주는 옵션
+app.set('json spaces', 2); // 들여쓰기 공백 수 지정
 
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true}));
