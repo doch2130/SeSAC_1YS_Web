@@ -21,7 +21,6 @@ function getDetail(videos) {
     return new Promise(function(resolve, reject) {
         setTimeout(function() {
             resolve(videos[0]);
-            // resolve(videos);
         }, 1000);
     });
 }
@@ -42,7 +41,6 @@ login('kim', '1234')
 .then(function(videos) {
     console.log('videos : ', videos);
     return getDetail(videos);
-    // return getDetail(videos[0]);
 })
 .then(function(video) {
     console.log('비디오 제목 : ' + video);
