@@ -1,4 +1,5 @@
-// 처음 response.data 받은 후에 태그 설정이 문제인거 같음, 일단 해결 완료
+// 멜론 iconv 없어도 사용 가능
+// 멜론은 체리오로 사용 가능
 
 const express = require('express');
 const axios = require('axios');
@@ -41,10 +42,12 @@ app.get('/', async (req, res) => {
 
             // 멜론
             const title = $(tag).find("td:nth-child(6) > div.wrap > div > div.rank01 > span > a").text();
+            const likeCount = $(tag).find("td:nth-child(8) > div > button > span.cnt").text();
             const imgsrc = '';
             console.log(i + 1, {
                 title,
-                imgsrc
+                imgsrc,
+                likeCount
             });
         });
         res.send(true);

@@ -1,0 +1,80 @@
+2022-12-10 토요일
+
+create table user (
+	user_id varchar(20) not null primary key,
+	pw
+	gender
+)
+
+create table product (
+	product_id int not null primary key,
+	abc,
+	def
+)
+
+create table payment (
+	pay_id int not null primary key,
+	user_id varchar(20) not null,
+	product_id int not null,
+    constraint user_payment_user_id foreign key (user_id) references user(user_id) on delete cascade on update cascade,
+    constraint user_product_product_id foreign key (product_id) references product(product_id) on delete cascade on update cascade
+)
+
+constraint 메시지 => 해당 기능에 대한 설명을 작성한다.
+foreign key user_id reference user(user_id) => 현재 테이블의 user_id 와 user 테이블에 있는 user_id와 외래키 설정을 하겠다.
+on delete cascade => user 테이블에 있는 user_id가 삭제되면 payment의 동일한 user_id에 속하는 값도 같이 삭제한다.
+on update cascade => user 테이블에 있는 user_id가 변경되면 payment의 동일한 user_id에 속하는 값도 같이 변경한다.
+
+
+
+
+github 팀으로 연동하기
+1. 사용자 추가
+ 개인 저장소 생성 (1명) - Collaborators - 멤버 추가
+ 추가한 멤버가 메일에서 승인을 눌러야 한다.
+
+
+2. 충돌 방지를 위한 규칙 설정
+- 로컬에서 merge 금지(해도 되는데 모든 인원이 git에 익숙하지 않아서 방지를 위한 작업)
+- 작업한 branch를 당일에 merge하여 끝낼 것
+
+3. 초기 세팅
+- repo 생성 (1명)
+ - repo 처음 생성자가 git clone 먼저 실행
+ - repo 처음 생성자가 git checkout -b develop
+ - git push origin develop
+ - settings - branches - dewfault branch 변경 (main => develop)
+ - General - Automatically delete head branches 체크
+- Collaborators 추가
+- 나머지 인원 git clone 실행
+- git checkout develop
+- git pull
+- git checkout -b '브랜치'	ex)hyo_login
+- 개발 시작 ***branch를 하루 이상 넘기지 말 것***
+- git add & commit
+- git push origin '브랜치'
+- github 홈페이지 접속하여 code 탭에 bracnh 생성 확인
+
+**merge는 github 홈페이지에서 하는 방식으로 진행**
+code - pull request - new pull request
+상단의 ***base: develop, compare: 브랜치***
+create pull request
+내용 간단하게 작성 후 - create pull request
+merge pull request - confirm merge  (충돌시 버튼 활성화가 안된다)
+merge 정상 성공 시 상단의  Merged(보라색)으로 표시 된다.
+
+ - settings - branches - dewfault branch 변경 (main => develop)
+ => 해당 설정으로 인해서 merge 이후에는 생성한 branch가 자동 삭제 된다
+
+*참고) git bash에는 생성했던 branch는 그대로 남아있다*
+
+git bash로 돌아와서
+git checkout develop
+git pull
+
+*이후 다시 시작할 때*
+- git checkout -b '브랜치'	ex)hyo_login
+- 개발 시작 ***branch를 하루 이상 넘기지 말 것***
+- 생략 -
+
+
