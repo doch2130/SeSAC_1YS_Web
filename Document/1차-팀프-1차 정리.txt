@@ -57,3 +57,5 @@ DB - mysql, mysql2, sequelize, sequelize-cli
 
 SMS 인증 기능
 - 네이버 API [보류]
+
+a
