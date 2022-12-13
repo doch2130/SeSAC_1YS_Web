@@ -1,0 +1,104 @@
+{
+	"data": [
+		{
+			"title": "Shut Down",
+			"rank": "11",
+			"lastWeekRank": "지난주 #12",
+			"albumImg": "https://i.ytimg.com/vi/POe9SOEKotk/mqdefault.jpg",
+			"singer": "BLACKPINK",
+			"chartDuration": "12주",
+			"views": "1.28M",
+			"link": "https://www.youtube.com/watch?v=POe9SOEKotk"
+		},
+		{
+			"title": "Pink Venom",
+			"rank": "12",
+			"lastWeekRank": "지난주 #14",
+			"albumImg": "https://i.ytimg.com/vi/gQlMMD8auMs/mqdefault.jpg",
+			"singer": "BLACKPINK",
+			"chartDuration": "16주",
+			"views": "1.2M",
+			"link": "https://www.youtube.com/watch?v=gQlMMD8auMs"
+		},
+		{
+			"title": "자격지심 (feat. 지코(ZICO))",
+			"rank": "13",
+			"lastWeekRank": "지난주 #15",
+			"albumImg": "https://i.ytimg.com/vi/bsT_OK4DdrM/mqdefault.jpg",
+			"singer": "BE'O (비오)",
+			"chartDuration": "10주",
+			"views": "1.19M",
+			"link": "https://www.youtube.com/watch?v=bsT_OK4DdrM"
+		},
+		{
+			"title": "모놀로그",
+			"rank": "14",
+			"lastWeekRank": "지난주 #18",
+			"albumImg": "https://i.ytimg.com/vi/IeDb7OrnGNE/mqdefault.jpg",
+			"singer": "테이",
+			"chartDuration": "12주",
+			"views": "1.1M",
+			"link": "https://www.youtube.com/watch?v=IeDb7OrnGNE"
+		},
+		{
+			"title": "TOMBOY",
+			"rank": "15",
+			"lastWeekRank": "지난주 #21",
+			"albumImg": "https://i.ytimg.com/vi/Jh4QFaPmdss/mqdefault.jpg",
+			"singer": "(여자)아이들",
+			"chartDuration": "39주",
+			"views": "1.06M",
+			"link": "https://www.youtube.com/watch?v=Jh4QFaPmdss"
+		},
+		{
+			"title": "들꽃놀이",
+			"rank": "16",
+			"lastWeekRank": "--",
+			"albumImg": "https://i.ytimg.com/vi/u18be_kRmC0/mqdefault.jpg",
+			"singer": "RM & 조유진",
+			"chartDuration": "1주",
+			"views": "1.05M",
+			"link": "https://www.youtube.com/watch?v=u18be_kRmC0"
+		},
+		{
+			"title": "London Boy",
+			"rank": "17",
+			"lastWeekRank": "지난주 #16",
+			"albumImg": "https://i.ytimg.com/vi/TMfvkhkALbU/mqdefault.jpg",
+			"singer": "임영웅",
+			"chartDuration": "4주",
+			"views": "1.02M",
+			"link": "https://www.youtube.com/watch?v=TMfvkhkALbU"
+		},
+		{
+			"title": "KICK BACK",
+			"rank": "18",
+			"lastWeekRank": "지난주 #23",
+			"albumImg": "https://i.ytimg.com/vi/M2cckDmNLMI/mqdefault.jpg",
+			"singer": "Kenshi Yonezu(켄시 요네즈/米津 玄師)",
+			"chartDuration": "8주",
+			"views": "1.02M",
+			"link": "https://www.youtube.com/watch?v=M2cckDmNLMI"
+		},
+		{
+			"title": "Cheshire",
+			"rank": "19",
+			"lastWeekRank": "지난주 #50",
+			"albumImg": "https://i.ytimg.com/vi/zugAhfd2r0g/mqdefault.jpg",
+			"singer": "ITZY",
+			"chartDuration": "2주",
+			"views": "999K",
+			"link": "https://www.youtube.com/watch?v=zugAhfd2r0g"
+		},
+		{
+			"title": "STEP",
+			"rank": "20",
+			"lastWeekRank": "지난주 #72",
+			"albumImg": "https://i.ytimg.com/vi/zYoYoBtLqOY/mqdefault.jpg",
+			"singer": "카라(KARA)",
+			"chartDuration": "5주",
+			"views": "995K",
+			"link": "https://www.youtube.com/watch?v=zYoYoBtLqOY"
+		}
+	]
+}

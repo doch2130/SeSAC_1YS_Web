@@ -1,0 +1,64 @@
+{
+	"data": [
+		{
+			"title": "Santa Tell Me",
+			"rank": "23",
+			"rankVariance": "유지",
+			"albumImg": "//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/080/481/362/80481362_1416820542267_1_140x140.JPG/dims/resize/Q_80,0",
+			"singer": "Ariana Grande",
+			"albumTitle": "Santa Tell Me",
+			"detailLink": "https://www.genie.co.kr/detail/songInfo?xgnm=82975165",
+			"totalNumPlay": "45,873,066"
+		},
+		{
+			"title": "손이 참 곱던 그대",
+			"rank": "24",
+			"rankVariance": "1상승",
+			"albumImg": "//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/638/032/82638032_1651479062721_1_140x140.JPG/dims/resize/Q_80,0",
+			"singer": "임영웅",
+			"albumTitle": "IM HERO",
+			"detailLink": "https://www.genie.co.kr/detail/songInfo?xgnm=96696808",
+			"totalNumPlay": "35,059,495"
+		},
+		{
+			"title": "사랑해 진짜",
+			"rank": "25",
+			"rankVariance": "1하강",
+			"albumImg": "//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/638/032/82638032_1651479062721_1_140x140.JPG/dims/resize/Q_80,0",
+			"singer": "임영웅",
+			"albumTitle": "IM HERO",
+			"detailLink": "https://www.genie.co.kr/detail/songInfo?xgnm=96696814",
+			"totalNumPlay": "34,312,063"
+		},
+		{
+			"title": "TOMBOY",
+			"rank": "26",
+			"rankVariance": "8상승",
+			"albumImg": "//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/586/132/82586132_1647227017471_1_140x140.JPG/dims/resize/Q_80,0",
+			"singer": "(여자)아이들",
+			"albumTitle": "I NEVER DIE",
+			"detailLink": "https://www.genie.co.kr/detail/songInfo?xgnm=96276241",
+			"totalNumPlay": "55,440,773"
+		},
+		{
+			"title": "연애편지",
+			"rank": "27",
+			"rankVariance": "유지",
+			"albumImg": "//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/638/032/82638032_1651479062721_1_140x140.JPG/dims/resize/Q_80,0",
+			"singer": "임영웅",
+			"albumTitle": "IM HERO",
+			"detailLink": "https://www.genie.co.kr/detail/songInfo?xgnm=96696815",
+			"totalNumPlay": "33,768,370"
+		},
+		{
+			"title": "Rush Hour (Feat. j-hope of BTS)",
+			"rank": "28",
+			"rankVariance": "2상승",
+			"albumImg": "//image.genie.co.kr/Y/IMAGE/IMG_ALBUM/082/998/598/82998598_1663838888101_1_140x140.JPG/dims/resize/Q_80,0",
+			"singer": "Crush",
+			"albumTitle": "Rush Hour",
+			"detailLink": "https://www.genie.co.kr/detail/songInfo?xgnm=98373055",
+			"totalNumPlay": "12,860,380"
+		}
+	]
+}
