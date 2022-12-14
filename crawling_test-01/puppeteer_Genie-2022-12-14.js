@@ -4,8 +4,8 @@
 const express = require('express');
 const cheerio = require('cheerio');
 const puppeteer = require('puppeteer');
+// const fs = require('fs');
 const fs = require('fs').promises;
-const axios = require('axios');
 const app = express();
 const port = 8080;
 
@@ -15,13 +15,12 @@ app.use(express.json());
 
 app.use('/static', express.static(__dirname+'/static'));
 
+// 1페이지 1 ~ 50
+const url = "https://www.genie.co.kr/chart/top200";
+// 2페이지 51 ~ 100
+const url2 = "https://www.genie.co.kr/chart/top200?pg=2";
+
 app.get('/', (req, res) => {
-
-    // 1페이지 1 ~ 50
-    const url = "https://www.genie.co.kr/chart/top200";
-    // 2페이지 51 ~ 100
-    const url2 = "https://www.genie.co.kr/chart/top200?pg=2";
-
     // 크롤링 + 파일 저장 함수 시작
     (async() => {
         // json 데이터 저장 변수
@@ -51,7 +50,7 @@ app.get('/', (req, res) => {
             } else {
                 await page.goto(url2);
             }
-
+            
             // 해당 셀렉터가 출력될 때까지 기다려준다.        
             await page.waitForSelector('table.list-wrap > tbody > tr.list');
             // $에 cheerio를 로드한다.
@@ -112,39 +111,11 @@ app.get('/', (req, res) => {
             browser.close();
         }
 
-        // console.log(data.data);
-        console.log("1st Crawling Exit");
-        // console.log(data.data[0].detailLink);
 
-        // 1차 크롤링 이후 2차 크롤링 시작(세부 페이지 접속)
-        const detailLists = data.data;
-        for (i = 0; i < detailLists.length; i++) {
-            const detailUrl = detailLists[i].detailLink;
-            // console.log({i, url});
+        console.log('for문 종료');
 
-            await axios({
-                method: 'get',
-                url: detailUrl
-                // iconv 디코딩을 사용하려면 arraybuffer 타입으로 받아야 한다.
-                // responseType: "arraybuffer"
-            }).then((response) => {
-                // console.log(response.data);
 
-                const $ = cheerio.load(response.data);
-
-                const detailList = $("#body-content > div.song-main-infos > div.aside-zone.daily-chart > div.total");
-                const total = $(detailList).find("div:nth-child(2) > p").text();
-
-                // totalNumPlay 값 입력 작업, 키 : 값
-                detailLists[i].totalNumPlay = total;
-            }).catch(err => {
-                console.log(err);
-            });
-        }
-
-        console.log('2nd crawling Exit');
-
-        // 파일 저장 함수
+        // 파일 저장
         // 날짜 객체 설정
         let date = new Date();
         // 파일 이름 설정 genieChartHour-년-월-일-시간
@@ -156,11 +127,13 @@ app.get('/', (req, res) => {
         // 파일 작성    stringify 함수로 data 작성시 탭 넣어서 보기 편하게 변경
         await fs.writeFile(fileName, JSON.stringify(data, null, '\t'))
         .then(() => {
-            console.log('Genie Fs Write Success');
+            console.log('Genie fs write success');
         })
         .catch((err) => {
             throw err;
         });
+
+        GenieDetailCrawling(fileName);
 
     })();
     
@@ -171,3 +144,72 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
     console.log('server open: ', port);
 });
+
+
+
+// 1차로 크롤링한 지니 차트 파일을 읽어와서 2차 크롤링 작업(세부 페이지)
+function GenieDetailCrawling(fileName) {
+    const axios = require('axios');
+    const fs2 = require('fs');
+    console.log('지니 디테일 크롤링 함수 시작');
+
+    let lists;
+    // JSON 파일 읽어서 detail 링크 불러오기
+    // readFile 파일 읽는 명령어
+    fs2.readFile(fileName, 'utf8', async (err, data) => {
+        if(err) throw err;
+
+        // json.parse로 파싱, 안해주면 JSON 데이터를 불러오지 못한다.
+        const result = JSON.parse(data);
+        // console.log(result.data);
+        console.log(result.data.length);
+        // console.log(result.data[49].detailLink);
+
+        // JSON에 데이터 추가하기
+        lists = result.data;
+        // console.log(lists);
+        // lists[0].test = 'test123';
+        // console.log(lists[0].title);
+        // console.log(lists[0]);
+
+        for (i = 0; i < lists.length; i++) {
+            const url = lists[i].detailLink;
+            // console.log({i, url});
+
+            await axios({
+                method: 'get',
+                url: url,
+                // iconv 디코딩을 사용하려면 arraybuffer 타입으로 받아야 한다.
+                // responseType: "arraybuffer"
+            }).then((response) => {
+                // console.log(response.data);
+
+                const $ = cheerio.load(response.data);
+
+                const list = $("#body-content > div.song-main-infos > div.aside-zone.daily-chart > div.total");
+                const total = $(list).find("div:nth-child(2) > p").text();
+
+                lists[i].totalNumPlay = total;
+                // console.log(lists[i]);
+            }).catch(err => {
+                console.log(err);
+            });
+        }
+        console.log('----------------');
+
+        let resultEnd = {};
+        resultEnd.data = [];
+
+        for(i = 0; i < lists.length; i++) {
+            resultEnd.data.push(lists[i]);
+        }
+        console.log(resultEnd);
+
+        fs2.writeFile(fileName, JSON.stringify(resultEnd, null, '\t'), (err) => {
+            if(err) console.log(err);
+
+            console.log('Genie fs write success');
+
+        });
+    });
+}
