@@ -54,7 +54,7 @@ app.get('/', (req, res) => {
         await lists.each((index, list) => {
             // 각 리스트의 하위 노드중 호텔 이름에 해당하는 요소를 Selector로 가져와 텍스트값을 가져온다.
             const rank = $(list).find("td:nth-child(2) > div > span.rank").text();
-            const rankVariance = $(list).find("td:nth-child(3) > div > span").text();
+            const rankVariance = $(list).find("td:nth-child(3) > div > span").attr('title');
             const albumImg = $(list).find("td:nth-child(4) > div > a > img").attr('src');
             const title = $(list).find("td:nth-child(6) > div > div > div.ellipsis.rank01 > span > a").text();
             const singer = $(list).find("td:nth-child(6) > div > div > div.ellipsis.rank02 > a").text();
@@ -91,7 +91,7 @@ app.get('/', (req, res) => {
         let formatDate = 'melonChartHour' + '-' + date.getFullYear() + '-' + ('00' + (date.getMonth()+1)).slice(-2) + '-' + ('00' + date.getDate()).slice(-2) + '-' + ('00' + date.getHours()).slice(-2);
 
         // 파일 경로 및 이름, 확장자 설정
-        let fileName = './testFolder/'+formatDate+'.json';
+        let fileName = './chart_data/Melon/'+formatDate+'.json';
 
         // 파일 작성    stringify 함수로 data 작성시 탭 넣어서 보기 편하게 변경
         fs.writeFile(fileName, JSON.stringify(data, null, '\t'), (err) => {

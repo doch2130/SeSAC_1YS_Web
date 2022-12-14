@@ -26,6 +26,7 @@ app.use(session({
     // },
     // true이면 https(보안서버)에서만 작동한다.
     // secure: 
+    
 }));
 
 app.get('/', (req, res) => {

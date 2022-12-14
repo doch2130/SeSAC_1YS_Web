@@ -98,7 +98,7 @@ app.get('/', (req, res) => {
         let formatDate = 'youtubeChartHour' + '-' + date.getFullYear() + '-' + ('00' + (date.getMonth()+1)).slice(-2) + '-' + ('00' + date.getDate()).slice(-2) + '-' + ('00' + date.getHours()).slice(-2);
 
         // 파일 경로 및 이름, 확장자 설정
-        let fileName = './testFolder/'+formatDate+'.json';
+        let fileName = './chart_data/Youtube/'+formatDate+'.json';
 
         // 파일 작성    stringify 함수로 data 작성시 탭 넣어서 보기 편하게 변경
         fs.writeFile(fileName, JSON.stringify(data, null, '\t'), (err) => {
