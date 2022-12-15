@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-UW7nqtAfV9h93tGKb9+YoZynF74OcsOt5Irr6Ag4KEbqgcICQv46iB8soY/KJ+Yl" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha384-i61gTtaoovXtAbKjo903+O55Jkn2+RtzHtvNez+yI49HAASvznhe9sZyjaSHTau9" crossorigin="anonymous"></script>
-
+    <script src="./static/js/login2.js"></script>
     <style>
         .row {
             margin: auto;
@@ -26,34 +26,42 @@
     </style>
 
     <script>
-        function test() {
-            $.ajax({
-                type: 'get',
-                url: '/register',
-            success : function(data) {
-                if(true) {
-                    $('#sidebar').html(data);
-                }
-            },
-            error : function() {
-                alert('통신실패!!');
-            }
-            });
+
+
+// 데이터 받아서 인클루드 하는 방법
+
+        
+
+        
+
+        function change(){
+            // 데이터 받아서 인클루드 하는 방법
+            "<% var value = isLogin %>";
+            var html = `<%-include('./view3.ejs', {info: value})%>`;
+
+            console.log(html);
+            const sidebar = document.getElementById('sidebar');
+            sidebar.innerHTML = html;
         }
 
-        function test2() {
+
+
+        function test(){
+            // 데이터 받아서 인클루드 하는 방법
+            "<% var value = isLogin %>";
+            var html = `<%-include('./login2.ejs', {info: value})%>`;
+
+            console.log(html);
             const sidebar = document.getElementById('sidebar');
-            console.log(sidebar);
-            axios({
-                method: 'get',
-                url: '/loginPage'
-            })
-            .then((response) => {
-                console.log(response);
-                sidebar.innerHTML = response.data;
-            });
+            sidebar.innerHTML = html;
         }
-        
+
+        function audioTest() {
+            const audio = document.getElementById('player');
+            console.log('현재시간: ', audio.currentTime);
+            console.log('볼륨: ', audio.volume);
+        }
+
     </script>
 </head>
 <body>
@@ -67,12 +75,15 @@
             <div style="margin-bottom: 1rem;">
                 메인 페이지에 오신 것을 환영합니다.
             </div>
-            <button type="button" class="btn btn-primary" onclick="test()"><a href="#">회원가입</a></button>
-            <button type="button" class="btn btn-primary" onclick="test2()"><a href="#">로그인</a></button>
+            <button type="button" class="btn btn-primary">회원가입</button>
+            <button type="button" class="btn btn-primary" onclick="test();">로그인</button>
             <!-- <button type="button" class="btn btn-primary" onclick="test2()"><a href="#">방명록 조회</a></button> -->
             <audio id="player" controls>
                 <source src="https://docs.google.com/uc?export=open&id=1kEdSvxdsS-kBaI2aPTmUXjbrG28kkhz_" type="audio/mp3">
             </audio>
+
+            <button type="button" onclick="change();">변경</button><br>
+            <button type="button" onclick="audioTest();">오디오 값</button><br>
         </div>
     </div>
 </body>

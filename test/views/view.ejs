@@ -1,0 +1,27 @@
+<html>
+    <head>
+        <script>
+            function change(){
+
+                // 데이터 받아서 인클루드 하는 방법
+                "<% var value = a %>";
+                var html = `<%-include('./view3.ejs', {info: value})%>`;
+
+                console.log(html);
+
+                document.querySelector("div").innerHTML = html;
+            }
+        </script>
+
+    </head>
+    <body>
+        <div id="div" style="background-color: aqua;">
+            <!-- 기본 인클루드 방법 -->
+            <%-include(`./view2.ejs`)%>
+        </div>
+
+        <button type="button" onclick="change();">변경</button><br>
+
+        안녕하세요
+    </body>
+</html>

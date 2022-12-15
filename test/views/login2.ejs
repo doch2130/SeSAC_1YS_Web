@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+    
+    
+    <style>
+        body {
+            background-color: aliceblue;
+        }
+        .row {
+            margin: auto;
+            height: 700px;
+            text-align: center;
+        }
+        a {
+            text-decoration: none;
+            color: white;
+        }
+        .col-12 {
+            margin: auto;
+        }
+        form {
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+            border: 1px solid black;
+            border-radius: 20px;
+            margin: auto;
+            width: 50%;
+            background-color: white;
+        }
+        input {
+            margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="row">
+        <div class="col-12">
+            <form action='/mypage' id="login_form" method="post" >
+                <fieldset>
+                    <legend>로그인</legend>
+                    아이디 : <input type="text" name="id" placeholder="아이디를 입력하세요."> <br>
+                    비밀번호 : <input type="password" name="pw" placeholder="비밀번호를 입력하세요."> <br><br>
+                    <button type="button" class="btn btn-primary" onclick="login()">로그인</button>
+                    <button type="button" class="btn btn-primary"><a href="./register">회원가입 페이지로 이동</a></button>
+                    <br>
+                    <button type="button" class="btn btn-primary" style="margin-top: 0.5rem;"><a href="./">메인 페이지로 이동</a></button>
+                    <br>
+                    <p><%= info %></p>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
