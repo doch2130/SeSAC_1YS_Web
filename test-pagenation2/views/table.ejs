@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-UW7nqtAfV9h93tGKb9+YoZynF74OcsOt5Irr6Ag4KEbqgcICQv46iB8soY/KJ+Yl" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha384-i61gTtaoovXtAbKjo903+O55Jkn2+RtzHtvNez+yI49HAASvznhe9sZyjaSHTau9" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        table, tr, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>rank</th>
+                <th>img</th>
+                <th>title</th>
+                <th>singer</th>
+                <th>duration</th>
+                <th>view</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+        
+            <!-- 100개 너무 많으니까 일단 줄이자 -->
+            <% for (let i = data2.curPage-1; i < data2.page_size; i++) { %>
+            <tr>
+                <td><%= data[i].rank %></td>
+                <td><img src="<%= data[i].albumImg %>"></td>
+                <td><%= data[i].title %></td>
+                <td><%= data[i].singer %></td>
+                <td><%= data[i].chartDuration %></td>
+                <td><%= data[i].views %></td>
+            </tr>
+            <% } %>
+
+            <tr>
+                <td colspan="6" id="pageBtn">
+                    <% for (let j = data2.startPage; j <= data2.totalPage; j++) { %>
+                        <button onclick="test('<%= j %>')">[ <%= j %> ]</button>
+                    <% } %>
+                </td>
+            </tr>
+        </tbody>
+        <div>
+
+        </div>
+    </table>
+</body>
+<script>
+    const pageBtn = document.getElementById('pageBtn');
+    const a = document.createElement('a');
+    const btn = document.createElement('button');
+    const tr = document.createElement('tr');
+    const td = document.createElement('td');
+    const tbody = document.querySelector('tbody');
+    const div = document.querySelector('tbody');
+
+    // btn.attr('type', 'button');
+    // var jbBtnText = document.createTextNode( 'Click' );
+    // btn.appendChild( jbBtnText );
+    // document.body.appendChild( btn );
+
+    function test(num) {
+        console.log('num: ', num);
+        const url = "?page="+num;
+        console.log('url: ', url);
+        axios({
+            method: 'get',
+            url: '/table',
+            params: {
+                url: url,
+                url2: 'page='+num,
+                num: num
+            }
+        })
+        .then((response) => {
+            const btnText = document.createTextNode('1');
+            const btnAttr = document.createAttribute('onclick', 'test()');
+            btn.appendChild(btnText);
+            pageBtn.append(btn);
+        })
+    }
+
+    test();
+</script>
+</html>
