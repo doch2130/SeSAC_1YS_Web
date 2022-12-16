@@ -19,16 +19,6 @@
     </style>
 </head>
 <body>
-    <div class="row">
-        <div class="col-2">              
-            <select class="form-select form-select-sm" aria-label=".form-select-sm example" onchange="viewCountChange()">
-                <option value="10">10개 보기</option>
-                <option value="25">25개 보기</option>
-                <option value="50">50개 보기</option>
-                <option value="100" selected>100개 보기</option>
-            </select>
-        </div>
-    </div>
     <table>
         <thead>
             <tr>
@@ -84,10 +74,9 @@ function dataMove() {
 
 
 
-// select 태그에서 기본 설정 값 100 가져오기
-// viewCount Change 함수는 밑에 생성
-let viewCount = document.querySelector('select').value;
-console.log(viewCount);
+// 뷰 카운트 임의 설정
+let viewCount = 10;
+
 
 
 // 스크립트 데이터로 테이블 출력하는 함수
@@ -116,25 +105,26 @@ function tableData(data, viewCount, btnId) {
 // tableData에서 사용하기 위한 변수
 const ejsData = dataMove();
 // 1번 실행해서 데이터 출력
-// 초기 실행이라서 btnId 변수 대신에 1값 고정
+// 초기 실행이라서 viewCount도 100 고정이지만 테스트를 위해 변수로 진행
+// 초기 실행이라서 btnId 변수 대신에 0값 고정
 tableData(ejsData, viewCount, 1);
 
 
 
+
+
 function pageAlgo(total, bottomSize, listSize, cursor){
-    // total = 총 갯수
-    // bottomSize = 하단 버튼 개수
-    // listSize = 화면에서 보여줄 크기
-    // cursor = 현재 나의 페이지
+    //total = 총 갯수
+    //bottomSize = 하단크기
+    //listSize = 화면에서 보여줄 크기
+    //cursor = 현재 나의 페이지
 
     //한 화면에 보여줄 갯수에서 구한 하단 총 갯수 
     let totalPageSize = Math.ceil(total / listSize);
 
     let firstBottomNumber, lastBottomNumber;
 
-    // 현재 페이지 버튼 % 하단 버튼 개수 == 0 인 경우 현재 버튼이 출력이 되지 않는 현상 확인
-    // 3번 버튼을 누르면 하단에 4, 5, 6 버튼만 보이는 현상
-    // if 조건문으로 출력되게 변경
+    
     if(cursor%bottomSize == 0 ) {
         //하단 최초 숫자
         firstBottomNumber = cursor - cursor % bottomSize;
@@ -166,13 +156,24 @@ function pageAlgo(total, bottomSize, listSize, cursor){
 
 
 
-
-// 280개의 데이터, 하단에는 20개씩, 1개화면에는 10개, 지금 나의페이지는 21
+//total = 총 갯수
+//bottomSize = 하단크기
+//listSize = 화면에서 보여줄 크기
+//cursor = 현재 나의 페이지
+//280개의 데이터, 하단에는 20개씩, 1개화면에는 10개, 지금 나의페이지는 21
 // let info = pageAlgo(280, 10, 10, 1);
-// 페이지 버튼 작업을 위한 1차 작업 초기 실행행
 let info = pageAlgo(ejsData.length, 3, viewCount, 1);
 
+// total = data.length
+// bottomSize = 5 고정
+// listSize = 10 으로 테스트, 초기값 100, selectValue에 따라 변동 예정
+// cursor = 초기값 1, 하단 button에다가 arg 값 넣어서 전달
 
+//실제 출력하는 방법 샘플
+// for(let i = info.firstBottomNumber ; i <= info.lastBottomNumber; i++){
+//     // 버튼 출력하다가 i가 현재 페이지랑 값이 같으면 현재 페이지 표시 용 태그 출력
+//     i == info.cursor ? console.log(`<span>cur : ${i}</span>`) : console.log(`<span>${i}</span>`)
+// }
 
 function pageBtn(info) {
     const tfoot = document.querySelector('tfoot');
@@ -190,9 +191,14 @@ function pageBtn(info) {
             <a class="page-link">pre</a>
         </li>`;
     }
-
+    // temp += `<ul class="pagination">
+    //     <li class="page-item" onclick="pageBtnMove('1', ${viewCount})">
+    //         <a class="page-link">pre</a>
+    //     </li>`;
     for (let i=info.firstBottomNumber; i <= info.lastBottomNumber; i++) {
-        // 버튼 출력하다가 i가 현재 페이지랑 값이 같으면 현재 페이지 표시용 active 클래스 추가
+        // 버튼 출력하다가 i가 현재 페이지랑 값이 같으면 현재 페이지 표시 용 태그 출력
+        // i == info.cursor ? console.log(`<span>cur : ${i}</span>`) : console.log(`<span>${i}</span>`);
+
         if (i == info.cursor) {
             temp += `<li class='page-item active' onclick="pageBtnMove('${i}', ${viewCount})"><a class="page-link">${i}</a></li>`;
         } else {
@@ -211,10 +217,13 @@ function pageBtn(info) {
             </li>
         </ul>`;
     }
+    // temp += `<li class="page-item" onclick="pageBtnMove('${info.lastBottomNumber}', ${viewCount})">
+    //             <a class="page-link">next</a>
+    //         </li>
+    //     </ul>`;
     tfoot.innerHTML = temp;
 }
 
-// 초기 실행 함수
 pageBtn(info);
 
 
@@ -229,31 +238,8 @@ function pageBtnMove(btnId, viewCount) {
     // 페이지 하단 번호 변경 작업
     let info = pageAlgo(ejsData.length, 3, viewCount, btnId);
     pageBtn(info);
-
-    // 페이지 상단으로 이동
-    window.scrollTo(0,0);
 }
 
-
-
-
-// viewCount Change 함수
-function viewCountChange() {
-    viewCount = document.querySelector('select').value;
-    console.log(viewCount);
-
-    // 페이지 출력 갯수 수정 후 새로운 데이터 출력
-    // btnId = 1은 데이터 갱신 이후 1페이지로 보여지기 위한 작업
-    tableData(ejsData, viewCount, 1);
-
-    // 페이지 하단 번호 변경 작업
-    // btnId = 1은 데이터 갱신 이후 1페이지로 보여지기 위한 작업
-    let info = pageAlgo(ejsData.length, 3, viewCount, 1);
-    pageBtn(info);
-
-    // 페이지 상단으로 이동
-    window.scrollTo(0,0);
-}
 
 </script>
 </html>

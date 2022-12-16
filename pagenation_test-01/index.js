@@ -12,11 +12,11 @@ app.get('/', (req, res) => {
 	res.render('index');
 });
 
-app.get('/test', (req, res) => {
+app.get('/table', (req, res) => {
 	youtubeFileRead((data) => {
         if(data) {
             // 파일에서 읽어온 데이터를 전달
-            res.render('test', {data: data});
+            res.render('table', {data: data});
         } else {
             res.send('false');
         }
