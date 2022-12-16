@@ -27,14 +27,78 @@
                 <th>view</th>
             </tr>
         </thead>
-
         <tbody>
-
+            <!-- 차트 데이터 자리 -->
         </tbody>
-
+        <tfoot>
+            <!-- 페이지 번호 -->
+        </tfoot>
     </table>
 </body>
 <script>
+
+// ejs에서 받은 json 파일 데이터를 사용하기 편리하기 위해 script 데이터로 변환하는 함수
+function dataMove() {
+    let temp = [];
+    let obj = {};
+    let title, rank, lastWeekRank, albumImg, singer, chartDuration, views, link;
+    '<% for(let i = 0; i < 100; i++) { %>'
+        title = '<%= data[i].title %>';
+        rank = '<%= data[i].rank %>';
+        lastWeekRank = '<%= data[i].lastWeekRank %>';
+        albumImg = '<%= data[i].albumImg %>';
+        singer = '<%= data[i].singer %>';
+        chartDuration = '<%= data[i].chartDuration %>';
+        views = '<%= data[i].views %>';
+        link = '<%= data[i].link %>';
+
+            obj = {
+            "title": title,
+            "rank": rank,
+            "lastWeekRank": lastWeekRank,
+            "albumImg": albumImg,
+            "singer": singer,
+            "chartDuration": chartDuration,
+            "views": views,
+            "link": link,
+        }
+        temp.push(obj);
+    '<% } %>'
+
+    console.log(temp);
+    return temp;
+}
+
+
+
+// 스크립트 데이터로 테이블 출력하는 함수
+function tableData(data) {
+    const tbody = document.querySelector('tbody');
+    let temp = '';
+    for(let i=0; i < data.length; i++) {
+        // tr.innerHTML = `
+        temp += `<tr>
+            <td id='${i}'>${data[i].rank}</td>
+            <td><img src='${data[i].albumImg}'></td>
+            <td>${data[i].title}</td>
+            <td>${data[i].singer}</td>
+            <td>${data[i].chartDuration}</td>
+            <td>${data[i].views}</td>
+            </tr>`;
+    }
+    tbody.innerHTML = temp;
+}
+
+// 1번 실행해서 데이터 저장
+// tableData에서 사용하기 위한 변수
+const ejsData = dataMove();
+// 1번 실행해서 데이터 출력
+tableData(ejsData);
+
+
+
+
+
 function pageAlgo(total, bottomSize, listSize, cursor){
     //total = 총 갯수
     //bottomSize = 하단크기
@@ -59,8 +123,15 @@ function pageAlgo(total, bottomSize, listSize, cursor){
     }
 }
 
+
+
+//total = 총 갯수
+//bottomSize = 하단크기
+//listSize = 화면에서 보여줄 크기
+//cursor = 현재 나의 페이지
 //280개의 데이터, 하단에는 20개씩, 1개화면에는 10개, 지금 나의페이지는 21
-let info = pageAlgo(280, 20, 10, 21)  
+// let info = pageAlgo(280, 10, 10, 1);
+let info = pageAlgo(ejsData.length, 5, 100, 1);
 
 // total = data.length
 // bottomSize = 5 고정
@@ -73,21 +144,30 @@ for(let i = info.firstBottomNumber ; i <= info.lastBottomNumber; i++){
     i == info.cursor ? console.log(`<span>cur : ${i}</span>`) : console.log(`<span>${i}</span>`)
 }
 
+function pageBtn(info) {
+    const tfoot = document.querySelector('tfoot');
+    let temp = `<ul class="pagination">
+        <li class="page-item">
+            <a class="page-link"><<</a>
+        </li>`;
+    for (let i=info.firstBottomNumber; i <= info.lastBottomNumber; i++) {
+        // 버튼 출력하다가 i가 현재 페이지랑 값이 같으면 현재 페이지 표시 용 태그 출력
+        i == info.cursor ? console.log(`<span>cur : ${i}</span>`) : console.log(`<span>${i}</span>`);
 
-let test = [];
-let title, rank, obj;
-'<% for(let i = 0; i < 100; i++) { %>'
-    title = '<%= data[i].title %>';
-    rank = '<%= data[i].rank %>';
-
-    obj = {
-        "title": title,
-        "rank": rank
+        if (i == info.cursor) {
+            temp += `<li class='page-item active'><a class="page-link">${i}</a></li>`;
+        } else {
+            temp += `<li class='page-item'><a class="page-link">${i}</a></li>`;
+        }
     }
-    test.push(obj);
-'<% } %>'
+    temp += `<li class="page-item">
+                <a class="page-link">>></a>
+            </li>
+        </ul>`;
+    tfoot.innerHTML = temp;
+}
 
-console.log(test);
+pageBtn(info);
 
 </script>
 </html>
