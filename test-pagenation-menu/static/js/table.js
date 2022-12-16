@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', function()
 {
     // select 태그에서 기본 설정 값 100 가져오기
     // viewCount Change 함수는 밑에 생성
-    let viewCount = document.querySelectorAll('select').value;
+    let viewCount = document.querySelectorAll('select')[1].value;
     // console.log(viewCount);
 
     // 스크립트 데이터로 테이블 출력하는 함수
@@ -159,7 +159,7 @@ window.addEventListener('DOMContentLoaded', function()
     // viewCount Change 함수
     // 페이지 몇 개 보기 변경 시 실행되는 함수
     window.viewCountChange = function () {
-        viewCount = document.querySelector('select').value;
+        viewCount = document.querySelectorAll('select')[1].value;
         // console.log(viewCount);
 
         // 페이지 출력 갯수 수정 후 새로운 데이터 출력
@@ -175,6 +175,12 @@ window.addEventListener('DOMContentLoaded', function()
         window.scrollTo(0,0);
     }
 
+
+    // 시간 변경 함수
+    window.dateHourChange = function () {
+        // 여기부터 작성
+        console.log('dateHour');
+    }
 });
 
 

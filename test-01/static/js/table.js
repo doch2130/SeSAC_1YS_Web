@@ -7,7 +7,7 @@ window.addEventListener('DOMContentLoaded', function()
 {
     // select 태그에서 기본 설정 값 100 가져오기
     // viewCount Change 함수는 밑에 생성
-    let viewCount = document.querySelectorAll('select').value;
+    let viewCount = document.querySelector('select').value;
     // console.log(viewCount);
 
     // 스크립트 데이터로 테이블 출력하는 함수
