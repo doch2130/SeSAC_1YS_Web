@@ -50,6 +50,10 @@
 </body>
 <script>
 
+
+// 처음 페이지 접속 및 새로고침 후 페이지 상단으로 이동
+window.scrollTo(0,0);
+
 // ejs에서 받은 json 파일 데이터를 사용하기 편리하기 위해 script 데이터로 변환하는 함수
 function dataMove() {
     let temp = [];
@@ -221,7 +225,7 @@ pageBtn(info);
 
 
 function pageBtnMove(btnId, viewCount) {
-    console.log(btnId);
+    // console.log(btnId);
 
     // 페이지 번호 클릭 후 새로운 데이터 출력
     tableData(ejsData, viewCount, btnId);
@@ -240,7 +244,7 @@ function pageBtnMove(btnId, viewCount) {
 // viewCount Change 함수
 function viewCountChange() {
     viewCount = document.querySelector('select').value;
-    console.log(viewCount);
+    // console.log(viewCount);
 
     // 페이지 출력 갯수 수정 후 새로운 데이터 출력
     // btnId = 1은 데이터 갱신 이후 1페이지로 보여지기 위한 작업
