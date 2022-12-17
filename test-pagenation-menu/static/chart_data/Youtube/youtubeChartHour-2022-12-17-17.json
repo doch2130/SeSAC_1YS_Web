@@ -1,16 +1,6 @@
 {
 	"data": [
 		{
-			"title": "Event Horizon (사건의 지평선)",
-			"rank": "1",
-			"lastWeekRank": "지난주 #1",
-			"albumImg": "https://i.ytimg.com/vi/j1uXcHwLhHM/mqdefault.jpg",
-			"singer": "윤하",
-			"chartDuration": "34주",
-			"views": "5.27M",
-			"link": "https://www.youtube.com/watch?v=j1uXcHwLhHM"
-		},
-		{
 			"title": "Dreamers (feat. Fahad Al Kubaisi)",
 			"rank": "2",
 			"lastWeekRank": "지난주 #3",
@@ -19,6 +9,16 @@
 			"chartDuration": "3주",
 			"views": "3.19M",
 			"link": "https://www.youtube.com/watch?v=IwzkfMmNMpM"
+		},
+		{
+			"title": "Event Horizon (사건의 지평선)",
+			"rank": "1",
+			"lastWeekRank": "지난주 #1",
+			"albumImg": "https://i.ytimg.com/vi/j1uXcHwLhHM/mqdefault.jpg",
+			"singer": "윤하",
+			"chartDuration": "34주",
+			"views": "5.27M",
+			"link": "https://www.youtube.com/watch?v=j1uXcHwLhHM"
 		},
 		{
 			"title": "ANTIFRAGILE",

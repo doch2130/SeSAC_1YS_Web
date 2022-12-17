@@ -1,36 +1,6 @@
 {
 	"data": [
 		{
-			"title": "Event Horizon (사건의 지평선)",
-			"rank": "1",
-			"lastWeekRank": "지난주 #1",
-			"albumImg": "https://i.ytimg.com/vi/j1uXcHwLhHM/mqdefault.jpg",
-			"singer": "윤하",
-			"chartDuration": "34주",
-			"views": "5.27M",
-			"link": "https://www.youtube.com/watch?v=j1uXcHwLhHM"
-		},
-		{
-			"title": "Dreamers (feat. Fahad Al Kubaisi)",
-			"rank": "2",
-			"lastWeekRank": "지난주 #3",
-			"albumImg": "https://i.ytimg.com/vi/IwzkfMmNMpM/mqdefault.jpg",
-			"singer": "정국",
-			"chartDuration": "3주",
-			"views": "3.19M",
-			"link": "https://www.youtube.com/watch?v=IwzkfMmNMpM"
-		},
-		{
-			"title": "ANTIFRAGILE",
-			"rank": "3",
-			"lastWeekRank": "지난주 #2",
-			"albumImg": "https://i.ytimg.com/vi/pyf8cbqyfPs/mqdefault.jpg",
-			"singer": "르세라핌",
-			"chartDuration": "8주",
-			"views": "3.13M",
-			"link": "https://www.youtube.com/watch?v=pyf8cbqyfPs"
-		},
-		{
 			"title": "Hype Boy",
 			"rank": "4",
 			"lastWeekRank": "지난주 #5",
@@ -321,7 +291,7 @@
 			"link": "https://www.youtube.com/watch?v=PS0qkO5qty0"
 		},
 		{
-			"title": "도깨비불 Illusion",
+			"title": "Illusion",
 			"rank": "33",
 			"lastWeekRank": "지난주 #30",
 			"albumImg": "https://i.ytimg.com/vi/vJFeoVNu3Vo/mqdefault.jpg",

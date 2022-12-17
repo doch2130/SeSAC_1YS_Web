@@ -15,19 +15,38 @@ window.addEventListener('DOMContentLoaded', function()
         const tbody = document.querySelector('tbody');
         let temp = '';
         
-        // for(let i=0; i < data.length; i++) {
-        // viewCount에 따라 데이터 출력 실행
-        // btnId = 페이지 하단의 버튼에 따라서 페이지 데이터 호출,  스타트 번호 페이지번호 * 1페이지 표시 개수
-        for(let i=btnId*viewCount-viewCount; i < btnId*viewCount; i++) {
-            // tr.innerHTML = `
-            temp += `<tr>
-                <td class="table-dark">${data[i].rank}</td>
-                <td class="table-dark"><img src='${data[i].albumImg}'></td>
-                <td class="table-dark">${data[i].title}</td>
-                <td class="table-dark">${data[i].singer}</td>
-                <td class="table-dark">${data[i].chartDuration}</td>
-                <td class="table-dark">${data[i].views}</td>
-                </tr>`;
+
+        // 데이터가 딱 맞게 viewCount에 나눠지는 데이터면 정상 출력이 되지만
+        // 99개 처럼 나머지가 생기는 경우에는 데이터 부족으로 에러 호출 확인
+        // if문 설정하여 btnId*viewCount가 data.length 보다 크면 조건문을 다르게 실행하도록 분기
+        if(btnId*viewCount > data.length) {
+            // viewCount에 따라 데이터 출력 실행
+            // btnId = 페이지 하단의 버튼에 따라서 페이지 데이터 호출,  스타트 번호 페이지번호 * 1페이지 표시 개수
+            for(let i=btnId*viewCount-viewCount; i < data.length; i++) {
+                // tr.innerHTML = `
+                temp += `<tr>
+                    <td class="table-dark">${data[i].rank}</td>
+                    <td class="table-dark"><img src='${data[i].albumImg}'></td>
+                    <td class="table-dark">${data[i].title}</td>
+                    <td class="table-dark">${data[i].singer}</td>
+                    <td class="table-dark">${data[i].chartDuration}</td>
+                    <td class="table-dark">${data[i].views}</td>
+                    </tr>`;
+            }
+        } else {
+            // viewCount에 따라 데이터 출력 실행
+            // btnId = 페이지 하단의 버튼에 따라서 페이지 데이터 호출,  스타트 번호 페이지번호 * 1페이지 표시 개수
+            for(let i=btnId*viewCount-viewCount; i < btnId*viewCount; i++) {
+                // tr.innerHTML = `
+                temp += `<tr>
+                    <td class="table-dark">${data[i].rank}</td>
+                    <td class="table-dark"><img src='${data[i].albumImg}'></td>
+                    <td class="table-dark">${data[i].title}</td>
+                    <td class="table-dark">${data[i].singer}</td>
+                    <td class="table-dark">${data[i].chartDuration}</td>
+                    <td class="table-dark">${data[i].views}</td>
+                    </tr>`;
+            }
         }
         tbody.innerHTML = temp;
     }
@@ -149,9 +168,6 @@ window.addEventListener('DOMContentLoaded', function()
         // 페이지 하단 번호 변경 작업
         let info = pageAlgo(ejsData.length, 3, viewCount, btnId);
         pageBtn(info);
-
-        // 페이지 상단으로 이동
-        window.scrollTo(0,0);
     }
 
     // 외부 JS 파일에서 작성하면 ejs 파일의 태그에서 이벤트를 인식 못하는 에러가 발생한다.
@@ -170,17 +186,23 @@ window.addEventListener('DOMContentLoaded', function()
         // btnId = 1은 데이터 갱신 이후 1페이지로 보여지기 위한 작업
         let info = pageAlgo(ejsData.length, 3, viewCount, 1);
         pageBtn(info);
-
-        // 페이지 상단으로 이동
-        window.scrollTo(0,0);
     }
 
 
     // 시간 변경 함수
     window.dateHourChange = function () {
-        // 여기부터 작성
-        console.log('dateHour');
+        // console.log('dateHour Start');
+        // 시간 가져오기
+        const viewTime = document.querySelectorAll('select')[0].value;
+        // console.log(viewTime);
+        const url = '/test2/'+viewTime;
+        axios({
+            method: 'get',
+            url: url
+        })
+        .then((response) => {
+            // console.log('dateHourChange End');
+            document.location.href = url;
+        });
     }
 });
-
-
