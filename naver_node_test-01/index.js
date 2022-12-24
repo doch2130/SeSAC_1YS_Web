@@ -34,22 +34,23 @@ function test() {
 
     var api_url = 'https://naveropenapi.apigw.ntruss.com/datalab/v1/search';
     var request_body = {
-    startDate: '2022-10-01',
-    endDate: '2022-11-30',
+    startDate: '2022-01-01',
+    endDate: '2022-12-01',
     timeUnit: 'month',
     keywordGroups: [
         {
-        groupName: '한글',
-        keywords: ['한글', 'korean'],
+        groupName: '멜론',
+        keywords: ['멜론', 'melon', '멜론 차트', 'music', '뮤직 비디오'],
         },
         {
-        groupName: '영어',
-        keywords: ['영어', 'english'],
+        groupName: '지니',
+        keywords: ['지니', 'genie', '지니 차트', 'music', '뮤직 비디오'],
+        },
+        {
+        groupName: '유튜브 뮤직',
+        keywords: ['유튜브 뮤직', 'youtube music', '유튜브 뮤직 차트', 'music', '뮤직 비디오'],
         },
     ],
-    device: 'pc',
-    ages: ['1', '2'],
-    gender: 'f',
     };
 
     request.post(
