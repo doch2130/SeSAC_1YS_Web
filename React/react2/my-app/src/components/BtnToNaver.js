@@ -1,4 +1,5 @@
-import React, {Component} from 'react';
+// import React, {Component} from 'react';
+import {Component} from 'react';
 
 class BtnToNaver extends Component {
     render() {
