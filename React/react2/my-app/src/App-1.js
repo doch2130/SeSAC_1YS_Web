@@ -49,6 +49,7 @@ function App() {
       {/* 함수의 경우 외부에서 정의 후 ()를 사용하면 바로 실행된다. */}
       {/* <span onClick={ printConsole() }>클릭</span> */}
 
+
       {/* StrictMode를 강제하기 때문에 에러가 발생하면 페이지에 에러 부분이 표시된다. */}
       {/* <span onClick={
         let num = 10;
