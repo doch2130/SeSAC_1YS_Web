@@ -1,15 +1,15 @@
-import logo from './logo.svg';
 import './App.css';
+import ImgComponent from './components/ImgComponent';
+import BtnToNaver from './components/BtnToNaver';
 
 function App() {
-  const divStyle = { marginTop: "32px", backgroundColor: "skyblue" };
-  const helloStr = "Hello, first exercise";
   
   return (
     <div className="App">
-      <div style={ divStyle } onClick={() => {
-        alert('클릭 됨');
-      }}>{ helloStr }</div>
+      <ImgComponent />
+      <div>
+        <BtnToNaver />
+      </div>
     </div>
   );
 }
