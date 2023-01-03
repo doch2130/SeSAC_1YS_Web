@@ -1,2 +1,102 @@
 2023-01-03 화요일
 
+React JS
+- 반응형 자바스크립트
+
+
+Wappalyzer
+- 크롬 확장 도구
+- 사이트에서 사용하는 코드를 볼 수 있다.
+
+JSX
+- JavaScript XML
+- React에서 사용한다.
+- HTML 문서 구조를 JS에서도 사용이 가능하며, JS 내부에서도 HTML을 짜듯 코드 구성이 가능해진다.
+- 단, Babel 이라는 컴파일러가 필요하다.
+
+
+Babel
+- JS의 컴파일러
+- ES6 출시 이후 브라우저에서 ES6 지원을 하지 않아서 ES6 문법과 ES5 문법의 충돌때문에 사용하였으며, ES6 문법을 ES5 문법으로 변경해주는 기능으로 사용하였다.
+- 브라우저의 업데이트 이후에는 추가적인 언어들에 대한 컴파일러 역하을 하게 되었으며, 대표로 React가 있다.
+
+
+
+기본 세팅
+Create React App
+
+최소 사양
+Node 14.0.0 이상
+npm 5.6 이상
+
+명령어
+npx create-react-app my-app
+cd my-app
+npm start
+- 기본 포트 3000번을 사용한다.
+
+
+NPX
+- Node Package eXute
+- Node 실행을 위한 명령어이며, npm과는 달리 최신 버전의 패키지를 임시로 설치해서 실행하는 용도로 사용된다.
+- NPM에 대한 의존성이 없어서 다른 Node.js 버전으로 이동도 가능하고 좀 더 자유로운 코드 공유가 가능하다.
+- 한번만 임시로 설치해서 해당 Node를 실행시키고 사라진다.
+- 1번만 사용하는 경우에 주로 사용한다.
+
+NPM
+- 패키지 모듈 설치 및 관리
+
+
+public/index.html
+-React의 캔버스를 제공하는 역할이라고 보면 된다.
+
+
+src/index.js
+- <React.StrictMode>
+- 코드를 무조건 2번 실행시켜준다.
+- 테스트로 1번 실행하고 1번 더 실행, 총 2번 실행시킨다.
+- 이 Mode 때문에 콘솔에서 2번 찍히는 경우도 있다.
+
+
+src/App.js
+- 실제 작동하는 코드이며, 개발 시 작성하는 파일이다.
+
+
+
+*Tip*
+HTML 요소는 return 의 () 안에 그대로 써주면 되고, JS 를 쓰고 싶으면 {} 안에 써주시면 됩니다!
+
+ex)
+function App() {
+	const str = 'Hello, JSX World!'
+	return (
+		<div className="App">
+		{str}
+		</div>
+	);
+}
+
+
+
+**
+폴더명을 대문자로 만들면 Error가 발생하는 경우가 있는데 package.json 파일에서 저장을 해주면 정상 작동한다.
+단, 코드 변경할 때마다 저장을 하는 작업을 해야한다.
+=> 마음 편하게 소문자로 폴더 새로 만드는게 제일 좋다.
+
+
+
+Babel 컴파일러 작동 시 기존 HTML과 JS의 중복되는 이름으로 인하여 몇가지 *규칙*이 필요하다.
+!!!규칙 필요!!!
+HTML
+class => className
+
+HTML, CSS
+kebob-case to camelCase
+ex) kebob-case => some-Name
+ex) camelCase => someName
+
+- 기존 HTML에서 style 또는 클래스를 정할 때 kebab-case 를 주로 사용하 였지만 JSX 에서는 반드시 camelCase 로 사용을 해주셔야 한다.
+- JS로 번역할 때 ‘–’ 는 빼기의 의미를 가지고 있어, 번역 시 오류가 발생할 수 있다.
+
+
+
