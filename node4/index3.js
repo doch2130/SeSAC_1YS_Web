@@ -8,11 +8,6 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
-
-// const upload = multer({
-//     dest : 'uploads/'
-// });
-
 app.use('/uploads', express.static('uploads'));
 
 const upload = multer({
@@ -38,7 +33,6 @@ app.post('/upload', upload.single('userfile'), (req, res) => {
     console.log(req.body);
     res.render('result3', {data: req.file});
 });
-
 
 app.listen(port, () => {
     console.log('server open : ', port);

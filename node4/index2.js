@@ -8,19 +8,16 @@ app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
-// 파일이 들어갈 경로를 설정해줘야 함, multer 객체를 사용하면 된다.
-// 경로에 필요한 폴더도 생성해줘야 한다.
-// const upload = multer({
-//     dest : 'uploads/'
-// });
-
-// 경로 + 상세 설정
+// 상세 설정 작업
 const upload = multer({
     // diskStorage => 하드 디스크에 저장할 때 사용하는 함수
     storage: multer.diskStorage({
+        // 저장 경로 설정
+        // 폴더도 생성해줘야 한다.
         destination(req, file, done) {
             done(null, 'uploads/');
         },
+        // 파일 이름 설정
         filename(req, file, done) {
             console.log(req.body);
             const ext = path.extname(file.originalname);
@@ -43,7 +40,7 @@ app.get('/file', (req, res) => {
 // <input type="file" name="userfile"> .single('form 의 name과 같아야 한다')
 app.post('/upload', upload.single('userfile'), (req, res) => {
     console.log(req.file);
-    console.log(req.body);
+    console.log(req.body.name2);
     res.send('upload complete');
 });
 // upload.single() 함수는 multer의 내장 함수로 이름을 받아서 업로드까지 하고 next() 함수까지 실행해주는 역할을 한다.
@@ -68,25 +65,6 @@ app.post('/upload-fields', upload.fields([{name: 'userfile1'}, {name: 'userfile2
     console.log(req.body);
     res.send('upload complete fields');
 });
-
-
-app.get('/', test, test2, (req, res) => {
-    console.log('req.name : ', req.name);
-    console.log('Hello');
-    res.send('Hello');
-});
-
-function test(req, res, next) {
-    req.name = '12345';
-    console.log(req.query);
-    console.log('test 함수입니다.');
-    next();
-}
-
-function test2(req, res, next) {
-    console.log('test2 함수입니다.');
-    next();
-}
 
 app.listen(port, () => {
     console.log('server open : ', port);

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Axios 실습</title>
     <!-- Axios CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" integrity="sha384-NAifrtbJwcoqjYqhfos40lsRt+O6K5TClF4FjW02ZswKdcD2H3gZN3KA1I3ZxYEM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     
     <script>
         function sendGet() {
@@ -26,14 +26,10 @@
             .then(function(res) {
                 console.log(res.data);
                 alert('이름은 ' + res.data.name + ' / 성별은 ' + res.data.gender + ' / 생일은 ' + res.data.birth);
-                // alert('성별은 ' + res.data.gender);
-                // alert('생일은 ' + res.data.birth);
-                // alert(res.data.interest);
             });
         }
 
     </script>
-    
 </head>
 <body>
     <form action="/form" method="get" id="form_info">
@@ -74,7 +70,6 @@
         </fieldset>
         
         <br>
-        <!-- <button type="submit" onclick="sendGet()">회원가입</button> -->
         <button type="button" onclick="sendGet()">회원가입</button>
     </form>
 </body>

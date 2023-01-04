@@ -24,7 +24,6 @@ const upload = multer({
     })
 });
 
-
 app.get('/', (req, res) => {
     res.render('file5');
 });
@@ -39,4 +38,3 @@ app.post('/upload', upload.single('userfile'), (req, res) => {
 app.listen(port, () => {
     console.log('server open : ', port);
 });
-
