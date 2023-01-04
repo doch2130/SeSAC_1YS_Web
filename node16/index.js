@@ -34,8 +34,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/setSession', (req, res) => {
-    req.session.user = 'id';
+    req.session.user = 'test';
     // req.session.id는 사용금지라고 함
+
+    console.log('세션 : ', req.session.user);
     res.send('세션 생성 성공');
     // 세션은 서버에 저장되지만 req 객체를 타는 이유는 클라이언트마다 세션ID를 가지고 있는데,
     // 서버는 세션ID를 구분해야 하기 때문에 클라이언트가 가지고 있는 고유의 세션ID를 가지고 오기 위해서 req 객체를 사용한다.

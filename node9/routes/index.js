@@ -6,6 +6,4 @@ router.get('/', controller.visitor);
 
 router.post('/register', controller.register);
 
-
-
 module.exports = router;

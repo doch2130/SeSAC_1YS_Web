@@ -1,4 +1,3 @@
-// const Visitor = require("../model/Visitor");
 // const { Visitor } = require('../model/index');
 // index 파일이라서 model 까지만 접근한다.
 // db = {
