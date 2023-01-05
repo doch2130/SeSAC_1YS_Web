@@ -245,7 +245,6 @@ module.exports = {
   rules: {
     'linebreak-style': 0,
     'no-console': 'off',
-    'comma-dangle': 1,
     parser: 'babel-eslint',
   },
 };
