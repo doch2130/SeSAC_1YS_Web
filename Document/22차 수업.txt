@@ -1,0 +1,282 @@
+2023-01-05 목요일
+
+npx create-react-app my-app
+
+
+MERN Stack
+- Best for Developing Web Apps
+   MongoDB
+   Express.js
+   React.js
+   Node.js
+
+
+1. Formatting
+Code의 스타일을 통일시켜준다.
+문법이 아닌 코드의 스타일을 통일 시켜줘서 가독성을 높이고 버그를 예방한다.
+Prettier를 사용하여 관리할 수 있다.
+
+
+1.5 React App 설치
+npx create-react-app my-app
+
+
+2. Prettier 설치
+cd my-app
+npm install --save-dev prettier
+
+--save : 패키지 모듈에 추가
+--save-dev : 개발할때만 사용, 빌드 & 배포시 패키지 포함 X
+
+
+3. VsCode 확장 프로그램 설치
+- Prettier - Code formatter v9.10.3
+
+
+4. Prettie 설정
+my-app/.prettierrc 파일 생성 (자동으로 JSON 확장자로 설정됨)
+
+내용 작성
+// ;(세미콜론) 사용, '(따옴표) 사용
+{
+    "semi": true,
+    "singleQuote": true
+}
+
+
+5. VSCode 설정
+my-app/.vscode 폴더 생성
+.vscode 내부에 settings.json 파일 생성
+
+my-app/.vscode/settings.json
+
+내용 작성
+{
+    "[javascript]": {
+        "editor.maxTokenizationLineLength": 2500,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
+
+
+6. 테스트
+main.js 생성
+console.log("asdsasd") 입력 후 저장
+console.log('asdsasd'); 로 자동 변경되는지 확인
+
+
+6-1. 적용 오류 원인
+- 프로젝트가 들어있는 해당 폴더를 Open한 후에 적용해야 수동으로 설정 작업을 안해도 적용이 된다.
+react/my-app 폴더 구성인 경우
+Open에서 my-app을 선택해줘야 한다.
+
+
+7. 수동 설정 방법
+File - Preferences - Settings
+검색 창 : format
+
+Editor: Format On Save 체크
+검색 창 : Default format
+
+Editor: Default Formatter => Prettier - Code formatter 선택
+
+- 해당 폴더가 아닌 전체 적용으로 진행 시 다른 폴더에도 영향을 주므로 주의가 필요하다.
+- 설정 값으로 지정되지는 않지만, Prettier 기본 설정 값을 따라가는 것으로 판단된다.
+
+
+8. Linting
+Formatting에 가깝지만 더 많은 규약과 규율을 검사해주는 작업이다.
+웹 개발에서는 Airbnb에서 사용하는 Linting 규율을 많이 사용한다.
+
+9. ESLint 설치
+cd my-app
+npm install --save-dev eslint
+
+10. VSCode 확장 프로그램 설치
+ESLint v2.2.6
+
+11 .eslintrc.js 생성
+my-app/.exlintrc.js
+
+내용 작성
+module.exports = {};
+
+12. Airbnb의 Lint 룰 가져와서 사용하기
+cd my-app
+npm install --save-dev eslint-config-airbnb-base eslint-plugin import
+
+
+13.
+.eslintrc.js 내용 추가 작성
+
+module.exports = {
+	// 기본 룰을 airbnb-base로 사용
+    extends: ['airbnb-base'],
+	
+	// 룰 추가 작성
+    rules: {
+		// 윈도우, 리눅스의 엔터 스타일 때문에 생기는 LF, CRLF 경고를 잡아줄 수 있다.
+        'linebreak-style': 0,
+		// 콘솔 로그는 배포할 때 사용자에게 보여주기 적합하지 않아서, 노란줄로 경고를 표시하지만
+		// off 설정으로 해놓으면 표시가 나오지 않는다.
+        'no-console': 'off',
+    }
+};
+
+
+
+14. 테스트
+main.js 내용 수정
+var x = 1;
+console.log(x);
+실행하면 정상 작동이지만, var x = 1; 이 빨간줄로 표시 된다.
+var를 권장하지 않아서, let 또는 const 사용하라고 한다.
+
+let x = 1;
+console.log(x);
+여기서 let 으로 바꾸면 x에만 빨간줄이 표시되는데,
+이유는 x를 1번만 값을 주고, 변경하지 않아서 const를 사용하는 것을 권장하기 떄문에 표시가 된다.
+
+const x = 1;
+console.log(x);
+마지막으로 수정하면 에러가 없어진다.
+
+
+15. Typescript
+ESLint에서 못잡는 코드도 잡아준다.
+
+my-app/main.js
+내용 수정
+const str = 'hello';
+const num = Math.log(str);
+console.log(num);
+
+실행
+NaN
+
+자료형에서 NaN은 쓸 이유가 없는 타입인데,
+Typescript를 사용하면 자료형 때문에 생기는 문제까지 잡아줄 수 있다.
+
+16. Typescript 설치
+cd my-app
+npm install --save-dev typescript
+
+
+17. 테스트
+
+main.js
+
+// @ts-check
+
+const str = 'hello';
+const num = Math.log(str);
+console.log(num);
+
+상단에 // @ts-check 내용 추가
+str에 빨간줄 표시가 되는 것을 볼 수 있다.
+
+
+
+18. State
+특수한 기능을 하는 변수라고 생각하면 된다.
+컴포넌트에 대한 상태를 의미한다.
+State가 변경되면 해당 컴포넌트를 다시 렌더링 하기 때문에, 컴포넌트의 유동성 관리가 쉽다.
+
+
+
+19. 리액트 comma-dangle 에러
+.eslintrc.js 파일에 comma-dangle 추가
+0 = 끄기
+1 = 경고
+2 = 에러
+https://devlog.jwgo.kr/2018/10/16/how-to-use-eslint/
+-> 밑에서 parser: babel-eslint 추가하면 이거는 없어도 된다.
+
+
+module.exports = {
+  extends: ['airbnb-base'],
+  rules: {
+    'linebreak-style': 0,
+    'no-console': 'off',
+    'comma-dangle': 1,
+  },
+};
+
+
+20. useState
+state를 활용하면 훨씬 쉽게 변경 사항을 HTML에 반영할 수 있다.
+state가 이전의 값과 달라지면 해당 컴포넌트를 다시 렌더링 한다.
+
+import { useState } from "react";
+const [스테이트이름, 스테이트변경함수] = useState(초기값);
+
+다른 함수를 이용해서 state 값을 변경해도 렌더링은 실행이 되지 않는다.
+스테이트 변경 함수를 사용해야만 렌더링 작업이 발생한다.
+
+
+*주의*
+상태 변경 함수는 꼭 함수 정의를 하고 사용해야 한다.
+함수 정의를 안하고 바로 사용하면 React 렌더가 계속해서 일어나기 때문에 Error가 발생한다.
+
+
+components 폴더의 component 작성 시 wrapping 태그가 필요합니다.
+https://stackoverflow.com/questions/59751733/react-native-what-exactly-is-the-empty-component
+
+방법 1 - div, span 등
+<div>
+your code
+</div>
+
+방법 2  <></> == <React.Fragment></React.Fragment>
+<>
+your code
+</>
+
+
+
+Components에서 return ( token parase 관련 Error 때문에
+빨간 줄이 안없어지는 현상 확인
+
+.eslintrc.js 파일에서 parser: 'babel-eslint' 를 추가하면 된다.
+
+module.exports = {
+  extends: ['airbnb-base'],
+  rules: {
+    'linebreak-style': 0,
+    'no-console': 'off',
+    'comma-dangle': 1,
+    parser: 'babel-eslint',
+  },
+};
+
+https://stackoverflow.com/questions/36001552/eslint-parsing-error-unexpected-token
+
+
+
+21. VSCode 확장 프로그램
+ES7 + React/Redux/React-Native snippets v4.4.3
+React 관련 snippets 제공
+
+
+22. 3항 연산자
+
+
+23. State와 변수의 차이
+State의 값이 변경되면 컴포넌트가 다시 리렌더링 되는 작업이 발생한다.
+그러면 변수에 +1을 실행했어도 리렌더링 되면서 함수도 다시 불러오기 때문에 변수가 다시 초기값으로 설정이 된다.
+그래서 콘솔에는 초기값+1이 된 값이 나올지라도 실제 View에는 초기값으로 출력 된다.
+
+24. State 사용 시 객체 또는 배열 사용 시
+State는 값이 변경되면 리렌더링을 하지만,
+원시 타입의 경우에는 메모리 주소에 값이 그대로 들어가 있지만,
+객체 타입을 사용하게 되면 메모리 주소에 주소 값이 들어가 있고, 주소 값을 한 번더 타고 들어가야 실제 값이 들어가 있기 때문에
+State의 입장에서는 메모리 값이 변하지 않는 것으로 보이게 되기 때문에 리렌더링이 발생하지 않는다.
+
+
+=>
+자주 값이 변경되고, 바로 반영해야 하면 State로 선언해서 사용한다.
+원시 값으로 사용하는 것이 좋다.
+배열 또는 객체로 사용할 경우, JS의 객체 타입 데이터의 특성을 고려해서 사용한다.
+
+
