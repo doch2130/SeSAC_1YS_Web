@@ -7,7 +7,7 @@ function App() {
 
   return (
     <div className="App">
-      <button onClick={() => setTeacher('tetz')}>영어로!</button>
+      <button onClick={() => setTeacher('sesac')}>영어로!</button>
       <br />
       <span>{teacher}</span>
       <br />

@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import './App.css';
 
 function App() {
@@ -9,8 +8,8 @@ function App() {
 
   function inEnglish() {
     const spanEl = document.querySelector('.App > span');
-    spanEl.innerHTML = 'tetz';
-    // teacher = 'tetz';
+    spanEl.innerHTML = 'sesac';
+    // teacher = 'sesac';
     // console.log(teacher);
   }
 

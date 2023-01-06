@@ -3,6 +3,6 @@ module.exports = {
   rules: {
     'linebreak-style': 0,
     'no-console': 'off',
-    parser: '@babel/eslint-parser',
+    parser: 'babel-eslint',
   },
 };

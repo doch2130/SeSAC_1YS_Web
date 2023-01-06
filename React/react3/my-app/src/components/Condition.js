@@ -7,7 +7,7 @@ export default function Condition() {
     <div>
       <button onClick={() => setCondition(!condition)}>컨디션 변경!</button>
       <br />
-      <span>{condition ? '👍' : '😂'}</span>
+      <span style={{ fontSize: '100px' }}>{condition ? '👍' : '😂'}</span>
     </div>
   );
 }

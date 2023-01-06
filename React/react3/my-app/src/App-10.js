@@ -1,10 +1,10 @@
 import './App.css';
-import Ex2 from './components/Ex2';
+import ObjState from './components/ObjState';
 
 function App() {
   return (
     <div className="App">
-      <Ex2 />
+      <ObjState />
     </div>
   );
 }
