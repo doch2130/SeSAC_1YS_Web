@@ -1,10 +1,10 @@
 import './App.css';
-import Ex3CallChangeObj from './components/Ex3CallChangeObj';
+import List2 from './components/List2';
 
 function App() {
   return (
     <div className="App">
-      <Ex3CallChangeObj />
+      <List2 />
     </div>
   );
 }
