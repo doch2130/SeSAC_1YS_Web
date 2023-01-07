@@ -2,3 +2,81 @@
 
 npx create-react-app my-app
 
+1. prettier + eslint + typescript + React 셋팅 방법
+- 프로젝트 폴더 모음에서 제일 최상단 폴더에 설정을 합니다.
+- 단, 하위 폴더에 중복으로 있으면 안됩니다. (충돌 방지)
+
+2ndREACT - 최상단 폴더
+
+2ndREACT/package.json
+{
+    "devDependencies": {
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "typescript": "^4.9.3"
+    }
+}
+
+npm install 명령어 입력하여 설치
+
+
+2ndREACT/.vscode/settings.json
+
+{
+    "[javascript]": {
+        "editor.maxTokenizationLineLength": 2500,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    }
+}
+- 여기서 맨 마지막 줄 "editor.defaultFormatter": "esbenp.prettier-vscode"
+이거는 지웠다가 직접 입력한 후에 다시 저장하시기 바랍니다. (VSCode 오류로 인해서 복붙하면 적용이 안되는 경우가 있습니다.)
+
+
+
+2ndREACT/.prettierrc
+
+{
+    "semi": true,
+    "singleQuote": true
+}
+
+
+2ndREACT/.eslintrc.js
+- jsx 문법 및 parse 에러처리 됩니다.
+
+module.exports = {
+  extends: ['airbnb-base'],
+  rules: {
+    'linebreak-style': 0,
+    'no-console': 'off',
+  },
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+  },
+};
+
+
+
+*git 사용자*
+2ndREACT/.gitignore
+**/node_modules
+**/package-lock.json
+**/.env
+
+
+
+2. jsx 확장자
+해당 설정 이후부터 components 파일 작성할 때 jsx 확장자로 사용한다.
+
+
+3. Props (properties)
+부모 컴포넌트에서 자식 컴포넌트에 원하는 데이터를 보내는 방법이다.
+
+부모이면 App.js 가 아니여도 데이터를 전달할 수 있습니다.
+
+
