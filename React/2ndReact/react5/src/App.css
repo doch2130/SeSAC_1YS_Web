@@ -1,0 +1,111 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* 1-5 */
+.test {
+  background-color: #FAEBD7;
+  color: #D2691E;
+  font-size: 30px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.input {
+  margin-top: 20px;
+}
+
+/* 1-6 */
+.red {
+  background-color: red;
+  width: 100px;
+  height: 100px;
+}
+.orange {
+  background-color: orange;
+  width: 100px;
+  height: 150px;
+}
+.yellow {
+  background-color: yellow;
+  width: 100px;
+  height: 200px;
+}
+.green {
+  background-color: green;
+  width: 100px;
+  height: 250px;
+}
+.blue {
+  background-color: blue;
+  width: 100px;
+  height: 300px;
+}
+.navy {
+  background-color: navy;
+  width: 100px;
+  height: 350px;
+}
+.purple {
+  background-color: purple;
+  width: 100px;
+  height: 400px;
+}
+
+.backdiv {
+  width: 100px;
+  height: 400px;
+  display: inline-block;
+}
+
+/* 다음 문제를 위해 주석처리 */
+/* .App {
+  min-width: 700px;
+} */
+
+/* 2-2 */
+/* 반응형은 포기 */
+.pBook {
+  font-size: 25px;
+  font-weight: bold;
+  margin: auto;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  width: 55%;
+  text-align: left;
+}
