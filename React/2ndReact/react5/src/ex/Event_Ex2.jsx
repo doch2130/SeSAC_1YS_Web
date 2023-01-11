@@ -7,8 +7,8 @@ export default function Event_Ex2() {
     email: 'codi@gmail.com'
   },
   {
-    name: '윤소희',
-    email: 'yoonsohee@gmail.com'
+    name: '테스터',
+    email: 'test@gmail.com'
   }
 ];
 

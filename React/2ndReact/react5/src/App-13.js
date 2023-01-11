@@ -1,10 +1,10 @@
 import './App.css';
-import Handler_ex from './ex/Handler_ex';
+import Handler_Ex from './ex/Handler_Ex';
 
 function App() {
   return (
     <div className="App">
-      <Handler_ex />
+      <Handler_Ex />
     </div>
   );
 }
