@@ -15,8 +15,6 @@ export default function List2() {
   ]
   return (
     <div>
-        <h1>오늘 해야할 일</h1>
-        <hr />
         <Modal />
         {/* 이렇게 1개씩 설정해서 데이터를 넘겨주는 방법이 있다. */}
         {/* <ListChild2 title={dataArr[0].title} content={dataArr[0].content} /> */}
@@ -36,9 +34,9 @@ export default function List2() {
         {/* 보통은 DB에서 받아온 데이터 중에서 Primary Key를 구분 값으로 같지만,
         Primary Key가 없는 경우에는 다른 구별이 가능한 값을 사용하고,
         최후의 수단으로 index 값을 사용한다. */}
-        {dataArr.map((el, index) => {
+        {/* {dataArr.map((el, index) => {
           return <ListChild2 title={el.title} content={el.content} key={index} />
-        })}
+        })} */}
 
         {dataArr.map((el, index) => {
           return (

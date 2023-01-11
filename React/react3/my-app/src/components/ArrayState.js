@@ -13,15 +13,15 @@ export default function ArrayState() {
           // 여기서 작업한거는 메모리 주소를 변경한 것이 아니라
           // 메모리 주소에 연결되어 있는 값을 변경한 것이기 때문에
           // State에서는 값이 그대로 인것으로 인식하여 리렌더링이 발생하지 않는다.
-          //   state[0] = 1;
-          //   setState(state);
-          //   console.log(state);
+            // state[0] = 1;
+            // setState(state);
+            // console.log(state);
 
           // 해결 방법 - 새로운 메모리 주소를 할당
-          //   setState([1]);
+            // setState([1]);
           //   [0]으로 설정해도 새로운 메모리 주소를 할당하기 때문에 리렌더링이 발생한다.
-          //   setState([0]);
-          //   console.log(state);
+            // setState([0]);
+            // console.log(state);
 
           //   다른 방법 - 전개 연산자 + 새로운 변수 할당
           state[0] = 1;

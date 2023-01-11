@@ -24,10 +24,10 @@ export default function MainHeader(props) {
     }
     // 구조분해를 이용해서 obj 객체 안에 있는 데이터를 각 변수에 저장한다.
     const {str, num} = obj;
-    console.log(obj.str);
-    console.log(obj.num);
-    console.log(str);
-    console.log(num);
+    console.log('obj.str ', obj.str);
+    console.log('obj.num ', obj.num);
+    console.log('str ', str);
+    console.log('num ', num);
 
   return (
     <>

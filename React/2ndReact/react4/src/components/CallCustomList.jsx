@@ -6,10 +6,10 @@ export default function CallCustomList() {
     
   return (
     <div>
-        <CustomList arr={nameArr} />
+        {/* <CustomList arr={nameArr} /> */}
 
         {/* 데이터가 제대로 전달되지 않는 경우 */}
-        {/* <CustomList/> */}
+        <CustomList/>
     </div>
   )
 }
