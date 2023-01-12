@@ -1,0 +1,41 @@
+2023-01-12 목요일
+
+npx create-react-app my-app
+
+1. useRef
+컴포넌트가 리렌더링 되어도 값을 유지하고 싶을 때 사용한다.
+주로 Input 태그에 많이 사용한다.
+참조하고자 하는 DOM 요소에 ref 속성을 주고 해당 태그의 변화를 감지하거나 DOM 요소를 컨트롤 할 수 있다.\
+VanilaJS 의 querySelector 또는 getElementById 같은 역할을 손쉽게 구현할 수 있다.
+
+2. 정리
+useState, useRef, Variable
+
+useState => 변경 시 리렌더링되며, 변경 값으로 적용된다.
+useRef => 변경되어도 리렌더링되지 않지만, 값은 유지되며 리렌더링 시 변경 값으로 적용된다.
+Variable => 변경되어도 리렌더링되지 않으며, 리렌더링 시 초기 값으로 돌아간다.
+
+3. React.Fragment
+
+4. 조건부 렌더링
+상황에 따라서 컴포넌트를 보여줄지 여부를 정할 때 사용한다.
+
+5. Life Cycle
+5-1. 컴포넌트의 Life Cycle
+Mount : 컴포넌트가 화면에 첫 렌더링 할 때
+Update : state 변화로 리렌더링 될 때
+Unmount : 화면에서 사라질 때
+
+5-2. 클래스형 컴포넌트의 Life Cycle
+Life Cycle 상황에 맞게 특정 기능을 수행할 수 있도록 다양한 기능을 제공한다.
+Mount : 컴포넌트가 화면에 첫 렌더링 할 때
+ componentDidMount()
+Update : state 변화로 리렌더링 될 때
+ componentDidUpdate()
+Unmount : 화면에서 사라질 때
+ componentWillUnmount()
+
+5-3. 함수형 컴포넌트의 Life Cycle
+클래스형에서 함수형으로 넘어가면서 기존의 Life Cycle을 담당하던 기능을 하나의 HOOKS로 추가하였다.
+HOOKS에 추가한 기능이 UseEffect 이다.
+
