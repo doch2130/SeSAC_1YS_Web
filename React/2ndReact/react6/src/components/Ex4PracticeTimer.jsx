@@ -10,6 +10,7 @@ export default function Ex4PracticeTimer() {
     useEffect(() => {
         timerView.current.value = 0;
     }, []);
+    // [] 으로 하면 마운트 될때에만 실행, 변수가 없어서 이후에는 실행이 안된다
 
     useEffect(() => {
         const timerFunction = setInterval(() => {

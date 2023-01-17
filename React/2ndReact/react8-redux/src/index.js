@@ -3,13 +3,31 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+// 옛날 문법이라 - 표시로 나옴, 일단 배우는 단계니까 그냥 사용
+
+const weight = 100;
+
+function reducer(state = weight, action) {
+  if (action.type === '증가') {
+    state++;
+    return state;
+  } else if (action.type === '감소') {
+    state--;
+    return state;
+  } else {
+    return state;
+  }
+}
+
+let store = createStore(reducer);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <BrowserRouter>
+  <Provider store={store}>
     <App />
-  </BrowserRouter>
+  </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function

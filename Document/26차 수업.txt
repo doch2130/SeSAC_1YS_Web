@@ -1,0 +1,107 @@
+2023-01-17 화요일
+
+npx create-react-app my-app
+
+1. useEffect
+서버로부터 데이터를 받아와야 하는 상황에서 많이 사용한다.
+최초 마운트 => 서버로부터 데이터를 요청 => 데이터를 State에 등록 => 렌더링
+
+2. 백엔드 서버 구성하기
+Express, cors 모듈 설치
+npm install express cors
+
+backend/server.js
+작성 후 터미널에서 실행
+1번 터미널에서 nodemon server.js
+실행 후 데이터 나오는지 체크
+
+3. CSS
+외부 CSS 파일 import 할 때는 바로 경로를 작성해주면 된다.
+import '../style/TestCss.css';
+
+3-1. Styled Components
+리액트는 기본적으로 컴포넌트 단위가 중심이 되는 구조입니다
+컴포넌트는 상대적으로 작은 규모로 운영이 되기 때문에 기존의 방식처럼 css 파일을 분리해서 운영할 필요가 크지 않습니다
+따라서, 이전에 <style> 태그를 사용해서 css 를 썼던 것 처럼 사용하고 싶은 요구가 많았습니다
+
+npm install styled-components
+
+확장프로그램
+vscode-styled-components v1.7.5
+Auto Rename Tag v0.1.10 => 태그 이름 변경 시 </> 닫힘 쪽도 같이 변경된다.
+
+*요즘 치고 올라오는 애들*
+Storybook
+Tailwind
+
+
+4. Public 폴더
+구성
+/public/images
+/src/components
+/src/style
+
+
+5. Props.children
+상황에 따라 html 요소 또는 컴포넌트 자체를 보내고 싶은 경우에 사용한다.
+컴포넌트의 자식 요소를 한꺼번에 전달해 줄 수 있다.
+
+
+6. React Router
+기존의 Router는 주소에 따라 페이지를 변경해주는 역할로 사용되었다.
+React에서는 컴포넌트별(DOM) 라우팅이 가능하다.
+조건부 렌더링으로 처리가 가능하지만, 서비스의 경우 주소에 따른 구분을 해줘야만 서비스별 구분이 가능하므로 라우팅 기능의 활용이 필요하다.
+
+npm install react-router-dom
+<BrowerRouter> </BrowerRouter>
+react-router-dom 컴포넌트로 <App> 컴포넌트를 감싸줘야한다.
+<App> 컴포넌트에서 발생하는 주소 값의 변경을 감지할 수 있다.
+
+[참고] HashRouter
+주소의 해시 주소값을 감지할 수 있는 라우터이다.
+
+index.js
+import 추가 및 감싸주는 BrowserRouter 태그 작성
+import { BrowserRouter } from 'react-router-dom';
+
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
+);
+
+
+<a> 태그는 브라우저 레벨에서 페이지를 자동으로 새로고침 하기 때문에
+<Link to=""> 컴포넌트를 사용해야 한다.
+
+html 상에서는 Link 컴포넌트가 <a>태그로 변경이 되지만 브라우저 새로고침 없이 주소만 변경해주는 역할을 한다.
+
+7. 주소 예외 처리
+path에 *을 입력하면 모든 주소에 대하여 처리한다는 의미를 가진다.
+코드는 위에서 아래 방향으로 처리가 되기 때문에
+무조건 제일 밑에 작성해야 다른 주소에 영향이 가지 않는다.
+<Route path="*" element={<NotFound />} />
+
+8. 주소의 Parameter
+useParams로 Parameter 값을 받을 수 있다.
+
+9. Redux
+상태 관리 라이브러리이다.
+React뿐만 아니라 다른 프레임워크에서도 사용이 가능하다.
+Redux 자체를 사용하는 것은 아니며, 각각의 프레임 워크에 맞춘 라이브러리를 사용한다.
+React에서는 React-Redux를 사용한다.
+
+컴포넌트의 상태를 일일이 Props로 전달하기 힘든 것을 해결한 라이브러리이다.
+컴포넌트 별 State에 따라 관리가 아닌 하나의 Stroe 라는 곳에서 관리한다.
+
+npm install redux
+npm install react-redux
+
+index.js 파일에 import 추가 및 APP 태그를 Provider로 감싸기
+import { Provider } from 'react-redux';
+root.render(
+  <Provider>
+    <App />
+  </Provider>
+);
+
