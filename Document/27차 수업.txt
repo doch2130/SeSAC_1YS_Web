@@ -1,0 +1,11 @@
+2023-01-19 목요일
+
+npx create-react-app my-app
+
+npm i redux react-redux @reduxjs/toolkit
+
+설치
+https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd/related?hl=ko
+
+사용법
+https://github.com/reduxjs/redux-devtools/tree/main/extension#installation
