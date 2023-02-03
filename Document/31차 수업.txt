@@ -1,0 +1,61 @@
+2023-02-02 목요일
+
+*React Project 서버 올리는 방법
+
+1. 빌드
+npm run build
+
+project에 build가 만들어 진다.
+
+2. 서버 접속
+apt-get update  (굳이 안해도 상관은 없음)
+apt-get install nginx
+
+3. 파일질라 실행
+cd /project/react/
+build 폴더를 업로드
+
+4. Nginx 사용 설정
+// 원본 복원
+sudo cp -r /etc/nginx/sites-available/ /etc/nginx/sites-available-origin
+sudo cp -r /etc/nginx/sites-enabled/ /etc/nginx/sites-enabled-origin
+
+// default 기본 설정 파일 삭제
+sudo rm /etc/nginx/sites-available/default
+sudo rm /etc/nginx/sites-enabled/default
+
+// build 결과물을 배포할 설정 파일 생성
+sudo vi /etc/nginx/sites-available/프로젝트명.conf
+ex) sudo vi /etc/nginx/sites-available/slick.conf
+
+sudo vi /etc/nginx/sites-available/react.conf
+
+5. Nginx 설정 파일 수정하기
+listen = react port
+location = 처음 url
+root = 프로젝트 build 폴더 위치
+index = index.html index.htm; 고정
+try_files $uri /index.html; 고정
+
+server {
+        listen 3000;
+        location / {
+                root /2st_project//react/build;
+                index index.html index.htm;
+                try_files $uri /index.html;
+        }
+}
+
+6. Project 실행할 수 있도록 링크 파일 만들기
+프로젝트.conf로 변경 할 것
+react.conf => 2군데 이므로 꼭 확인할 것
+
+sudo ln -s /etc/nginx/sites-available/react.conf /etc/nginx/sites-enabled/react.conf
+
+7. Nginx 재기동하고 동작 확인
+sudo systemctl stop nginx
+sudo systemctl start nginx
+sudo systemctl status nginx
+
+8. 네이버 클라우드 플랫폼 방화벽 열기
+ACT - 0.0.0.0/0 3000
