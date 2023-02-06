@@ -5,7 +5,7 @@ npx create-react-app my-app
 1. useRef
 컴포넌트가 리렌더링 되어도 값을 유지하고 싶을 때 사용한다.
 주로 Input 태그에 많이 사용한다.
-참조하고자 하는 DOM 요소에 ref 속성을 주고 해당 태그의 변화를 감지하거나 DOM 요소를 컨트롤 할 수 있다.\
+참조하고자 하는 DOM 요소에 ref 속성을 주고 해당 태그의 변화를 감지하거나 DOM 요소를 컨트롤 할 수 있다.
 VanilaJS 의 querySelector 또는 getElementById 같은 역할을 손쉽게 구현할 수 있다.
 
 2. 정리
