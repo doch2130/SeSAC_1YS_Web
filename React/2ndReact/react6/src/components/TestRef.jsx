@@ -19,10 +19,12 @@ export default function TestRef() {
     <div>
         <h1>{text}</h1>
         {/* 기존 JS 사용 */}
+        <label>기존 JS + useState </label>
         <input type="text" onChange={(e) => { onChangeText(e) }} />
         <br />
         <br />
         {/* useRef 사용 */}
+        <label>useRef </label>
         <input type="text" ref={inputValue} onChange={onChangeText2} />
     </div>
   )

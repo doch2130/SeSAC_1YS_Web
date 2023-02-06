@@ -19,7 +19,6 @@ export default function Ex3Conditional() {
     }
   return (
     <div>
-        {/* {numBtn === '1번' ? <Ex3PracticeOne title={'1번 컴포넌트'} /> : <Ex3PracticeTwo title={'2번 컴포넌트'} />} */}
         {numBtnRender}
         <button onClick={changeNum}>{numBtn}</button>
 
