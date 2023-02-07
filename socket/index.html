@@ -20,6 +20,15 @@
       console.log('Client Server Connected');
     });
 
+    socket.on('welcome', (data) => {
+      // 서버에서 보내준 데이터
+      // data: {msg: ''}
+      console.log(data.msg);
+
+      // 서버로 데이터 보내기
+      socket.emit('response', 'hello');
+    });
+
   </script>
 </body>
 </html>

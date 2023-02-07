@@ -12,6 +12,12 @@ app.get('/', (req, res) => {
 io.on('connection', (socket) => {
   console.log('Server Socket Connected', socket.id);
 
+  socket.emit('welcome', {msg: 'welcome'});
+
+  socket.on('response', (str) => {
+    console.log(str);
+  });
+
   socket.on('disconnect', () => {
     console.log('Server Socket disconnected');
   });

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket Ex1</title>
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+</head>
+<body>
+  <h1>Socket.io Ex1</h1>
+  
+  <button type="button" onclick="hello()">hello</button>
+  <br />
+  <button type="button" onclick="study()">study</button>
+  <br />
+  <button type="button" onclick="bye()">bye</button>
+  <br />
+  <button type="button" onclick="btnSend('hello')">teacher Hello</button>
+  <button type="button" onclick="btnSend('study')">teacher Study</button>
+  <button type="button" onclick="btnSend('bye')">teacher Bye</button>
+
+  <script>
+    let socket = io.connect();
+
+    socket.on('connect', () => {
+      console.log('Client Server Connected');
+    });
+    
+    socket.on('helloServer', (data) => {
+      console.log('hello :', data.msg);
+    });
+    socket.on('studyServer', (data) => {
+      console.log('study :', data.msg);
+    });
+    socket.on('byeServer', (data) => {
+      console.log('bye :', data.msg);
+    });
+    socket.on('response', (data) => {
+      console.log(data);
+    });
+
+    function hello() {
+      socket.emit('helloBtn', 'client hello');
+    }
+
+    function study() {
+      socket.emit('studyBtn', 'client study');
+    }
+
+    function bye() {
+      socket.emit('byeBtn', 'client bye');
+    }
+
+    // 선생님 답
+    function btnSend(msg) {
+      socket.emit('send', msg);
+      // 함수 안에 있어도 결과를 받을 수 있다.
+      // 단, 함수가 실행될 때 등록이 되기 때문에 함수 실행전에는 서버에서 보내도 작동을 하지 않는다.
+      // socket.on('response', (data) => {
+      //   console.log(data);
+      // });
+    }
+
+  </script>
+</body>
+</html>
