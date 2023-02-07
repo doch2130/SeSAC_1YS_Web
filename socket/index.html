@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket</title>
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+</head>
+<body>
+  <h1>Socket.io 사용하기</h1>
+
+  <script>
+    // 클라이언트 소켓 생성 후 연결
+    let socket = io.connect();
+    
+    // 메시지 보낼 때 사용: socket.emit(), socket.emit("이벤트명", data)
+    // 메시지 받을 때 사용: socket.on(), socket.on("이벤트명", (data) => {})
+    socket.on('connect', () => {
+      console.log('Client Server Connected');
+    });
+
+  </script>
+</body>
+</html>
