@@ -4,7 +4,6 @@ import './Chatting.css';
 
 export default function Chatting() {
   const inputTextArea = useRef();
-  const chattingArea = useRef();
 
   const inputTextAreaHeightAuto = () => {
     inputTextArea.current.style.height = 'auto';
@@ -35,8 +34,8 @@ export default function Chatting() {
       <Col xs={12}>
 
         {/* 채팅창 */}
-        <Row id='chattingArea' ref={chattingArea}>
-          <Col xs={12} style={{marginTop: '30px'}}>
+        <Row id='chattingArea'>
+          <Col xs={12} id='chattingAreaChildren' style={{marginTop: '30px'}}>
             {/* 내가 보낸 메시지 */}
             <Row>
               <Col xs={12} className='textBoxCol'>
@@ -76,7 +75,14 @@ export default function Chatting() {
 
         {/* 전송 */}
         <Row style={{margin: 'auto', width: '500px'}}>
-          <Col xs={12} style={{textAlign: 'right', marginBottom: '10px'}}>
+          <Col xs={12} style={{marginBottom: '10px', display: 'flex', justifyContent: 'flex-end'}}>
+            <div style={{display: 'flex', marginRight: '10px'}}>
+              <select id="selectDM">
+                <option value='전체' selected>전체</option>
+                <option value='홍길동'>홍길동</option>
+                <option value='김새싹'>김새싹</option>
+              </select>
+            </div>
             <button type='button' className='btn' id='sendBtn'>전송</button>
           </Col>
 
