@@ -40,7 +40,7 @@ try_files $uri /index.html; 고정
 server {
         listen 3000;
         location / {
-                root /2st_project//react/build;
+                root /2st_project/react/build;
                 index index.html index.htm;
                 try_files $uri /index.html;
         }
@@ -58,4 +58,5 @@ sudo systemctl start nginx
 sudo systemctl status nginx
 
 8. 네이버 클라우드 플랫폼 방화벽 열기
-ACT - 0.0.0.0/0 3000
+ACT - 0.0.0.0/0 3000 / 리액트
+ACT - 0.0.0.0/0 4000 / 서버
