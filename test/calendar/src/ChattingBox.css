@@ -1,0 +1,116 @@
+#chattingWrap {
+  width: 500px;
+  margin: auto;
+  /* margin-top: 10px; */
+}
+#chattingWrap > div.col-12:nth-child(1) {
+  padding: 0px;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+#chattingArea {
+  width: 498px;
+  height: 700px;
+  background-color: #BACEE0;
+  margin: auto;
+  overflow: auto;
+  border-radius: 5px 5px 0px 0px;
+}
+.textBoxCol {
+  margin: 10px 0px;
+}
+.textBox {
+  border-radius: 3px;
+  white-space: pre-wrap;
+  padding: 5px 10px;
+  display: inline-block;
+  margin: 0px;
+  max-width: 300px;
+}
+.textBoxMe {
+  text-align: left;
+  background-color: #FFEB33;
+}
+.textBoxMe::after {
+  content:'';
+  position:absolute;
+  border-style:solid;
+  border-width: 10px 15px;
+  border-color: transparent transparent transparent #FFEB33;
+  top: 10px;
+  right: -12px;
+  transform: rotate(90deg);
+}
+.textBoxYou {
+  background-color: #FFFFFF;
+}
+.textBoxYou::after {
+  content:'';
+  position:absolute;
+  border-style:solid;
+  border-width:10px 15px;
+  border-color: transparent transparent transparent #FFFFFF;
+  top: 10px;
+  left: -12px;
+  transform: rotate(90deg);
+}
+.textBoxTime {
+  font-size: 0.8rem;
+}
+
+#inputText {
+  width: 498px;
+  resize: none;
+  overflow: hidden;
+  outline: none;
+  border: none;
+  min-height: 75px;
+  padding: 10px 10px 0px;
+}
+#sendBtn {
+  background-color: #FFEB33;
+  padding: 6px 18px;
+}
+#sendBtn:focus {
+  border-color: red;
+}
+/* .notice {
+  text-align: center;
+  position: fixed;
+  max-width: 498px;
+  margin-top: 10px;
+}
+#noticeTag {
+  margin: 0px;
+} */
+
+.textBoxDM {
+  background-color: #ffd0fa !important;
+}
+
+.textBoxDM::after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 10px 15px;
+  border-color: transparent transparent transparent #ffd0fa;
+  top: 10px;
+  right: -12px;
+  transform: rotate(90deg);
+}
+
+.textBoxYouDM {
+  background-color: #ffd0fa !important;
+}
+
+.textBoxYouDM::after {
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 10px 15px;
+  border-color: transparent transparent transparent #ffd0fa;
+  top: 10px;
+  left: -12px;
+  transform: rotate(90deg);
+  
+}
