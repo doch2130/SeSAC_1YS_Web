@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en, ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Socket</title>
+  <script src="https://cdn.socket.io/4.6.0/socket.io.min.js" integrity="sha384-c79GN5VsunZvi+Q/WObgk2in0CbZsHnjEqvFxC5DxHn9lTfNce2WW6h2pH6u/kF+" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./index.css">
+</head>
+<body>
+  <h1>Socket.io 사용하기</h1>
+  <div class="app__wrap">
+    <div id="info" class="app__info"></div>
+    <div id="chatWindow" class="app__window"></div>
+    <div class="app__input__wrap">
+        <input id="chatInput" type="text" class="app__input" autofocus placeholder="대화를 입력해주세요.">
+        <button id="chatMessageSendBtn" class="app__button">전송</button>
+    </div>
+  </div>
+  <script>
+    // 클라이언트 소켓 생성 후 연결
+    const socket = io.connect();
+
+
+    
+    // 메시지 보낼 때 사용: socket.emit(), socket.emit("이벤트명", data)
+    // 메시지 받을 때 사용: socket.on(), socket.on("이벤트명", (data) => {})
+    socket.on('connect', () => {
+      console.log('Client Server Connected');
+      const name = prompt('대화명을 입력해주세요.', '');
+      socket.emit('newUser', name);
+    });
+
+    
+
+    // socket.on('updateMessage', (data) => {
+    //   const infoEl= document.getElementById('info');
+    //   infoEl.innerHTML = data.message;
+    // });
+
+    // socket.on('updateMessage', (data) => {
+    //   if(data.name === 'SERVER'){
+    //       const info = document.getElementById('info');
+    //       info.innerHTML = data.message;
+    //   }else{
+
+    //   }
+    // });
+
+
+  const chatWindow = document.getElementById('chatWindow');
+  socket.on('updateMessage', (data) => {
+      if(data.name === 'SERVER'){
+          const info = document.getElementById('info');
+          info.innerHTML = data.message;
+
+          setTimeout(() => {
+              info.innerText = '';
+          }, 1000);
+      } else{
+          const chatMessageEl = drawChatMessage(data);
+          chatWindow.appendChild(chatMessageEl);
+      }
+  });
+
+
+  function drawChatMessage(data){
+    const wrap = document.createElement('p');
+    const message = document.createElement('span');
+    const name = document.createElement('span');
+
+    name.innerText = data.name;
+    message.innerText = data.message;
+
+    name.classList.add('output__user__name');
+    message.classList.add('output__user__message');
+
+    wrap.classList.add('output__user');
+    wrap.dataset.id = socket.id;
+   
+    wrap.appendChild(name);
+    wrap.appendChild(message);
+
+    return wrap;
+}
+
+
+
+  const sendButton = document.getElementById('chatMessageSendBtn');
+  const chatInput = document.getElementById('chatInput');
+
+  sendButton.addEventListener('click', function(){
+      const message = chatInput.value;
+      // console.log('message', message);
+      
+      if(!message) {
+        console.log('false');
+        return false;
+      }
+
+      socket.emit('sendMessage', {
+          message
+      });
+
+      chatInput.value = '';
+  });
+
+  </script>
+</body>
+</html>
