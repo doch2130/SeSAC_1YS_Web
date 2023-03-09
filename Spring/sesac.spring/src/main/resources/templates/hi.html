@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<!-- thymeleaf를 작성해야 사용할 수 있다. CND 방식과 같은 느낌-->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Hi</title>
+</head>
+<body>
+<!--  원래는 well 이라는 메시지가 나와야 하지만, model에서 text를 전달해줄 때 "메세지입니다!" 라는 메시지를 전달해줍니다.
+  그래서 h1 태그의 th:text 부분에서 msg 값을 받아서 출력이 되기 때문에 well 대신에 메세지입니다! 메시지가 나옵니다. -->
+    <h1 th:text="${msg}">well</h1>
+    <br/>
+    <p th:utext="${utext}">p태그</p>
+    <br/>
+<!--   msg2는 model에서 넘겨주는 값이 없지만,
+ 여기서 msg2를 직접 만들어서 사용할 수 있다.
+ 이때 '안녕? ' 이라는 글자와 msg="메세지입니다!" 글자를 합쳐서
+ 안녕? 메세지입니다! 라는 문잗을 msg2에 저장 후 출력한 것이다.-->
+    <span th:with="msg2='안녕? ' + ${msg}" th:text="${msg2}"></span>
+</body>
+</html>

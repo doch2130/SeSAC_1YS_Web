@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Practice1</title>
+</head>
+<body>
+
+<h1 th:if="${age}>20" th:text="${age} + '는 성인입니다.'" style="color: green;"></h1>
+<h1 th:unless="${age}>20" th:text="${age} + '는 미성년자입니다.'" style="color: blue;"></h1>
+
+<h1 th:if="${age2}>20" th:text="${age2} + '는 성인입니다.'" style="color: green;"></h1>
+<h1 th:unless="${age2}>20" th:text="${age2} + '는 미성년자입니다.'" style="color: blue;"></h1>
+
+</body>
+</html>
