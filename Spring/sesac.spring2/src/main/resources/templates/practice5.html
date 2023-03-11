@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+<script>
+    const submitHandler = () => {
+        const form = document.getElementById("formRegister");
+        const birthday = form.birthdayYear.value + "-" + form.birthdayMon.value + "-" + form.birthdayDay.value;
+        let interest = "";
+        for(let i = 0; i < document.getElementsByName("interest").length; i++) {
+            if(document.getElementsByName("interest")[i].checked === true) {
+                interest += document.getElementsByName("interest")[i].value + " ";
+            }
+        }
+
+        axios.get(`/axios/practice5-GET`, {
+            params: {
+                name: form.name.value,
+                gender: form.gender.value,
+                birthday: birthday,
+                interest: interest
+            }
+        })
+        .then((res)=>{
+            console.log( res );
+            console.log(res.data[1] + " Get 회원가입 성공");
+        });
+    }
+
+    const submitHandler2 = () => {
+        const form = document.getElementById("formRegister");
+            const birthday = form.birthdayYear.value + "-" + form.birthdayMon.value + "-" + form.birthdayDay.value;
+            let interest = "";
+            for(let i = 0; i < document.getElementsByName("interest").length; i++) {
+                if(document.getElementsByName("interest")[i].checked === true) {
+                    interest += document.getElementsByName("interest")[i].value + " ";
+                }
+            }
+
+            axios({
+                url: "/axios/practice5-POST",
+                method: "post",
+                data: {
+                    name: form.name.value,
+                    gender: form.gender.value,
+                    birthday: birthday,
+                    interest: interest
+                }
+            })
+            .then((res)=>{
+                console.log( res );
+                console.log(res.data[1] + " Post 회원가입 성공");
+            });
+    }
+</script>
+<h2>동적 폼 전송 - 실습</h2>
+<form style="width: 500px;" id="formRegister">
+    <fieldset>
+        이름 <input type="text" name="name" /> <br />
+        성별 <input type="radio" name="gender" value="남자" />남자
+        <input type="radio" name="gender" value="여자" />여자
+        <br />
+        생년월일
+        <select name="birthdayYear">
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select>
+        년
+        <select name="birthdayMon">
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        월
+        <select name="birthdayDay">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        일
+        <br />
+        <!--        <input type="date" name="birthday"> <br />-->
+        관심사 <input type="checkbox" name="interest" value="여행" />여행
+        <input type="checkbox" name="interest" value="패션" />패션
+        <input type="checkbox" name="interest" value="음식" />음식
+    </fieldset>
+    <button type="button" onclick="submitHandler()">회원가입 - Get</button>
+    <button type="button" onclick="submitHandler2()">회원가입 - Post</button>
+</form>
+</body>
+</html>

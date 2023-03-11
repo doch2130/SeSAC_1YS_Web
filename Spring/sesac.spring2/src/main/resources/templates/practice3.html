@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<h2>폼 전송 - 실습</h2>
+<form action="/practice3-register" method="post" style="width: 500px;">
+    <fieldset>
+        이름 <input type="text" name="name" /> <br />
+        성별 <input type="radio" name="gender" value="남자" />남자
+        <input type="radio" name="gender" value="여자" />여자
+        <br />
+        생년월일
+        <select name="birthdayYear">
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+        </select>
+        년
+        <select name="birthdayMon">
+            <option value="10">10</option>
+            <option value="11">11</option>
+            <option value="12">12</option>
+        </select>
+        월
+        <select name="birthdayDay">
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+        </select>
+        일
+        <br />
+<!--        <input type="date" name="birthday"> <br />-->
+        관심사 <input type="checkbox" name="interest" value="여행" />여행
+        <input type="checkbox" name="interest" value="패션" />패션
+        <input type="checkbox" name="interest" value="음식" />음식
+    </fieldset>
+<button type="submit">회원가입</button>
+</form>
+</body>
+</html>
