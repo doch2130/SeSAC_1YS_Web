@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -12,6 +12,28 @@
 <script>
     const userUpdate = () => {
         const form = document.getElementById("formMypage");
+        if(form.pwd.value.trim() === '') {
+            alert("비밀번호를 입력해주세요!!");
+            return;
+        }
+        axios({
+            method: "patch",
+            url: "/axios/practice6-update",
+            data: {
+                id: form.id.value,
+                pwd: form.pwd.value,
+                gender: form.gender.value,
+                birthday: form.birthday.value,
+            }
+        })
+        .then((res) => {
+          console.log(res);
+          if(res.data === true) {
+            alert("개인정보 수정이 완료되었습니다.");
+          } else {
+            alert("개인정보 수정 중 에러가 발생하였습니다!");
+          }
+        });
     }
     const userDelete = () => {
         const form = document.getElementById("formMypage");
@@ -24,7 +46,12 @@
         })
         .then((res) => {
             console.log(res);
+            alert("탈퇴가 완료되었습니다.");
+            document.location.href="/practice6";
         });
+    }
+    const loginMove = () => {
+        document.location.href="/practice6";
     }
 </script>
 <h2>CRUD 실습 - 마이 페이지</h2>
@@ -32,14 +59,27 @@
     <fieldset>
         <div>
             <label>아이디: </label>
-            <input type="text" name="id" disabled />
+            <input type="text" name="id" disabled readonly th:value="${id}" />
         </div>
         <div>
             <label>비밀번호: </label>
             <input type="text" name="pwd" />
         </div>
+        <div>
+            <label>성별</label>
+<!--            <p th:if="${hello}=='web'" th:text="${hello}"></p>-->
+            <input type="radio" name="gender" value="남자" th:if="${gender}=='남자'" th:checked="true" />
+            <input type="radio" name="gender" value="남자" th:unless="${gender}=='남자'" th:checked="false" />남자
+            <input type="radio" name="gender" value="여자" th:if="${gender}=='여자'" th:checked="true" />
+            <input type="radio" name="gender" value="여자" th:unless="${gender}=='여자'" th:checked="false" />여자
+        </div>
+        <div>
+            <label>생일</label>
+            <input type="date" name="birthday" th:value="${birthday}" />
+        </div>
         <button type="button" onclick="userUpdate()">회원정보 수정</button>
         <button type="button" onclick="userDelete()">회원탈퇴</button>
+        <button type="button" onclick="loginMove()">로그아웃</button>
     </fieldset>
 </form>
 </body>
