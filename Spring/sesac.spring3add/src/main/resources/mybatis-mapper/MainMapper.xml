@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace는 mapper를 작성해주면 됩니다. -->
+<!--앞에 package 경로는 mapper의 상단에 보시면 package sesac.sesac.spring3.mapper;
+이런식으로 있는 것을 그대로 가져오면 됩니다. -->
+<!-- select 부분의 resultType 부분도 패키지를 수정해줍니다. -->
+<!--위에서 가져온 패키지 경로에서 mapper를 제외한 sesac.sesac.spring3 부분만 가져와서 사용하면 됩니다.-->
+<mapper namespace="sesac.sesac.spring3add.mapper.MainMapper">
+    <select id="retrieveAll" resultType="sesac.sesac.spring3add.domain.User">
+        SELECT user.* FROM user
+    </select>
+    <select id="loginUser" resultType="sesac.sesac.spring3add.domain.User" parameterType="java.util.Map">
+        select * from user where id = #{id} and password = #{password}
+    </select>
+    <select id="getUserInfo" resultType="sesac.sesac.spring3add.domain.User" parameterType="java.lang.String">
+        select * from user where id = #{id}
+    </select>
+</mapper>
