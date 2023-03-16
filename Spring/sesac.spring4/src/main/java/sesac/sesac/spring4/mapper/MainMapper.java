@@ -1,7 +1,7 @@
-package sesac.sesac.spring3add.mapper;
+package sesac.sesac.spring4.mapper;
 
 import org.apache.ibatis.annotations.*;
-import sesac.sesac.spring3add.domain.User;
+import sesac.sesac.spring4.domain.User;
 
 import java.util.List;
 

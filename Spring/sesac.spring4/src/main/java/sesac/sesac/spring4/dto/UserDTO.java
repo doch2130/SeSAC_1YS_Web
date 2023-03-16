@@ -1,12 +1,19 @@
-package sesac.sesac.spring3add.dto;
+package sesac.sesac.spring4.dto;
 
 public class UserDTO {
     private String id;
     private String name;
     private String nickname;
     private String password;
+    private int no;
 
+    public int getNo() {
+        return no;
+    }
 
+    public void setNo(int no) {
+        this.no = no;
+    }
 
     public String getId() {
         return id;
@@ -39,6 +46,7 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
+
 
 
 }

@@ -1,10 +1,10 @@
-package sesac.sesac.spring3add.service;
+package sesac.sesac.spring4.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sesac.sesac.spring3add.domain.User;
-import sesac.sesac.spring3add.dto.UserDTO;
-import sesac.sesac.spring3add.mapper.MainMapper;
+import sesac.sesac.spring4.domain.User;
+import sesac.sesac.spring4.dto.UserDTO;
+import sesac.sesac.spring4.mapper.MainMapper;
 
 import java.util.ArrayList;
 import java.util.List;

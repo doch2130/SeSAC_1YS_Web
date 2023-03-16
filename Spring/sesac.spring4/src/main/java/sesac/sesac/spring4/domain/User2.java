@@ -1,19 +1,28 @@
-package sesac.sesac.spring3add.dto;
+package sesac.sesac.spring4.domain;
 
-public class UserDTO {
+//import lombok.Getter;
+//import lombok.Setter;
+
+//@Getter
+//@Setter
+public class User2 {
     private String id;
     private String name;
     private String nickname;
     private String password;
 
-
-
-    public String getId() {
-        return id;
-    }
+    public String getId() { return id; }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getName() {
@@ -31,14 +40,5 @@ public class UserDTO {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
 
 }

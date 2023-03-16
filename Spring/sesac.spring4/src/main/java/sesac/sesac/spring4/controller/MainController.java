@@ -1,12 +1,12 @@
-package sesac.sesac.spring3add.controller;
+package sesac.sesac.spring4.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import sesac.sesac.spring3add.domain.User;
-import sesac.sesac.spring3add.dto.UserDTO;
-import sesac.sesac.spring3add.service.MainService;
+import sesac.sesac.spring4.domain.User;
+import sesac.sesac.spring4.dto.UserDTO;
+import sesac.sesac.spring4.service.MainService;
 
 import javax.servlet.http.HttpSession;
 

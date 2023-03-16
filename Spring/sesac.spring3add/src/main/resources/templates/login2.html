@@ -11,8 +11,9 @@
 <body>
 <script>
     const registerMove = () => {
-        document.location.href="/register";
+        document.location.href="/person/register";
     }
+
     const login = () => {
         const form = document.getElementById("formLogin");
         if(form.id.value.trim() === '') {
@@ -26,43 +27,44 @@
             return;
         }
 
-        axios({
-            method: "post",
-            url: "/axios/login",
-            data: {
-                id: form.id.value,
-                password: form.password.value,
-            }
-        })
+        const data = {
+            id: form.id.value,
+            password: form.password.value
+        }
+        axios.post("/person/login", data)
         .then((res) => {
-            if(res.data === false) {
-                alert("정보가 일치하지 않습니다");
-                form.id.focus();
-                form.id.value = '';
-                form.password.value = '';
+            console.log(res.data);
+            // return false;
+
+            if (res.data != "") {
+                alert("로그인 성공!");
+                form.action = "/person/info";
+                form.method = "post";
+                form.submit();
             } else {
-                document.location.href="/mypage";
+               alert("정보가 일치하지 않습니다");
+               form.reset();
             }
         });
     }
 
-    const enterEvent = (event) => {
+    const enterEventHandler = (event) => {
         if(event.key == 'Enter') {
             login();
         }
     }
 
 </script>
-<h2>CRUD 실습 - 로그인</h2>
+<h2>CRUD 실습 - 로그인2</h2>
 <form id="formLogin" style="width: 500px;">
     <fieldset>
         <div>
             <label for="userid">아이디 : </label>
-            <input type="text" name="id" placeholder="아이디를 입력하세요." id="userid" onkeydown="enterEvent(event)" />
+            <input type="text" name="id" placeholder="아이디를 입력하세요." id="userid" onkeydown="enterEventHandler(event)" />
         </div>
         <div>
             <label for="userpassword">비밀번호 : </label>
-            <input type="password" name="password" placeholder="비밀번호를 입력하세요." id="userpassword" onkeydown="enterEvent(event)" />
+            <input type="password" name="password" placeholder="비밀번호를 입력하세요." id="userpassword" onkeydown="enterEventHandler(event)" />
         </div>
     </fieldset>
     <button type="button" onclick="login()">로그인</button>

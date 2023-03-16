@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script>
+    const boardWriteMove = () => {
+      document.location.href="/write";
+    }
+
+    const boardRead = (boardId) => {
+      console.log("boardId", boardId);
+      console.log("boardId", typeof boardId);
+      console.log("boardId", typeof Number(boardId));
+
+      axios({
+        method: 'post',
+        url: '/read/check',
+        data: {
+          id: Number(boardId)
+        }
+      })
+      .then((res) => {
+        console.log('res.data', res);
+        if(res.data) {
+          document.location.href="/board/read?id="+boardId;
+        } else {
+          alert("새로고침 후 다시 시도해주세요!");
+        }
+      });
+    }
+
+  </script>
+</head>
+<body>
+<table border="1" style="width: 500px; text-align: center;">
+  <tr>
+    <th style="width: 100px;">번호</th>
+    <th>제목</th>
+  </tr>
+  <tr th:each="board:${list}">
+    <td th:text="${board.getNo()}" th:onclick="|boardRead('${board.getId()}')|"></td>
+    <td th:text="${board.getTitle()}" th:onclick="|boardRead('${board.getId()}')|"></td>
+  </tr>
+</table>
+<div style="width: 500px; margin-top: 10px; text-align: center;">
+  <button type="button" onclick="boardWriteMove()">글 등록하기</button>
+</div>
+</body>
+</html>

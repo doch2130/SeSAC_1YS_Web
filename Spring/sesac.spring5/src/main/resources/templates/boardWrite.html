@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+    const boardWriteMove = () => {
+      const form = document.getElementById('boardWriteForm');
+      if(form.title.value.trim() === '') {
+        alert("제목을 입력해주세요!");
+        form.title.focus();
+        return;
+      } else if (form.content.value.trim() === '') {
+        alert("내용을 입력해주세요!");
+        form.content.focus();
+        return;
+      }
+
+      axios({
+        method: "post",
+        url: "/write",
+        data: {
+            title: form.title.value,
+            content: form.content.value
+        }
+      })
+      .then((res) => {
+        if(res.data) {
+            alert("글이 정상적으로 등록되었습니다!");
+            document.location.href="/";
+        } else {
+            alert("에러가 발생하였습니다. 새로고침 후 다시 시도해주세요!");
+        }
+      });
+    }
+  </script>
+</head>
+<body>
+<div style="width: 500px; margin-top: 10px; text-align: center;">
+    <h1>글 등록하기</h1>
+</div>
+<div>
+    <form id="boardWriteForm">
+        <fieldset style="width: 500px; height: 500px; border: 1px solid black; border-radius: 20px;">
+            <div>
+                <label for="title">제목</label>
+                <input id="title" type="text" name="title" style="width: 400px;"/>
+            </div>
+            <div>
+                <label for="content">내용</label><br />
+                <textarea id="content" name="content" style="width: 500px; height: 400px; resize: none; overflow: auto;"></textarea>
+            </div>
+        </fieldset>
+    </form>
+</div>
+<div style="width: 500px; margin-top: 10px; text-align: center;">
+    <button type="button" onclick="boardWriteMove()" style="cursor: pointer;">글 등록하기</button>
+</div>
+</body>
+</html>
