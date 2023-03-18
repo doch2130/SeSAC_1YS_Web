@@ -1,0 +1,17 @@
+# 부모 이지미 지정
+FROM node:16
+
+# 작업 디렉토리 생성
+WORKDIR /app
+
+# 소스 추가
+COPY . /app
+
+# 패키지 설치
+RUN npm install
+
+# 포트 매핑
+EXPOSE 3000
+
+# 실행 명령
+CMD [ "npm", "start" ]

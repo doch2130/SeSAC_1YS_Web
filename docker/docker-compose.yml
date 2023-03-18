@@ -1,0 +1,35 @@
+version: "3.8"
+services:
+  node:
+    image: "node-project"
+    working_dir: /app
+    volumes:
+      - ./test:/app
+    ports:
+      - "9000:8000"
+    container_name: node-project2
+    #command: bash -c "ls & npm install & node index.js"
+    command: bash -c "npm install & node index.js"
+  react:
+    image: "react-node"
+    working_dir: /app
+    volumes:
+      - ./react-node:/app
+    ports:
+      - "9100:3000"
+    container_name: react-node2
+    #command: bash -c "ls & npm start"
+    command: bash -c "npm start"
+  react-nginx:
+    image: "react-nginx"
+    working_dir: /app
+    volumes:
+      - ./react-project:/app
+    build: 
+      context: .
+    ports:
+      - "9200:80"
+    container_name: react-nginx2
+    #command: bash -c "ls & nginx -g \"daemon off;\""
+    command: bash -c "nginx -g \"daemon off;\""
+
