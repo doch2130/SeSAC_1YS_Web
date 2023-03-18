@@ -8,7 +8,6 @@ services:
     ports:
       - "9000:8000"
     container_name: node-project2
-    #command: bash -c "ls & npm install & node index.js"
     command: bash -c "npm install & node index.js"
   react:
     image: "react-node"
@@ -18,8 +17,9 @@ services:
     ports:
       - "9100:3000"
     container_name: react-node2
-    #command: bash -c "ls & npm start"
     command: bash -c "npm start"
+
+  # 블로그 + 내가 해본 버전
   react-nginx:
     image: "react-nginx"
     working_dir: /app
@@ -30,6 +30,16 @@ services:
     ports:
       - "9200:80"
     container_name: react-nginx2
-    #command: bash -c "ls & nginx -g \"daemon off;\""
     command: bash -c "nginx -g \"daemon off;\""
+    #command: bash -c "ls & nginx -g \"daemon off;\""
 
+  # 강사님 버전
+  react-nginx2:
+    image: "react-nginx2"
+    build: 
+      context: ./react-project
+    volumes:
+      - ./react-project/build:/usr/share/nginx/html
+    ports:
+      - "9300:80"
+    container_name: react-nginx3
