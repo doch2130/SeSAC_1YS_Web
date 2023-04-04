@@ -21,7 +21,7 @@ io.on('connection', (socket) => {
   socket.emit('info', socket.id);
 
   socket.emit('welcome', {msg: 'welcome'});
-
+ 
   socket.on('response', (str) => {
     console.log(str);
   });
